@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicio 10</title>
+	<h2>Ejercicio 10</h2>
+</head>
+<body>
+
+	<form action="upload_images.php" method="POST" enctype="multipart/form-data">
+		Seleccione Imagen: 
+		<input type="file" name="fichero" id="fichero"><br>
+		<input type="submit" value="Subir Imagen" name="subir"><br>
+	</form>
+
+	<br>
+	<br>
+
+	<form action=show_images.php method="POST">
+		Mostrar Imagenes: 
+		<input type="submit" value="Ver Imagenes" name="ver">
+	</form>
+
+
+</body>
+</html>

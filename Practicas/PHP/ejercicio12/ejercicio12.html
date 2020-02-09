@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<h2>Ejercicio 12</h2>
+</head>
+<body>
+
+	<!-- Formulario radio buttons -->
+	<form action="ejercicio12.php" method="POST">
+		Numero lineas: <input type="text" name="nRows" required><br>
+		Texto lineas: <input type="text" name="string"required><br>
+		<p>Color de fondo 1:</p>
+			<input type="radio" name="bgcolor1" value="red" required>Rojo<br>
+			<input type="radio" name="bgcolor1" value="green">Verde<br>
+			<input type="radio" name="bgcolor1" value="blue">Azul<br>
+			<input type="radio" name="bgcolor1" value="brown">Marron<br>
+			<input type="radio" name="bgcolor1" value="gray">Gris<br>
+			<input type="radio" name="bgcolor1" value="yellow">Amarillo<br>
+		<p>Color de fondo 2: </p>
+			<input type="radio" name="bgcolor2" value="red" required>Rojo<br>
+			<input type="radio" name="bgcolor2" value="green">Verde<br>
+			<input type="radio" name="bgcolor2" value="blue">Azul<br>
+			<input type="radio" name="bgcolor2" value="brown">Marron<br>
+			<input type="radio" name="bgcolor2" value="gray">Gris<br>
+			<input type="radio" name="bgcolor2" value="yellow">Amarillo<br>
+
+		<input type="submit" value="Enviar" name="enviar">
+	</form>
+	<br>
+
+
+	<!-- Menu desplegable -->
+	<form action="ejercicio12.php" method="GET">
+		<select name="Color[]" size="5" multiple="multiple" required>
+			<option value="Red">Red</option>
+			<option value="Green">Green</option>
+			<option value="Blue">Blue</option>
+			<option value="Pink">Pink</option>
+			<option value="Yellow">Yellow</option>
+		</select>
+		<input type="submit" name="submit" value="Get Selected Values" />
+	</form>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

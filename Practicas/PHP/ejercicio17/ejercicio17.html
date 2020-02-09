@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <form action="ejercicio17.php" method="POST">
+
+            <p>Elija un color:</p>
+            <select name="Color[]" size="5" multiple="multiple" required>
+                <option value="Red">Red</option>
+                <option value="Green">Green</option>
+                <option value="Blue">Blue</option>
+                <option value="Pink">Pink</option>
+                <option value="Yellow">Yellow</option>
+            </select>
+
+            <p>Elija un dia: </p>
+            <input type="radio" name="day" value="monday" required>Lunes<br>
+            <input type="radio" name="day" value="tuesday" required>Martes<br>
+            <input type="radio" name="day" value="wednesday" required>Miercoles<br>
+            <input type="radio" name="day" value="thursday" required>Jueves<br>
+            <input type="radio" name="day" value="friday" required>Viernes<br>
+            <input type="radio" name="day" value="saturday" required>Sabado<br>
+            <input type="radio" name="day" value="sunday" required>Domingo<br>
+
+            <p>Elija varios canales de TV:</p>
+            <input type="checkbox" name="channel[]" value="ch1">
+            <label for="vehicle2"> TheWillyrex</label><br>
+
+            <input type="checkbox" name="channel[]" value="ch2">
+            <label for="vehicle2"> Discovery Max</label><br>
+
+            <input type="checkbox" name="channel[]" value="ch3">
+            <label for="vehicle2"> Telecirco</label><br>
+
+            <input type="checkbox" name="channel[]" value="ch4">
+            <label for="vehicle2"> Visual Politik</label><br>
+
+            <input type="checkbox" name="channel[]" value="ch5">
+            <label for="vehicle2"> Tri-line</label><br>
+
+            <input type="checkbox" name="channel[]" value="ch6">
+            <label for="vehicle2"> Hardware 360</label><br>
+
+            <br><input type="submit" name="enviar" value="Enviar" />
+        </form>
+
+    </body>
+</html>
