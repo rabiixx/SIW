@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Data Load</title>
+	
+	<!-- BOOTSTRAP 4 CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+	<div id="test">
+		<p>Hola Mundo</p>
+	</div>
+
+
+	<button id="btn1" class="btn btn-danger">
+		Click  to change 1
+	</button>
+
+	<button id="btn2" class="btn btn-primary">
+		Click  to change 2
+	</button>
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<!-- BOOTSTRAP 4 JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script>
+
+		$(document).ready(function() {
+
+			$("#btn1").click(function(event) {
+				console.log("que pasa");
+				$("#test").load("data.html");	
+			});
+
+			/** .load(): Nor permite hacer un POST a una url (.php por ejemplo) y mandar 
+			  * datos (string o objeto) junto con la solictud al servidor y a su vez 
+			  *	una funcion de callback que se ejecutar cuando se complete la solicitud */
+			$("#btn2").click(function(event) {
+				$("#test").load("data.php", {
+					name: "Ruben", 
+					lastname: "Cherif"
+					}, alert("Todo Correcto y todos contentos!"));	
+			});
+		});
+	</script>
+
+</body>
+</html>

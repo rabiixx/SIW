@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload Images</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.js"></script>
+
+</head>
+<body>
+
+ 	<!--<form action="upload_img.php" class="dropzone" id="dropzoneFrom"></form>
+
+	<div align="center">
+ 		<button align="center" class="btn btn-success" type="submit" id="submit">Subir Fotos</button>
+	</div>-->
+
+
+	<form action="upload_img.php"  enctype="multipart/form-data" method="POST">
+		<input type="text" id ="firstname" name ="firstname" />
+    	<input type="text" id ="lastname" name ="lastname" />
+	    <div class="dropzone" id="dropzoneForm"></div>
+		<div align="center">
+ 			<button align="center" class="btn btn-success" type="submit" id="submit-all">Subir Fotos</button>
+		</div>
+	</form>
+	
+</body>
+
+	<script>
+
+
+
+	/*$(document).ready(function(){*/
+
+
+		// Do this outside of jQuery
+		Dropzone.autoDiscover = false;
+
+		// Start jQuery stuff
+		$(function() {
+
+		    // Call Dropzone manually
+		    $("#dropzoneForm").dropzone({
+		    	url: 'upload_img.php',						
+		        paramName: "image",	
+		        uploadMultiple: true,
+		        parallelUploads: 3,
+		        maxFiles: 5,						
+		        maxFilesize: 8, // MB 						// Tamaño maximo por imagen
+		        dictDefaultMessage: 'Hola',					// Mensaje
+		        autoProcessQueue: false,					// Para que no se suban automaticamente
+		        addRemoveLinks: true,						// Link para eliminarlas los archivos antes de subit
+		  		acceptedFiles:".png,.jpg,.gif,.jpeg",		// Tipos de archivos permitidos
+		        /*addedfile: function (file) {
+		        	console.log(file.name);
+		        },*/
+		        /*removedFile: function (file) {
+		        	console.log(file.name);
+		        },*/
+		        init: function () {
+		        	$("#submit-all").click(function (e) {
+		        		dropzoneForm = this;
+
+		        		//files = getAcceptedFiles(dropzoneForm);
+
+		        		console.log("files");
+
+						e.preventDefault();
+			            e.stopPropagation();
+			            dropzoneForm.processQueue();
+		        	});
+
+
+			        //send all the form data along with the files:
+			        this.on("sendingmultiple", function(data, xhr, formData) {
+			            formData.append("firstname", jQuery("#firstname").val());
+			            formData.append("lastname", jQuery("#lastname").val());
+			        });
+		        }
+		    });
+
+		});
+
+	
+
+ </script>
+</html>
+
+https://stackoverflow.com/questions/39890303/dropzone-js-and-jquery-version-compatibility
+
+https://stackoverflow.com/questions/17872417/integrating-dropzone-js-into-existing-html-form-with-other-fields
+
+https://stackoverflow.com/questions/58272551/dropzone-getacceptedfiles-producing-object-file-instead-of-file
+
+<form action="upload.php" enctype="multipart/form-data" method="POST">
+    <input type="text" id ="firstname" name ="firstname" />
+    <input type="text" id ="lastname" name ="lastname" />
+    <div class="dropzone" id="myDropzone"></div>
+    <button type="submit" id="submit-all"> upload </button>
+</form>
+
+Dropzone.options.myDropzone= {
+    url: 'upload.php',
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    parallelUploads: 5,
+    maxFiles: 5,
+    maxFilesize: 1,
+    acceptedFiles: 'image/*',
+    addRemoveLinks: true,
+    init: function() {
+        dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+
+        // for Dropzone to process the queue (instead of default form behavior):
+        document.getElementById("submit-all").addEventListener("click", function(e) {
+            // Make sure that the form isn't actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            dzClosure.processQueue();
+        });
+
+        //send all the form data along with the files:
+        this.on("sendingmultiple", function(data, xhr, formData) {
+            formData.append("firstname", jQuery("#firstname").val());
+            formData.append("lastname", jQuery("#lastname").val());
+        });
+    }
+}

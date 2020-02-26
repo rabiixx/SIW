@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload CSV to DB</title>
+
+		<!-- BOOTSTRAP CDN -->
+	<link rel="stylesheet" href="bootstrap.min.css">
+
+	<!-- Font Awesome Kit -->
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="container" style="padding-top: 400px">
+		<div class="row d-flex justify-content-center ">
+			<div class="card" style="width: 40em">
+				<form id="upload-csv-form">
+					<input type="file" id="csv_file" name="csv_file" class="form-control">
+				 	<div class="text-center">
+						<button class="btn btn-success mt-auto" type="submit" id="importar">Importar</button>	
+					</div> 
+					<h1 id="enviar"></h1>
+			</form>
+			</div>
+			
+		</div>
+	</div>
+
+
+	
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(function() {
+			
+			$("#upload-csv-form").submit(function(e) {
+
+				e.preventDefault();			// Evitamos que se recarge la pagina
+			
+				// Comprobamos que el usuario ha escogido algun fichero
+				if ($("#csv_file").val() != "") {
+						
+					// Se comprueba que el fichero sea sea de tipo .csv
+					var file = $("#csv_file").val();
+
+					file = file.toLowerCase();
+					
+					file = file.split('.');
+
+					data = new FormData(this);
+
+					console.log(data.get('csv_file'));
+
+					if (file[file.length - 1] == "csv") {
+						$.ajax({
+							url: 'upload_csv.php',
+							method: 'POST',
+							data: new FormData(this),
+							contentType: false,
+							cache: false,
+							processData: false,
+							success: function (data) {
+
+								console.log(data);
+
+								if (data == 'error1') {
+									alert("OKOKOKO");
+								} else if (data == 'error2') {
+									alert("NOKNOK");
+								} else {
+									alert("HAKC");
+									$("#enviar").html("SUCCESS");		
+								}		
+							}
+						})
+					}
+				}
+			});
+
+
+
+		});
+
+
+	</script>
+
+</body>
+</html>
