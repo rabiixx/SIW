@@ -6,7 +6,7 @@ const username = document.getElementById('username');
 const password = document.getElementById('pass');
 
 // Form
-const form = document.getElementById('loginForm');
+const form = document.getElementById('login-form');
 
 // Handle form
 form.addEventListener('submit', function(e) {
@@ -15,37 +15,26 @@ form.addEventListener('submit', function(e) {
 
 	if ( (validateUsername() || validateEmail()) && validatePassword() ) {
 
-		//var form = $('form'); // You need to use standard javascript object here
-		var formData = new FormData();
-		formData.append('username', username.value);
-		formData.append('password', password.value);
-		/*formData.append('username', $('username').val());
-		formData.append('password', $('pass').val());*/
-
-		//console.log(formData.get("Nombre de Usuario"));
-
-
+		var formData = new FormData(this);
+		/*formData.append('username', username.value);
+		formData.append('password', password.value);*/
+		formData.append("button-pressed", true);
+		
 		$.ajax({
 			url: 'includes/login.inc.php',
 			type: 'POST',
 			data: formData,
 			contentType: false,
-    		processData: false
-		})
-		.done(function(data) {
-			console.log(data);
-		})
-		.fail(function() {
-			console.log("error");
+    		processData: false,
+    		success: function (response) {
+    			console.log(response);
+    		},
+    		error: function(data) {
+    			console.log(data);	
+    		}
 		});
-		
-
-
-
-
 
 	}
-
 });
 
 
@@ -93,8 +82,6 @@ function checkPassword(field, maxLength) {
 function checkIfEmpty(field) {
   	if (isEmpty(field.value.trim())) {
     	
-  		console.log(field.value);
-
     	// set field invalid
     	setInvalid(field, `${field.name} no puede estar vacio.`);
     	return true;

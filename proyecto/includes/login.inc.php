@@ -1,25 +1,31 @@
 <?php 
 
-	if (isset($_POST['login-sumbit'])) {
+include '..\database.php';
+
+if ($conn) {
+	echo "DB OK";
+} else {
+	echo "DB NOK";
+}
+
+if (isset($_POST['button-pressed'])) {
 	
-	require 'database.php';
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
-	echo $username;
-	echo $password;
-
-	$sql = "SELECT * FROM users WHERE uidUsers=? OR emailUsers=?;";
+	$sql = "SELECT * FROM usuarios WHERE (Username=? OR Email=?);";
 	$stmt = mysqli_stmt_init($conn);
 
 	/** Comprobamos que la sentencia funciona
 	  * correctamente contra la base de datos */
-	if (!mysqli_stmt_prepare($stmt)) {
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		exit(mysqli_stmt_error($stmt));
+    	//echo mysqli_error();
 		header("Location: ../signup.php?error=sqlerror");
 		exit(); 		
 	} else {
-		mysqli_stmt_bind_param($stmt, "ss", $mailudi, $mailudi);
+		mysqli_stmt_bind_param($stmt, "ss", $username, $username);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 
@@ -27,8 +33,14 @@
 		  * Devulve un array asociativo */
 		if ( $row = mysqli_fetch_assoc($result) ) {
 				
-			$pwdCheck = password_verify($password, $row['pwdUsers']);
-				
+			//$pwdCheck = password_verify($password, $row['password']);
+			
+			if ($password == $row['password']) {
+				$pwdCheck = true;
+			} else {
+				$pwdCheck = false;
+			}
+
 			if ($pwdCheck == false) {
 				header("Location: ../signup.php?error=wrongpwd");
 				exit();
@@ -43,15 +55,14 @@
 				  * informacion sobre el usuario */
 				session_start();
 
-				$_SESSION['userId'] = $row['idUsers'];
-				$_SESSION['userUid'] = $row['uidUsers'];
+				$_SESSION['username'] = $row['username'];
 
 				header("Location: ../signup.php?login=success");
 					exit();
 
 			} else {
 				header("Location: ../signup.php?error=wrongpwd");
-					exit();
+				exit();
 			}
 		} else {
 			header("Location: ../signup.php?error=nouser");
@@ -59,9 +70,9 @@
 		}
 
 	}
-}
-
 } else {
-	header("Location: ../signup.php?");
-	exit(); 
+
+	echo "Hooa";
+
+
 }
