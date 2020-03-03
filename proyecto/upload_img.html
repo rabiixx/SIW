@@ -19,22 +19,22 @@
 </head>
 <body>
 
- 	<!--<form action="upload_img.php" class="dropzone" id="dropzoneFrom"></form>
-
-	<div align="center">
- 		<button align="center" class="btn btn-success" type="submit" id="submit">Subir Fotos</button>
-	</div>-->
-
-
 	<form action="upload_img.php"  enctype="multipart/form-data" method="POST">
-		<input type="text" id ="firstname" name ="firstname" />
+		<input type="text" id ="firstname" name ="firstname1" />
     	<input type="text" id ="lastname" name ="lastname" />
-	    <div class="dropzone" id="dropzoneForm"></div>
+	  	<div class="dropzone" id="dropzoneForm"></div>
 		<div align="center">
  			<button align="center" class="btn btn-success" type="submit" id="submit-all">Subir Fotos</button>
 		</div>
 	</form>
-	
+
+	<!-- <form action="upload_img.php" class="dropzone" id="dropzoneForm"></form>  -->
+
+<!--  	<form>
+		<div class="dropzone" id="dropzoneForm"></div>
+		<button align="center" class="btn btn-success" type="submit" id="submit-all">Subir Fotos</button>
+	</form>-->
+
 </body>
 
 	<script>
@@ -53,15 +53,15 @@
 		    // Call Dropzone manually
 		    $("#dropzoneForm").dropzone({
 		    	url: 'upload_img.php',						
-		        paramName: "image",	
+		        paramName: "images",	
 		        uploadMultiple: true,
 		        parallelUploads: 3,
 		        maxFiles: 5,						
-		        maxFilesize: 8, // MB 						// Tamaño maximo por imagen
-		        dictDefaultMessage: 'Hola',					// Mensaje
-		        autoProcessQueue: false,					// Para que no se suban automaticamente
-		        addRemoveLinks: true,						// Link para eliminarlas los archivos antes de subit
-		  		acceptedFiles:".png,.jpg,.gif,.jpeg",		// Tipos de archivos permitidos
+		        maxFilesize: 8, // MB 								// Tamaño maximo por imagen
+		        dictDefaultMessage: 'Arrastre las imagenes aqui',	// Mensaje
+		        autoProcessQueue: false,							// Para que no se suban automaticamente
+		        addRemoveLinks: true,								// Link para eliminarlas los archivos antes de subit
+		  		acceptedFiles:".png,.jpg,.gif,.jpeg",				// Tipos de archivos permitidos
 		        /*addedfile: function (file) {
 		        	console.log(file.name);
 		        },*/
@@ -69,13 +69,10 @@
 		        	console.log(file.name);
 		        },*/
 		        init: function () {
+
+		        	dropzoneForm = this;
+
 		        	$("#submit-all").click(function (e) {
-		        		dropzoneForm = this;
-
-		        		//files = getAcceptedFiles(dropzoneForm);
-
-		        		console.log("files");
-
 						e.preventDefault();
 			            e.stopPropagation();
 			            dropzoneForm.processQueue();
@@ -86,8 +83,21 @@
 			        this.on("sendingmultiple", function(data, xhr, formData) {
 			            formData.append("firstname", jQuery("#firstname").val());
 			            formData.append("lastname", jQuery("#lastname").val());
+
+			            /*for (var value of formData.values()) {
+							console.log(value); 
+						}*/
 			        });
+		        },
+		        complete: function (file) {
+		        	console.log(file);
+
+		        	// Eliminamos las imagenes del dropzone
+		        	dropzoneForm.removeAllFiles();
 		        }
+		        /*success: function (data) {
+		        	console.log("hola&adios");
+		        }*/
 		    });
 
 		});
@@ -96,7 +106,7 @@
 
  </script>
 </html>
-
+<!-- 
 https://stackoverflow.com/questions/39890303/dropzone-js-and-jquery-version-compatibility
 
 https://stackoverflow.com/questions/17872417/integrating-dropzone-js-into-existing-html-form-with-other-fields
@@ -136,4 +146,4 @@ Dropzone.options.myDropzone= {
             formData.append("lastname", jQuery("#lastname").val());
         });
     }
-}
+} -->

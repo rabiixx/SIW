@@ -1,60 +1,241 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Add Restaurant</title>
 
+	<!-- BOOTSTRAP CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+	<!-- DROPZONE CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css">
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	
+	<!-- BOOTSTAP 4 JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<!-- DROPZONE JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.js"></script>	
+
+    <script> 
+		$(function(){
+			$("#navbar").load("navbar.html"); 
+		});
+    </script> 
+
 
 </head>
 <body>
 
-	<h1 class="text-center text-warning" style="padding-top: 150px">Añade tu propio restaurante</h1>
+		<header id="navbar"></header>
 
 	
+	
+	<!-- <form action="upload_img.php"  enctype="multipart/form-data" method="POST">
+		<input type="text" id ="firstname" name ="firstname" />
+    	<input type="text" id ="lastname" name ="lastname" />
+	  	<div class="dropzone" id="dropzoneForm"></div>
+		<div align="center">
+ 			<button align="center" class="btn btn-success" type="submit" id="submit-all">Subir Fotos</button>
+		</div>
+	</form> -->
+
 	<div class="container">
-		<form id="add_restaurant_form">
+
+
+		<h1 class="text-center text-warning" style="padding-top: 75px">Añade tu propio restaurante</h1>
+
+		<form action="add_restaurant.php" enctype="multipart/form-data" method="POST" id="restaurant-form">
 			<div class="form-group">
-				<label for="restaurantName">Nombre del Restaurante</label>
-				<input type="text" class="form-control" placeholder="Nombre Restaurante">
+				<label for="name">Nombre del Restaurante</label>
+				<input type="text" class="form-control" placeholder="Nombre Restaurante" id="name" name="name">
 			</div>
 			<div class="form-group">
 				<label for="location">Ubicacion</label>
-				<input type="text" class="form-control" placeholder="Ubicacion">
+				<input type="text" class="form-control" placeholder="Ubicacion" id="location" name="location">
 			</div>
 			<div class="form-group">
-				<label for="food_type">Tipo de Comida</label>
-				<input type="text" class="form-control" placeholder="Comida">
+				<label for="food-type">Tipo de Comida</label>
+				<input type="text" class="form-control" placeholder="Comida" id="food-type" name="food-type">
 			</div>
-			<div class="form-group">
+			<div class="form-group input-group">
 				<label for="price">Precio</label>
-				<input type="number" class="form-control" placeholder="Precio">
+				<input type="number" class="form-control" placeholder="Precio" id="price" name="price">
+				
+				<div class="input-group-append">
+					<select class="custom-select">
+						<option value="1" selected>€</option>
+						<option value="2">$</option>
+					</select>
+				</div>
+  			</div>
+
+  			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<select class="custom-select">
+						<option value="1" selected>€</option>
+						<option value="2">$</option>
+					</select>
+				</div>
+				<input type="text" class="form-control" placeholder="Some text">
 			</div>
+			
+			<div class="dropzone" id="dropzoneForm"></div>
+			
 			<div class="d-flex justify-content-center mb-2" id="btn-add-restaurant">
-				<button type="submit" class="btn btn-success">Añadir Restaurante</button>		
+				<button type="submit" id="submit-all" class="btn btn-success mt-3">Añadir Restaurante</button>	
 			</div>
-			
-			
+
 		</form>
 
-		 <form action="upload_img.php" id="dropzone" class="dropzone"></form>
+		<!-- Modal -->
+		<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">Esta seguro que desea añadir este restaurante?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCancel">Cacelar</button>
+						<button type="button" class="btn btn-primary" id="btnContinue">Continuar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-	
-	</div>	
-
-	 <!-- JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.js"></script>	
-	
-	<!-- CUSTOM CS -->
-    <script src="app.js"></script>
+</div>	
 
+
+
+		
+	<script>
+
+	/*$(document).ready(function(){*/
+
+		// Do this outside of jQuery
+		Dropzone.autoDiscover = false;
+
+		// Start jQuery stuff
+		$(function() {
+
+		    // Call Dropzone manually
+		    $("#dropzoneForm").dropzone({
+		    	url: 'add_restaurant.php',						
+		        paramName: "images",	
+		        uploadMultiple: true,
+		        parallelUploads: 3,
+		        maxFiles: 5,						
+		        maxFilesize: 8, // MB 								// Tamaño maximo por imagen
+		        dictDefaultMessage: 'Arrastre las imagenes aqui',	// Mensaje
+		        autoProcessQueue: false,							// Para que no se suban automaticamente
+		        addRemoveLinks: true,								// Link para eliminarlas los archivos antes de subit
+		  		acceptedFiles:".png,.jpg,.gif,.jpeg",				// Tipos de archivos permitidos
+		        /*addedfile: function (file) {
+		        	console.log(file.name);
+		        },*/
+		        /*removedFile: function (file) {
+		        	console.log(file.name);
+		        },*/
+		        init: function () {
+
+		        	dropzoneForm = this;
+
+		        	// callback and crossOrigin are optional
+					/*let mockFile = { name: "res1.png" };
+					this.displayExistingFile(mockFile, 'img/res1.png');*/
+
+		        	$("#submit-all").click(function (e) {
+
+						e.preventDefault();
+			           	e.stopPropagation();
+
+			           //	confirm("Esta seguro ?");
+
+						$('#confirmModal').modal('toggle');
+
+						$('#btnContinue').click(function() {
+							dropzoneForm.processQueue();
+							$('#confirmModal').modal('hide');		
+						});
+		        	
+		        	});
+
+
+			        //send all the form data along with the files:
+			        this.on("sendingmultiple", function(data, xhr, formData) {
+			            
+			            formData.append("name", jQuery("#name").val());
+			            formData.append("location", jQuery("#location").val());
+			            formData.append("food-type", jQuery("#food-type").val());
+			            formData.append("price", jQuery("#price").val());
+			            
+			            /*for (var value of formData.values()) {
+							console.log(value); 
+						}*/
+			        });
+		        },
+		        /*complete: function (response, data, file) {
+		        	dropzoneForm.removeFile(file);
+		        	console.log(file);
+		        	console.log(data);
+		        }*/
+		        complete: function (file, data) {
+		        	
+		        	console.log(file);
+
+		        	// Reset form input fields
+		        	$('#restaurant-form').trigger("reset");
+
+		        	// Remove dropzone images
+		        	dropzoneForm.removeAllFiles();
+		        }, 
+		        success: function (response, data) {
+		        	console.log(data);
+		        }
+
+
+		    });
+
+		});
+
+
+	</script>		
 
 </body>
 </html>
+
+
+
+<!-- INCLUDE HTML FILES IN A HTML FIEL -->
+<!-- 
+	<script>
+  		$(function(){
+    		var includes = $('[data-include]');
+    		jQuery.each(includes, function(){
+      			var file = 'views/' + $(this).data('include') + '.html';
+      			$(this).load(file);
+    		});
+  		});
+	</script>
+
+	<div data-include="header"></div>
+	<div data-include="footer"></div>
+
+				API MENUS
+http://nypl.github.io/menus-api/#tokens
+
+
+ -->
