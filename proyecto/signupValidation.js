@@ -23,6 +23,7 @@ const signupForm = document.getElementById('signup-form');
 // Handle Signup Form
 signupForm.addEventListener('submit', function(e) {
 
+
 	// Prevent default behaviour
 	e.preventDefault();
 
@@ -32,28 +33,30 @@ signupForm.addEventListener('submit', function(e) {
 		validateUsername() &&
 	 	validateEmail() && 
 	 	validatePassword() &&
-	 	validataConfirmPassword()
+	 	validateConfirmPassword()
 	 	) {
 
-		var formData = new FormData(this);
-		formData.append("button-pressed", true);
-		
-		//formData.append('username', username.value);
-		//formData.append('password', password.value);*/
-		
-		$.ajax({
-			url: 'includes/signup.inc.php',
-			type: 'POST',
-			data: formData,
-			contentType: false,
-    		processData: false,
-    		success: function (response) {
-    			console.log(response);
-    		},
-    		error: function(data) {
-    			console.log(data);	
-    		}
-		});
+			var formData = new FormData(this);
+			formData.append("button-pressed", true);
+			
+			//formData.append('username', username.value);
+			//formData.append('password', password.value);*/
+			
+			$.ajax({
+				url: 'includes/signup.inc.php',
+				type: 'POST',
+				data: formData,
+				contentType: false,
+	    		processData: false,
+	    		success: function (response, data, error) {
+	    			console.log(response);
+	    			console.log(error);
+	    			console.log(data);
+	    		},
+	    		error: function(data) {
+	    			console.log(data);	
+	    		}
+			});
 
 	}
 });
@@ -75,7 +78,7 @@ function validateName(field) {
 function checkName(field) {
 	
 	if (/^[a-zA-Z]*$/.test(field.value)) {
-    	setValid(field, `${field.placeholder} es valido.`);
+    	setValid(field);
 		return true;
 	} else {
 		setInvalid(field, `El ${field.placeholder} solo puede contener letras.`);
@@ -100,8 +103,8 @@ function checkEmail(field) {
 	var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	if (regex.test(field.value)) {
-		setValid(field, 'El email es valido.');
-		return false;
+		setValid(field);
+		return true;
 	} else {
 		setInvalid(field, 'El email no es valido.');
 		return false;
@@ -124,7 +127,7 @@ function validateUsername() {
 /* Comprueba si solo hay caracteres alfanumericos */
 function checkUsername(field) {
 	if (/^[a-zA-Z0-9]+$/.test(field.value)) {
-    	setValid(field, "Nombre de usuario valido");
+    	setValid(field);
 		return true;
 	} else {
 		setInvalid(field, `${field.name} solo puede contener letras y numeros.`);
@@ -147,7 +150,7 @@ function validatePassword() {
 function checkPassword(field, maxLength) {
 
 	if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value)) {
-		setValid(field, "Contraseña valida");
+		setValid(field);
 		return true;
 	} else if (field.value.length > maxLength) {
 		setInvalid(field, `La ${field.name} debe contener como mucho ${maxLength} caracteres.`);
@@ -155,6 +158,23 @@ function checkPassword(field, maxLength) {
 	} else {
 		setInvalid(field, `La ${field.name} al menos debe tener 8 caracteres, una letra minuscula, otra mayuscula y un numero.`);
 		return false;
+	}
+
+}
+
+function validateConfirmPassword() {
+	if (password.classList.contains('text-danger')) {
+		setInvalid(confirmPassword, 'La contraseña debe ser valida.');
+		return;
+	}
+	
+	// If they match
+	if (password.value !== confirmPassword.value) {
+		setInvalid(confirmPassword, 'Las constraseñas no coinciden.');
+		return;
+	} else {
+		setValid(confirmPassword);
+		return true;
 	}
 
 }
@@ -187,20 +207,27 @@ function setInvalid(field, msg) {
 		field.nextElementSibling.classList.remove('text-success');		
 	}
 
+
+	if (field.classList.contains('border-success')) {
+		field.classList.remove('border-success');
+	}
+
+	field.classList.add('border-danger');
 	field.nextElementSibling.classList.add('text-danger');
 	
 }
 
 /* Disables de warning message behind input field */
-function setValid(field, msg) {	
-	
-	field.nextElementSibling.innerHTML = msg;
-	
-	if (field.nextElementSibling.classList.contains('text-danger')) {
-		field.nextElementSibling.classList.remove('text-danger');		
+function setValid(field) {	
+
+	field.nextElementSibling.innerHTML = '';
+
+
+	if (field.classList.contains('border-danger')) {
+		field.classList.remove('border-danger');
 	}
 
-	field.nextElementSibling.classList.add('text-success');
+	field.classList.add('border-success');
 }
 
 

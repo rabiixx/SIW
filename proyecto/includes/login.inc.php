@@ -1,10 +1,9 @@
 <?php 
 
-include '..\database.php';
-
-
 if (isset($_POST['button-pressed'])) {
-	
+
+	include '..\database.php';
+
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
@@ -27,13 +26,13 @@ if (isset($_POST['button-pressed'])) {
 		  * Devulve un array asociativo */
 		if ( $row = mysqli_fetch_assoc($result) ) {
 				
-			//$pwdCheck = password_verify($password, $row['password']);
+			$pwdCheck = password_verify($password, $row['password']);
 			
-			if ($password == $row['password']) {
+			/*if ($password == $row['password']) {
 				$pwdCheck = true;
 			} else {
 				$pwdCheck = false;
-			}
+			}*/
 
 			if ($pwdCheck == false) {
 				header("Location: ../signup.php?error=wrongpwd");

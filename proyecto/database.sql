@@ -6,7 +6,7 @@ CREATE TABLE Usuarios (
     Apellido varchar(255) NOT NULL,
     Username varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
-    password varchar(255) NOT NULL,
+    Password varchar(255) NOT NULL,
     PRIMARY KEY (idUsuario)
 );
 
