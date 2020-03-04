@@ -1,5 +1,4 @@
-
-const red = '#F44336';
+/* Login Form Javascript Validation */
 
 // Input fields
 const username = document.getElementById('username');
@@ -8,17 +7,19 @@ const password = document.getElementById('pass');
 // Form
 const form = document.getElementById('login-form');
 
-// Handle form
+// Handle Login Form
 form.addEventListener('submit', function(e) {
+
 	// Prevent default behaviour
 	e.preventDefault();
 
 	if ( (validateUsername() || validateEmail()) && validatePassword() ) {
 
 		var formData = new FormData(this);
-		/*formData.append('username', username.value);
-		formData.append('password', password.value);*/
 		formData.append("button-pressed", true);
+		
+		//formData.append('username', username.value);
+		//formData.append('password', password.value);*/
 		
 		$.ajax({
 			url: 'includes/login.inc.php',
@@ -36,6 +37,11 @@ form.addEventListener('submit', function(e) {
 
 	}
 });
+
+
+
+
+
 
 
 /* Valida si un usuario es correcto */
@@ -62,6 +68,20 @@ function validatePassword() {
 	return true;
 }
 
+/* Check if the field is empty */
+function checkIfEmpty(field) {
+  	if (isEmpty(field.value.trim())) {
+    	
+    	// Set field invalid
+    	setInvalid(field, `${field.placeholder} no puede estar vacio.`);
+    	return true;
+  	} else {
+		// set field valid
+		setValid(field);
+		return false;
+  	}
+}
+
 /* Minimum eight characters, at least one uppercase letter, one lowercase letter and one number: */
 function checkPassword(field, maxLength) {
 
@@ -78,33 +98,6 @@ function checkPassword(field, maxLength) {
 
 }
 
-
-function checkIfEmpty(field) {
-  	if (isEmpty(field.value.trim())) {
-    	
-    	// set field invalid
-    	setInvalid(field, `${field.name} no puede estar vacio.`);
-    	return true;
-  	} else {
-		// set field valid
-		setValid(field);
-		return false;
-  	}
-}
-
-function isEmpty(value) {
-	if (value === '') return true;
-	return false;
-}
-
-function setInvalid(field, message) {
-	field.parentElement.nextElementSibling.innerHTML = message;
-}
-
-function setValid(field) {	
-	field.parentElement.nextElementSibling.innerHTML = '';
-}
-
 /* Comprueba si solo hay caracteres alfanumericos */
 function checkUsername(field) {
 	if (/^[a-zA-Z0-9]+$/.test(field.value)) {
@@ -115,6 +108,24 @@ function checkUsername(field) {
 		return false;
   	}
 }
+
+
+function isEmpty(value) {
+	if (value === '') return true;
+	return false;
+}
+
+/* Shows a warning message behind the input field */
+function setInvalid(field, message) {
+	field.parentElement.nextElementSibling.innerHTML = message;
+}
+
+/* Disables de warning message behind input field */
+function setValid(field) {	
+	field.parentElement.nextElementSibling.innerHTML = '';
+}
+
+
 
 
 

@@ -3,6 +3,7 @@
 CREATE TABLE Usuarios (
     idUsuario int AUTO_INCREMENT NOT NULL,
     Nombre varchar(255) NOT NULL,
+    Apellido varchar(255) NOT NULL,
     Username varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,

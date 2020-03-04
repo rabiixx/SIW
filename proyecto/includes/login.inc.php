@@ -2,15 +2,9 @@
 
 include '..\database.php';
 
-if ($conn) {
-	echo "DB OK";
-} else {
-	echo "DB NOK";
-}
 
 if (isset($_POST['button-pressed'])) {
 	
-
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
