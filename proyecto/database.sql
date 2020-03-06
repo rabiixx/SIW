@@ -20,7 +20,7 @@ CREATE TABLE Restaurantes (
 	Imagen varchar(255) NOT NULL, 
 	Mapa text NOT NULL,							/* HTML Google Maps */
 	idUsuario int NOT NULL,
-	aforo int NOT NULL,
+	Aforo int NOT NULL,
 	PRIMARY KEY (idRestaurante),
 	FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE ON UPDATE CASCADE
 );

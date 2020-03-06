@@ -19,11 +19,11 @@
 	if ( mysqli_num_rows($results) > 0 ) {
 		while($row = mysqli_fetch_array($results)) {
 			$json[] = array(
-				'imagen' => $row['imagen'],
-				'nombre' => $row['nombre'],
-				'ubicacion' => $row['ubicacion'],
-				'cocina' => $row['cocina'],
-				'precio' => $row['precio']
+				'imagen' => $row['Imagen'],
+				'nombre' => $row['Nombre'],
+				'ubicacion' => $row['Ubicacion'],
+				'cocina' => $row['Categoria'],
+				'precio' => $row['Precio']
 			);
 		}
 		$jsonstring = json_encode($json);

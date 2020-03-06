@@ -17,11 +17,11 @@
 	  	
 	  	while($row = mysqli_fetch_array($result)) {
 	    	$json[] = array(
-		    	 'imagen' => $row['imagen'],
-		      	'nombre' => $row['nombre'],
-		      	'ubicacion' => $row['ubicacion'],
-		      	'cocina' => $row['cocina'],
-		      	'precio' => $row['precio']
+		    	'imagen' => $row['Imagen'],
+		      	'nombre' => $row['Nombre'],
+		      	'ubicacion' => $row['Ubicacion'],
+		      	'cocina' => $row['Categoria'],
+		      	'precio' => $row['Precio']
 		    );
 	  	}
 

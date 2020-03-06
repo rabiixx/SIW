@@ -1,17 +1,23 @@
 $(document).ready(function() {
 
 
+
     fetchRestaurants();
 
   	/** Consulta a la base de datos los restaurantes y muestra 
       * los 10 primer */
   	function fetchRestaurants() {
-  		$.ajax( {
+
+  		
+        $.ajax( {
   			url: 'restaurant_list.php',
   			method: 'POST',
   			dataType: 'json',
   			success: function (response) {
   				//const restaurants = JSON.parse(response);
+                console.log("Hola");
+
+                console.log(response);
 
                 let template = '';
                 response.forEach(restaurant => {
@@ -32,7 +38,12 @@ $(document).ready(function() {
                           `
                 });
             $('#restaurant_list').html(template);		
-  		    }
+  		    },
+            error: function (data) {
+                console.log(data['responseText']);
+
+                console.log("adios");
+            }
         });
     }
 
@@ -85,7 +96,7 @@ $(document).ready(function() {
 
     // Infinite Scroll
 
-    var start = 3;
+    var start = 6;
     var limit = 3;
     var reachedMax = false;
 

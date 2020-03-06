@@ -2,7 +2,7 @@
   
   include('database.php');
 
-  $query = "SELECT * from restaurantes LIMIT 3";
+  $query = "SELECT * from restaurantes LIMIT 6";
   $result = mysqli_query($conn, $query);
   
   if(!$result) {
@@ -11,15 +11,15 @@
 
   $json = array();
 
-  while($row = mysqli_fetch_array($result)) {
-    $json[] = array(
-    	 'imagen' => $row['imagen'],
-      	'nombre' => $row['nombre'],
-      	'ubicacion' => $row['ubicacion'],
-      	'cocina' => $row['cocina'],
-      	'precio' => $row['precio']
-    );
-  }
+    while($row = mysqli_fetch_array($result)) {
+        $json[] = array(
+            'imagen' => $row['Imagen'],
+          	'nombre' => $row['Nombre'],
+          	'ubicacion' => $row['Ubicacion'],
+          	'categoria' => $row['Categoria'],
+          	'precio' => $row['Precio']
+        );
+    }
 
   $jsonstring = json_encode($json);
   echo $jsonstring;
