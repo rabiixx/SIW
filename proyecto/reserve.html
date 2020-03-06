@@ -17,8 +17,49 @@
 	<div data-include="navbar"></div>
 
 
-	<div class="container">
-		
+	<div class="container d-flex justify-content-center">
+		<div class="card">
+			<div class="card-header">
+				<h1 class="text-center">Haz tu reserva</h1>
+			</div>
+			<div class="card-body">
+				<form action="" method="POST" class="form-group" id="reserveForm">
+					<label for="NumeroPersonas">Numero Personas</label>
+					<select id="cars" class="form-control" name="nPeople">
+						<option>Num Personas</option>
+						<option value="1">1 Persona</option>
+						<option value="2">2 Personas</option>
+						<option value="3">3 Personas</option>
+						<option value="4">4 Personas</option>
+						<option value="5">5 Personas</option>
+						<option value="6">6 Personas</option>
+						<option value="7">7 Personas</option>
+						<option value="8">8 Personas</option>
+					</select>	
+					
+					<div class="row mt-2">
+						<div class="col-6">
+							<label for="fecha">Fecha</label>
+							<input type="date" placeholder="Fecha" class="form-control" name="date">
+						</div>
+						<div class="col-6">
+							<label for="Hora">Hora</label>
+							<select id="hour" class="form-control" name="hour">
+								<option>Elige Hora</option>
+								<option value="21:00">21:00 PM</option>
+								<option value="21:30">21:30 PM</option>
+								<option value="22:00">22:00 PM</option>
+								<option value="22:30">22:30 PM</option>
+							</select>	
+						</div>
+					</div>
+					<div class="mt-3 justify-content-center">
+						<button type="submit" class="btn btn-primary btn-block">Buscar</button>	
+					</div>
+					
+				</form>
+			</div>
+		</div>
 
 		
 	</div>
@@ -61,6 +102,66 @@
   		});
 
 
+		$(document).ready(function() {
+			
+			form = document.getElementById('reserveForm');
+
+			form.addEventListener('submit', function(e) {
+
+				e.preventDefault();
+			
+				var formData = new FormData(this);
+
+				var date = new Date();
+
+				//var actualHour = date.getHours();
+				//var actualMin = date.getMinutes();
+
+				actualHour = 22;
+				actualMin = 45;
+
+
+				if (actualMin < 30) {
+					actualMin = 30;
+				} else {
+					 ++actualHour;
+					 actualMin = 0;
+				}
+
+				actualTimeSec = (60 * actualHour) + actualMin;	// Hora actual
+				destTimeSec = 23 * 60; 							// 23:00  
+
+				console.log(actualTimeSec);
+
+				/*for(var i = 420; i <= 1320; i += 15){
+			        hours = Math.floor(i / 60);
+			        minutes = i % 60;
+			        if (minutes < 10){
+			            minutes = '0' + minutes; // adding leading zero
+			        }
+			        ampm = hours % 24 < 12 ? 'AM' : 'PM';
+			        hours = hours % 12;
+			        if (hours === 0){
+			            hours = 12;
+			        }
+
+
+				$("#hour").append(
+					)
+			
+				console.log(time);*/
+			});
+
+		});
+
 	</script>
 </body>
 </html>
+
+
+
+<!-- Get actual date -->
+<!-- https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript -->
+
+<!-- Dinamic date dropdown -->
+<!-- https://stackoverflow.com/questions/8918168/javascript-dynamic-time-drop-down -->
