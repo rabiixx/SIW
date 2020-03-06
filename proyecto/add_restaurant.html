@@ -23,28 +23,12 @@
 	<!-- DROPZONE JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.js"></script>	
 
-    <script> 
-		$(function(){
-			$("#navbar").load("navbar.html"); 
-		});
-    </script> 
 
 
 </head>
 <body>
 
-		<header id="navbar"></header>
-
-	
-	
-	<!-- <form action="upload_img.php"  enctype="multipart/form-data" method="POST">
-		<input type="text" id ="firstname" name ="firstname" />
-    	<input type="text" id ="lastname" name ="lastname" />
-	  	<div class="dropzone" id="dropzoneForm"></div>
-		<div align="center">
- 			<button align="center" class="btn btn-success" type="submit" id="submit-all">Subir Fotos</button>
-		</div>
-	</form> -->
+	<header data-include="navbar"></header>
 
 	<div class="container">
 
@@ -114,14 +98,23 @@
 		</div>
 
 
-
-
 </div>	
 
 
 
 		
 	<script>
+
+
+
+	// Import html header and footer
+  	$(function(){
+    	var includes = $('[data-include]');
+    	jQuery.each(includes, function(){
+    		var file = $(this).data('include') + '.html';
+    		$(this).load(file);
+    	});
+  	});
 
 	/*$(document).ready(function(){*/
 
@@ -133,7 +126,7 @@
 
 		    // Call Dropzone manually
 		    $("#dropzoneForm").dropzone({
-		    	url: 'add_restaurant.php',						
+		    	url: 'includes/add_restaurant.php',						
 		        paramName: "images",	
 		        uploadMultiple: true,
 		        parallelUploads: 3,

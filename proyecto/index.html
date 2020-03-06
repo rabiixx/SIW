@@ -1,193 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 	<meta charset="UTF-8">
-	<title>Reserva Restaurantes</title>
+	<title>Restaurantes</title>
 
 	<!-- BOOTSTRAP CDN -->
-	<link rel="stylesheet" href="bootstrap.min.css">
- 
-	<!-- Google Icons -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<!-- Font Awesome Kit -->
 	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
 
-	<!-- Custom CSS Styles -->
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
-
-	<!-- JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-	<!-- BOOTSTRAP SHOW PASSWORD -->
-	<script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-
-	<!-- POPPER.JS -->
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-
-
-
 </head>
 <body>
 
-<header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed">
-	  	<a class="navbar-brand text-white" href="#">Reservas</a>
-	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    	<span class="navbar-toggler-icon"></span>
-	  	</button>
-
-	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    	<ul class="navbar-nav mr-auto">
-	      
-	      		<li class="nav-item active">
-	        		<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	      		</li>
-	      
-	      		<li class="nav-item">
-	        		<a class="nav-link" href="#">Link</a>
-	      		</li>
-
-	      		<li class="nav-item">
-	        		<a class="nav-link disabled" href="#">Disabled</a>
-	      		</li>
-	    	</ul>
-	    	<div class="ml-auto">
-	    		<a href="#" class="btn btn-dark text-white mr-3 border border-dark">Iniciar Sesion</a>
-	    		<a href="#" class="btn btn-outline-dark text-white border">Registrarse</a>
-	    	</div>
+	<header data-include="navbar"></header>
 
 
-	    </div>
-	</nav>
-</header>
+	<div class="container ">
 
 
-<section id="login">
-	<div class="container mt-5">
-		<div class="d-flex justify-content-center h-100">
-			<div class="card" style="width: 350px">
-				<div class="card-header">
-					<h3 class="text-center">Iniciar Sesion</h3>
-				</div>	
-				<div class="d-flex justify-content-center mt-2">
-					<span style = "color: #FFA500;"><i class="fas fa-user fa-3x"></i></span>	
-				</div>
-			
-				<div class="card-body">
-					<form accept="login.inc.php" method="post" id="login-form" enctype="multipart/form-data">
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-user"></i></span>
-								</div>
-								
-								<input type="text" id="username" name="username" class="form-control" placeholder="Username" onfocusout="validateUsername()">
-							</div>
-							<span class="text-danger mt-1 small"></span>
-							
-						</div>
-						
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<button id="show_hide_pass" class="input-group-text"><i id="pass_icon" class="fas fa-eye"></i></button>
-								</div>
-
-								<input type="password" id="pass" name="password" class="form-control" data-toogle="password" placeholder="Password" onfocusout="validatePassword()">
-
-							</div>
-							<span class="text-danger mt-1 small"></span>
+	<div class="jumbotron text-center mt-1">
+        <h1>Reserva de Restaurantes</h1>
+        <h3>Haz tu reserva YA!</h3>
+    </div>
 	
-						</div>
 
-						<div class="form-group row justify-content-start">
-							<div class="col">
-								<div class="checkbox">
-									<input type="checkbox" name="remember"> 
-									<label for="remember-me">Recordar</label>
-								</div>
-							</div>
-						</div>
-						
-						<!--<div class="form-group">
-							<input type="submit" value="Login" class="btn float-right login_btn">
-						</div>-->
-						<div class="d-flex justify-content-center">
-							<button type="submit" class="btn btn-success" name="login-submit">Inciar Sesion</button>	
-						</div>	
-					</form>
-				</div>
+    <div class="container mb-3 border border-dark">
+    	<div class="d-flex row justify-content-center w-100 border border-danger">
+    		<form class="form-inline">
+    			<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            	<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    		</form>	
+    	</div>
+    </div>  
 
-				<div class="card-footer">
-					<div class="d-flex justify-content-center links">
-						¿No tienes una cuenta?<a href="#" class="ml-2">Registrate</a>
-					</div>
-					<div class="d-flex justify-content-center">
-						<a href="#">¿Has olvidado tu contraseña?</a>
-					</div>	
-				</div>
+	<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 
-			</div>
-		</div>	
+	<div class="row">
+
+		<div class="col-3 ">
+			<ul class="list-group">
+				<li class="list-group-item">Cras justo odio</li>
+				<li class="list-group-item">Dapibus ac facilisis in</li>
+				<li class="list-group-item">Morbi leo risus</li>
+				<li class="list-group-item">Porta ac consectetur ac</li>
+				<li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</div>
+
+
+
+		<div class="col-9">
+			<div class="row" id="restaurant_list"></div>		
+		</div>
+
+	</div>
+
+    
 	</div>
 
 
-<script src="loginValidation.js"></script>
 
-<script>
-	$(document).ready(function() {
+
+
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<!-- CUSTOM JS -->
+    <script src="js/restaurant_list.js"></script>
+	
+	<script>
 		
-
-		/* Show hide password function */
-		$("#show_hide_pass").click(function(e) {
-
-			e.preventDefault();
-	       	e.stopPropagation();
-
-			var type = $("#pass").attr('type');
-
-			$("#pass_icon").toggleClass('fa-eye fa-eye-slash');
-
-			if (type === "password") {
-				$("#pass").attr('type', 'text');
-			} else {
-				$("#pass").attr('type', 'password');
-			}
-
-		});
-	});
-</script>
-
-
-
+		// Import html header and footer
+	  	$(function(){
+	    	var includes = $('[data-include]');
+	    	jQuery.each(includes, function(){
+	    		var file = $(this).data('include') + '.html';
+	    		$(this).load(file);
+	    	});
+	  	});
+	</script>
 
 </body>
 </html>
 
-
-<!-- Font Awesome Sizing
-
-<i class="fas fa-camera fa-xs"></i>
-<i class="fas fa-camera fa-sm"></i>
-<i class="fas fa-camera fa-lg"></i>
-<i class="fas fa-camera fa-2x"></i>
-<i class="fas fa-camera fa-3x"></i>
-<i class="fas fa-camera fa-5x"></i>
-<i class="fas fa-camera fa-7x"></i>
-<i class="fas fa-camera fa-10x"></i>
-
-
-input-group: es un contenedor que te permite añadir un icono, 
-texto o boton al lado del campo input
-
-input-group-prepend: añade el elemento al principio
-input-group-append: lo añade al final
-input-group-text: style the specified help text.
-
-
- -->

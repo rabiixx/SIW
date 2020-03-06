@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reserva</title>
+
+	<!-- BOOTSTRAP CDN -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Font Awesome Kit -->
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+	<div data-include="navbar"></div>
+
+
+	<div class="container">
+		
+
+		
+	</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<!-- BOOTSTRAP 4 JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+	<script src="js/reserve.js"></script>
+
+	<script>
+		
+		$(function(){
+    		var includes = $('[data-include]');
+    		jQuery.each(includes, function(){
+      			var file = $(this).data('include') + '.html';
+      			$(this).load(file);
+    		});
+  		});
+
+
+	</script>
+</body>
+</html>

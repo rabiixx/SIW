@@ -10,7 +10,7 @@ $(document).ready(function() {
 
   		
         $.ajax( {
-  			url: 'restaurant_list.php',
+  			url: 'includes/restaurant_list.php',
   			method: 'POST',
   			dataType: 'json',
   			success: function (response) {
@@ -59,7 +59,7 @@ $(document).ready(function() {
         if($('#search').val()) {
             let search = $('#search').val();
             $.ajax({
-                url: 'restaurant_search.php',
+                url: 'includes/restaurant_search.php',
                 data: { search: search },
                 method: 'POST',
                 success: function (response) {
@@ -119,10 +119,8 @@ $(document).ready(function() {
 
         if (win_scroll_top >= doc_height - win_height) {
 
-            //$("#load_more").click(function(event) {
-
                 $.ajax({
-                    url: 'inf_scroll.php',
+                    url: 'includes/inf_scroll.php',
                     method: 'POST',
                     data: {
                         start: start, 
@@ -166,54 +164,6 @@ $(document).ready(function() {
                 console.log("Opcions2");
             }
     });
-    
-
-
-    // Dropzone configuration
-  /*  Dropzone.options.dropzoneForm = {
-        url: 'upload_img.php',
-        method: 'POST',
-        acceptedFiles: '.png, .jpg, .jpeg, .gif',
-        dictDefaultMessage: 'Arrastra las imagenes de tu restaurante aqui.',
-        autoProcessQueue: false,
-        init: function () {
-            var myDropzone = this;
-            $("#btn-add-restaurant").submit(function (e) {
-    
-                e.preventDefault();     // Evitamos que se recarge la pagina
-        
-                /** Como hemos puesto que las imagenes no se suban automaticamente,
-                  * hay que llamar al metofo para que las suba */
-              /*  myDropzone.processQueue();
-            });
-        }
-    }*/
-
-     Dropzone.options.dropzoneFrom = {
-  autoProcessQueue: false,
-  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
-          dictDefaultMessage: 'Arrastra las imagenes de tu restaurante aqui.',
-
-  init: function(){
-   var submitButton = document.querySelector('#submit-all');
-   myDropzone = this;
-   submitButton.addEventListener("click", function(){
-    myDropzone.processQueue();
-   });
-   this.on("complete", function(){
-    if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
-    {
-     var _this = this;
-     _this.removeAllFiles();
-    }
-    list_image();
-   });
-  },
- };
-
-
-
-
     
 
 });
