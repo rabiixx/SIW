@@ -72,13 +72,13 @@ CREATE TABLE Anade (
 
 CREATE TABLE Reserva (
 	idReserva int AUTO_INCREMENT NOT NULL,
-	Fecha DATE NOT NULL,
+	Fecha DATETIME NOT NULL,				/* Fecha en la que se realizo la reserva */
 	Turno varchar(255),						/* Desayuno, Comida, Cena */
 	idRestaurante int NOT NULL,
 	idUsuario int NOT NULL,					
 	FechaReserva DATETIME,					/* YYYY-MM-DD hh:mm:ss */
 	PRIMARY KEY (idReserva, idUsuario, idRestaurante),
-	CHECK (Turno IN ('Desayuno', 'Comida', 'Cena')),
+	CHECK (Turno IN ('Comida', 'Cena')),
 	FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (idRestaurante) REFERENCES Restaurantes(idRestaurante) ON DELETE CASCADE ON UPDATE CASCADE
 );
