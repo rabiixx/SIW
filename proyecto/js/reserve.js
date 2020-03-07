@@ -12,11 +12,11 @@ $(document).ready(function() {
 	defaultStartSec = 13 * 60;		// Reservations starts at 13:00
 	defaultEndSec =  23 * 60;		// Reservations finish at 23:00 
 
-	document.getElementById("date").defaultValue = actualDate;
+	//document.getElementById("datepicker").defaultValue = actualDate;
 
 	dinamicHourDropdown(true);
 
-	myDate = document.getElementById("date"); 
+	myDate = document.getElementById("datepicker"); 
 
 	myDate.addEventListener("change", function () {		
 		if (myDate.value != actualDate) {
@@ -86,6 +86,10 @@ $(document).ready(function() {
 			e.preventDefault();
 		
 			var formData = new FormData(this);
+		
+			var date = document.getElementById("datepicker").value;
+
+			formData.append('date', date);
 			formData.append("button-pressed", true);
 
 			$.ajax({

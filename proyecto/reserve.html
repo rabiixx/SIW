@@ -13,6 +13,8 @@
 	<!-- JQUERY UI CSS -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+	<link rel="stylesheet" href="themes/jquery-ui.theme.css">
+	
 
 </head>
 <body>
@@ -27,28 +29,27 @@
 				<h1 class="text-center">Haz tu reserva</h1>
 			</div>
 			<div class="card-body">
-				<form action="includes/reserve.php" method="POST" class="form-group" id="reserveForm" enctype="multipart/form-data>
-					<label for="NumeroPersonas">Numero Personas</label>
-					<select id="cars" class="form-control" name="nPeople">
-						<option>Num Personas</option>
-						<option value="1">1 Persona</option>
-						<option value="2">2 Personas</option>
-						<option value="3">3 Personas</option>
-						<option value="4">4 Personas</option>
-						<option value="5">5 Personas</option>
-						<option value="6">6 Personas</option>
-						<option value="7">7 Personas</option>
-						<option value="8">8 Personas</option>
-					</select>	
+				<form action="includes/reserve.php" method="POST" class="form-group" id="reserveForm" enctype="multipart/form-data">
 					
-					<div class="row mt-2">
-						<!-- <div class="col-6">
-							<label for="fecha">Fecha</label>
-							<input type="date" id="date" placeholder="Fecha" class="form-control" name="date">
-						</div>-->
-						<div class="col-6">
-							<label for="Hora">Fecha</label>
-							<input type="text" id="datepicker" class="form-control">
+					
+					<div class="row mt-2 d-flex justify-content-center">
+												
+						<!-- <input type="text" id="datepicker" class="form-control" name="date"> -->
+						<div id="datepicker" name="datepicker" class="block"></div>
+						
+						<div class="col-6">	
+							<label for="NumeroPersonas">Numero Personas</label>
+							<select id="cars" class="form-control" name="nPeople">
+								<option>Num Personas</option>
+								<option value="1">1 Persona</option>
+								<option value="2">2 Personas</option>
+								<option value="3">3 Personas</option>
+								<option value="4">4 Personas</option>
+								<option value="5">5 Personas</option>
+								<option value="6">6 Personas</option>
+								<option value="7">7 Personas</option>
+								<option value="8">8 Personas</option>
+							</select>					
 						</div>
 						
 						<div class="col-6">
@@ -67,21 +68,31 @@
 	
 
 
-
 	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<!-- JQEURY UI JS -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<!-- SPANISH CALENDAR -->
+	<script src="jquery/ui/datepicker-es.js"></script>
+
 	<!-- BOOTSTRAP 4 JS -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-	<script src="js/reserve.js"></script>
+	<style>
+		.ui-widget {
+			font-size: 1.5em;
+			font-style: italic;
+		}
+	</style>  
+
 
 	<script>
-		
+	
+		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );	
+
 		$(function(){
     		var includes = $('[data-include]');
     		jQuery.each(includes, function(){
@@ -90,13 +101,17 @@
     		});
   		});
 
+
+		
+
   		$(function () {
 			$("#datepicker").datepicker();
 		});
 
-
-
 	</script>
+
+	<script src="js/reserve.js"></script>
+
 </body>
 </html>
 
