@@ -13,9 +13,9 @@
 	<!-- JQUERY UI CSS -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-	<link rel="stylesheet" href="themes/jquery-ui.theme.css">
+	<!-- JQUERY UI THEME -->
+	<link rel="stylesheet" href="css/jquery-ui.css">
 	
-
 </head>
 <body>
 
@@ -34,7 +34,6 @@
 					
 					<div class="row mt-2 d-flex justify-content-center">
 												
-						<!-- <input type="text" id="datepicker" class="form-control" name="date"> -->
 						<div id="datepicker" name="datepicker" class="block"></div>
 						
 						<div class="col-6">	
@@ -69,7 +68,7 @@
 
 
 	<!-- JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
 	<!-- JQEURY UI JS -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -91,22 +90,8 @@
 
 	<script>
 	
-		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );	
-
-		$(function(){
-    		var includes = $('[data-include]');
-    		jQuery.each(includes, function(){
-      			var file = $(this).data('include') + '.html';
-      			$(this).load(file);
-    		});
-  		});
 
 
-		
-
-  		$(function () {
-			$("#datepicker").datepicker();
-		});
 
 	</script>
 

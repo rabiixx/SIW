@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+	$(function(){
+		var includes = $('[data-include]');
+		jQuery.each(includes, function(){
+  			var file = $(this).data('include') + '.html';
+  			$(this).load(file);
+		});
+	});
+
+
 	var date = new Date();
 	var actualHour = date.getHours();		// Get actual hour
 	var actualMin = date.getMinutes();		// Get actual min
@@ -16,15 +25,23 @@ $(document).ready(function() {
 
 	dinamicHourDropdown(true);
 
-	myDate = document.getElementById("datepicker"); 
+	 $(function () {
 
-	myDate.addEventListener("change", function () {		
-		if (myDate.value != actualDate) {
-			dinamicHourDropdown(false);
-		} else {
-			dinamicHourDropdown(true);
-		}
+		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );	
+
+		$("#datepicker").datepicker({
+			minDate: new Date(),
+			dateFormat: "yy-mm-dd", 	// ISO 8601 Date Format
+			onSelect: function () {
+				if ($("#datepicker").val() != actualDate) {
+					dinamicHourDropdown(false);	
+				} else {
+					dinamicHourDropdown(true);
+				}				
+			}
+		});
 	});
+
 	
 
 	/* Displays a reservation hour dropdown list with a 30min delay. */
@@ -77,6 +94,11 @@ $(document).ready(function() {
 
 
 
+
+		
+
+ 
+
 	$(document).ready(function() {
 		
 		form = document.getElementById('reserveForm');
@@ -100,15 +122,14 @@ $(document).ready(function() {
 	    		processData: false,
 	    		success: function (response) {
 	    			console.log(response);
+					$('#reserveForm').trigger("reset");
+					$( "#datepicker").datepicker( "setDate", "getDate" );
 	    		},
 	    		error: function(data) {
 	    			console.log(data);	
 	    		}
 			});
-
-
-			
-				
+		
 		});
 
 	});
