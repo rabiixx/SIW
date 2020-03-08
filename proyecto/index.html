@@ -11,6 +11,8 @@
 	<!-- Font Awesome Kit -->
 	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
 
@@ -19,12 +21,10 @@
 
 	<div class="container ">
 
-
 	<div class="jumbotron text-center mt-1">
         <h1>Reserva de Restaurantes</h1>
         <h3>Haz tu reserva YA!</h3>
     </div>
-	
 
     <div class="container mb-3 border border-dark">
     	<div class="d-flex row justify-content-center w-100 border border-danger">
@@ -95,6 +95,31 @@
 	    		$(this).load(file);
 	    	});
 	  	});
+		    
+	
+    function loadRestaurant(x) {
+ 
+    	var trozo = x.id.split("-");
+
+    	var rest_name = trozo[trozo.length - 1];
+
+    	console.log("hola");
+
+      	$.ajax({
+           	url: 'includes/load_restaurant.php',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				restName: rest_name,
+				buttonPressed: true
+			},
+            success: function (response) {
+            	console.log(response);
+            }                                             
+    	});
+    }
+
+	
 	</script>
 
 </body>

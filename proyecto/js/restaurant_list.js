@@ -1,11 +1,23 @@
-$(document).ready(function() {
 
+
+
+
+/*$("a").click(function(e) {
+    e.preventDefault();
+    console.log("a pressed");
+    var buttonElementId = $(this).attr('href');
+    console.log(buttonElementId);
+});*/
+
+
+
+$(document).ready(function() {
 
 
     fetchRestaurants();
 
   	/** Consulta a la base de datos los restaurantes y muestra 
-      * los 10 primer */
+      * los 10 primeros */
   	function fetchRestaurants() {
 
   		
@@ -15,46 +27,39 @@ $(document).ready(function() {
   			dataType: 'json',
   			success: function (response) {
   				//const restaurants = JSON.parse(response);
-                console.log("Hola");
-
-                console.log(response);
 
                 let template = '';
                 response.forEach(restaurant => {
                     template += `
-                        <div class="col-4 mb-3">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
-                                <div class="d-flex card-body flex-column">
-                                  <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                                  <p class="card-text">${restaurant.ubicacion}</p>
-                                  <p class="card-text">${restaurant.cocina}</p>
-                                  <h1 class="card-text">${restaurant.precio} €</h1>
-                                  <button href="#" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                            <div class="col-4 mb-3">
+                                <div class="card h-100" href="reserve.html">
+                                    <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
+                                    <div class="d-flex card-body flex-column">
+                                        <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
+                                        <p class="card-text">${restaurant.ubicacion}</p>
+                                        <p class="card-text">${restaurant.cocina}</p>
+                                        <h1 class="card-text">${restaurant.precio} €</h1>
+                                        <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                           `
                 });
             $('#restaurant_list').html(template);		
   		    },
             error: function (data) {
-                console.log(data['responseText']);
+                //console.log(data['responseText']);
 
-                console.log("adios");
+                //console.log("adios");
             }
         });
     }
 
 
-
     /** Muestra los restaurantes que comiencen por la 
       * letra que el usuario introduzca por la barra de busqueda */ 
     $('#search').keyup(function() {
-
-        console.log("Keyup")
-        console.log($('#search').val());
 
         if($('#search').val()) {
             let search = $('#search').val();
@@ -75,11 +80,11 @@ $(document).ready(function() {
                                     <div class="card h-100">
                                         <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
                                         <div class="d-flex card-body flex-column">
-                                          <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                                          <p class="card-text">${restaurant.ubicacion}</p>
-                                          <p class="card-text">${restaurant.cocina}</p>
-                                          <h1 class="card-text">${restaurant.precio} €</h1>
-                                          <button href="#" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                            <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
+                                            <p class="card-text">${restaurant.ubicacion}</p>
+                                            <p class="card-text">${restaurant.cocina}</p>
+                                            <h1 class="card-text">${restaurant.precio} €</h1>
+                                            <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>                                        
                                         </div>
                                     </div>
                                 </div>`
@@ -106,16 +111,9 @@ $(document).ready(function() {
 
       $(window).scroll(function(e) {
 
-        console.log("Opcion 1");
-
-
         var win_scroll_top = Math.round($(window).scrollTop());
         var doc_height = Math.round($(document).height());
         var win_height = Math.round($(window).height());
-
-        console.log(win_scroll_top);
-        console.log(doc_height);
-        console.log(win_height);
 
         if (win_scroll_top >= doc_height - win_height) {
 
@@ -138,7 +136,7 @@ $(document).ready(function() {
 
                             restaurants = JSON.parse(response);
                             
-                            console.log(restaurants);
+                           // console.log(restaurants);
 
                             let template = '';
                             restaurants.forEach(restaurant => {
@@ -147,11 +145,11 @@ $(document).ready(function() {
                                         <div class="card h-100">
                                             <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
                                             <div class="d-flex card-body flex-column">
-                                              <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                                              <p class="card-text">${restaurant.ubicacion}</p>
-                                              <p class="card-text">${restaurant.cocina}</p>
-                                              <h1 class="card-text">${restaurant.precio} €</h1>
-                                              <button href="#" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                                <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
+                                                <p class="card-text">${restaurant.ubicacion}</p>
+                                                <p class="card-text">${restaurant.cocina}</p>
+                                                <h1 class="card-text">${restaurant.precio} €</h1>
+                                                <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>
                                             </div>
                                         </div>
                                     </div>`
@@ -161,9 +159,13 @@ $(document).ready(function() {
                     }
                 });    
             } else {
-                console.log("Opcions2");
+               // console.log("Opcions2");
             }
     });
     
+   
+
+
+
 
 });

@@ -1,5 +1,8 @@
 /* BASE DE DATOS PAGINA WEB */
 
+
+CREATE DATABASE proyecto;
+
 CREATE TABLE Usuarios (
     idUsuario int AUTO_INCREMENT NOT NULL,
     Nombre varchar(255) NOT NULL,
@@ -48,7 +51,7 @@ CREATE TABLE Opinar(
 	idUsuario int NOT NULL,
 	idRestaurante int NOT NULL,
 	idOpinion int NOT NULL,
-	idImg int NOT NULL,
+	idImg int,
 	Fecha DATE NOT NULL,
 	PRIMARY KEY (idUsuario, idRestaurante, idImg),
 	FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
