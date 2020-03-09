@@ -52,10 +52,32 @@
 
 
 		$jsonstring = json_encode($matrix);
-		echo $jsonstring;
+	
+
+		$src_template = explode("##MARCA##", file_get_contents("../reserve.html"));
+
+	   	$auxTemplate = '';
+
+	   	$dest_template = '';
+
+		for ($i = 0; $i < sizeof($matrix); $i++) { 
+
+			$auxTemplate = $src_template[1];
+
+			$auxTemplate = str_replace("##Username##", $matrix[$i]['username'], $auxTemplate);
+		   	$auxTemplate = str_replace("##Titulo##", $matrix[$i]['rating']['title'], $auxTemplate);
+		   	$auxTemplate = str_replace("##Descripcion##", $matrix[$i]['rating']['description'], $auxTemplate);
+		   	$auxTemplate = str_replace("##Fecha##", $matrix[$i]['date'], $auxTemplate);
 
 
-   }
+		   	$dest_template .= $auxTemplate;
+		}
+
+		echo $src_template[0] . $dest_template . $src_template[2];
+
+	}
+
+
 
 
 
@@ -110,13 +132,5 @@
 
 
 
-   	$file = file_get_contents("../reserve.html");
 
-   	$file = explode("##MARCA##", $file);
-
-   	$template = '';
-
-   	str_replace("##Username##", $matrix[i]['username'], $file);
-   	str_replace("##Titulo##", $matrix[i]['rating']['title'], $file);
-   	str_replace("##Descripcion##", $matrix[i]['rating']['description'], $file);
-   	str_replace("##Fecha##", $matrix[$i]['Fecha'], $file);
+   	

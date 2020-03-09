@@ -9,16 +9,19 @@ function loadRestaurant(x) {
     $.ajax({
         url: 'includes/load_restaurant.php',
         type: 'POST',
-        dataType: 'json',
+        //dataType: 'json',
+        dataType: 'text',
         data: {
             restName: rest_name,
             buttonPressed: true
         },
-        success: function (response) {
-            console.log(response);
+        success: function (completeHtmlPage) {
+            console.log(completeHtmlPage);
+            $("html").html(completeHtmlPage);
         },
         error: function (request, status, error) {
             console.log(request.responseText);
+            //console.log('Error hackeado');
         }                                             
     });
 }
@@ -96,7 +99,7 @@ $(document).ready(function() {
                                             <p class="card-text">${restaurant.ubicacion}</p>
                                             <p class="card-text">${restaurant.cocina}</p>
                                             <h1 class="card-text">${restaurant.precio} €</h1>
-                                            <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)" class="btn btn-primary btn-block mt-auto">Reservar</button>                                        
+                                            <button id="btn-${restaurant.nombre}" href="reserve.html" onclick="loadRestaurant(this.id)" class="btn btn-primary btn-block mt-auto">Reservar</button>                                        
                                         </div>
                                     </div>
                                 </div>`
@@ -162,7 +165,7 @@ $(document).ready(function() {
                                                 <p class="card-text">${restaurant.ubicacion}</p>
                                                 <p class="card-text">${restaurant.cocina}</p>
                                                 <h1 class="card-text">${restaurant.precio} €</h1>
-                                                <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)"  class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                                <button id="btn-${restaurant.nombre}" href="reserve.html" onclick="loadRestaurant(this.id)" class="btn btn-primary btn-block mt-auto">Reservar</button>
                                             </div>
                                         </div>
                                     </div>`
