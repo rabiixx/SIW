@@ -1,18 +1,31 @@
+   
+function loadRestaurant(x) {
+ 
+    var trozo = x.split("-");
+
+    var rest_name = trozo[trozo.length - 1];
 
 
-
-
-/*$("a").click(function(e) {
-    e.preventDefault();
-    console.log("a pressed");
-    var buttonElementId = $(this).attr('href');
-    console.log(buttonElementId);
-});*/
+    $.ajax({
+        url: 'includes/load_restaurant.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            restName: rest_name,
+            buttonPressed: true
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }                                             
+    });
+}
 
 
 
 $(document).ready(function() {
-
 
     fetchRestaurants();
 
@@ -20,7 +33,6 @@ $(document).ready(function() {
       * los 10 primeros */
   	function fetchRestaurants() {
 
-  		
         $.ajax( {
   			url: 'includes/restaurant_list.php',
   			method: 'POST',
@@ -39,7 +51,7 @@ $(document).ready(function() {
                                         <p class="card-text">${restaurant.ubicacion}</p>
                                         <p class="card-text">${restaurant.cocina}</p>
                                         <h1 class="card-text">${restaurant.precio} €</h1>
-                                        <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                        <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)"  class="btn btn-primary btn-block mt-auto">Reservar</button>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +96,7 @@ $(document).ready(function() {
                                             <p class="card-text">${restaurant.ubicacion}</p>
                                             <p class="card-text">${restaurant.cocina}</p>
                                             <h1 class="card-text">${restaurant.precio} €</h1>
-                                            <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>                                        
+                                            <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)" class="btn btn-primary btn-block mt-auto">Reservar</button>                                        
                                         </div>
                                     </div>
                                 </div>`
@@ -109,7 +121,8 @@ $(document).ready(function() {
         
         if ($(window).data('ajaxready') == false) return;*/
 
-      $(window).scroll(function(e) {
+    $(window).scroll(function(e) {
+
 
         var win_scroll_top = Math.round($(window).scrollTop());
         var doc_height = Math.round($(document).height());
@@ -149,7 +162,7 @@ $(document).ready(function() {
                                                 <p class="card-text">${restaurant.ubicacion}</p>
                                                 <p class="card-text">${restaurant.cocina}</p>
                                                 <h1 class="card-text">${restaurant.precio} €</h1>
-                                                <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this)" class="btn btn-primary btn-block mt-auto">Reservar</button>
+                                                <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)"  class="btn btn-primary btn-block mt-auto">Reservar</button>
                                             </div>
                                         </div>
                                     </div>`
@@ -163,7 +176,6 @@ $(document).ready(function() {
             }
     });
     
-   
 
 
 

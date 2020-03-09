@@ -13,6 +13,15 @@
 
 	<link rel="stylesheet" href="css/styles.css">
 
+		<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+	<!-- CUSTOM JS -->
+    <script src="js/restaurant_list.js"></script>
+
+
 </head>
 <body>
 
@@ -77,13 +86,7 @@
 
 
 
-	<!-- JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-	<!-- CUSTOM JS -->
-    <script src="js/restaurant_list.js"></script>
 	
 	<script>
 		
@@ -97,31 +100,7 @@
 	  	});
 		    
 	
-    function loadRestaurant(x) {
- 
-    	var trozo = x.id.split("-");
 
-    	var rest_name = trozo[trozo.length - 1];
-
-    	console.log(rest_name);
-
-      	$.ajax({
-           	url: 'includes/load_restaurant.php',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				restName: rest_name,
-				buttonPressed: true
-			},
-            success: function (response) {
-            	console.log("hola2");
-            	console.log(response);
-            },
-            error: function (request, status, error) {
-            	console.log(request.responseText);
-            }                                             
-    	});
-    }
 
 	
 	</script>

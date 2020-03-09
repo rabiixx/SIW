@@ -60,7 +60,7 @@
 
 
    /**
-    * @param  %isUser
+    * @param  %idUser
     * @return 
     */
     function getUsername(int $idUser, $conn) {
@@ -107,3 +107,16 @@
 
    		return $result;
    	}
+
+
+
+   	$file = file_get_contents("../reserve.html");
+
+   	$file = explode("##MARCA##", $file);
+
+   	$template = '';
+
+   	str_replace("##Username##", $matrix[i]['username'], $file);
+   	str_replace("##Titulo##", $matrix[i]['rating']['title'], $file);
+   	str_replace("##Descripcion##", $matrix[i]['rating']['description'], $file);
+   	str_replace("##Fecha##", $matrix[$i]['Fecha'], $file);
