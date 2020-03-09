@@ -22,21 +22,18 @@ INSERT INTO opiniones(Titulo, Descripcion, Puntuacion) VALUES ("Opinion5", "Lore
 INSERT INTO opiniones(Titulo, Descripcion, Puntuacion) VALUES ("Opinion6", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, excepturi.",5);
 INSERT INTO opiniones(Titulo, Descripcion, Puntuacion) VALUES ("Opinion7", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, excepturi.",4);
 
-INSERT INTO imagenes(imgName) VALUES ("res1.png");
-INSERT INTO imagenes(imgName) VALUES ("res2.jpg");
-INSERT INTO imagenes(imgName) VALUES ("res3.jpg");
-INSERT INTO imagenes(imgName) VALUES ("res4.jpg");
-INSERT INTO imagenes(imgName) VALUES ("res5.jpg");
 
+INSERT INTO opinar(idUsuario, idRestaurante, idOpinion,Fecha) VALUES (1, 1, 1, "2020-04-01");
+INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, Fecha) VALUES (1, 1, 2, "2020-04-02");
+INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, Fecha) VALUES (1, 1, 3, "2020-04-03");
+INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, Fecha) VALUES (1, 1, 4, "2020-04-04");
+INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, Fecha) VALUES (1, 1, 5, "2020-04-05");
 
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 1, 1, "2020-04-01");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 1, 2, "2020-04-02");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 1, 3, "2020-04-03");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 2, 4, "2020-04-04");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 3, 5, "2020-04-05");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 4, "NULL", "2019-04-06");
-INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1, 1, 5, "NULL", "2020-04-07");
-
+INSERT INTO imagenes(imgName, idOpinion) VALUES ("res1.png", 1);
+INSERT INTO imagenes(imgName, idOpinion) VALUES ("res2.jpg", 1);
+INSERT INTO imagenes(imgName, idOpinion) VALUES ("res3.jpg", 1);
+INSERT INTO imagenes(imgName, idOpinion) VALUES ("res4.jpg", 2);
+INSERT INTO imagenes(imgName, idOpinion) VALUES ("res5.jpg", 3);
 
 /* OBTENER OPINIONES SOBRE UN RESTAURANTE */
 SELECT o.Titulo, o.Descripcion, o.Puntuacion, op.idUsuario, op.idImg, op.Fecha, o.idOpinion, op.idRestaurante

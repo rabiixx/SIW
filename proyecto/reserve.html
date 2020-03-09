@@ -24,45 +24,54 @@
 
 
 	<div class="container d-flex justify-content-center">
-		<div class="card" style="width: 400px; ">
-			<div class="card-header">
-				<h1 class="text-center">Haz tu reserva</h1>
+		
+		<div class="row" style="margin-top: 100px">
+			<div class="col-8">
+				<img src="img/res1.png" alt="">
 			</div>
-			<div class="card-body">
-				<form action="includes/reserve.php" method="POST" class="form-group" id="reserveForm" enctype="multipart/form-data">
-					
-					
-					<div class="row mt-2 d-flex justify-content-center">
-												
-						<div id="datepicker" name="datepicker" class="block"></div>
-						
-						<div class="col-6">	
-							<label for="NumeroPersonas">Numero Personas</label>
-							<select id="cars" class="form-control" name="nPeople">
-								<option>Num Personas</option>
-								<option value="1">1 Persona</option>
-								<option value="2">2 Personas</option>
-								<option value="3">3 Personas</option>
-								<option value="4">4 Personas</option>
-								<option value="5">5 Personas</option>
-								<option value="6">6 Personas</option>
-								<option value="7">7 Personas</option>
-								<option value="8">8 Personas</option>
-							</select>					
-						</div>
-						
-						<div class="col-6">
-							<label for="Hora">Hora</label>
-							<select id="hour" class="form-control" name="hour"></select>	
-						</div>
+			<div class="col-4">
+				<div class="card" style="width: 400px; ">
+					<div class="card-header">
+						<h1 class="text-center">Haz tu reserva</h1>
 					</div>
-					<div class="mt-3 justify-content-center">
-						<button type="submit" class="btn btn-primary btn-block">Buscar</button>	
+					<div class="card-body">
+						<form action="includes/reserve.php" method="POST" class="form-group" id="reserveForm" enctype="multipart/form-data">
+							
+							
+							<div class="row mt-2 d-flex justify-content-center">
+														
+								<div id="datepicker" name="datepicker" class="block"></div>
+								
+								<div class="col-6">	
+									<label for="NumeroPersonas">Numero Personas</label>
+									<select id="cars" class="form-control" name="nPeople">
+										<option>Num Personas</option>
+										<option value="1">1 Persona</option>
+										<option value="2">2 Personas</option>
+										<option value="3">3 Personas</option>
+										<option value="4">4 Personas</option>
+										<option value="5">5 Personas</option>
+										<option value="6">6 Personas</option>
+										<option value="7">7 Personas</option>
+										<option value="8">8 Personas</option>
+									</select>					
+								</div>
+								
+								<div class="col-6">
+									<label for="Hora">Hora</label>
+									<select id="hour" class="form-control" name="hour"></select>	
+								</div>
+							</div>
+							<div class="mt-3 justify-content-center">
+								<button type="submit" class="btn btn-primary btn-block">Buscar</button>	
+							</div>
+							
+						</form>
 					</div>
-					
-				</form>
+				</div>
 			</div>
 		</div>
+		
 	</div>
 	
 

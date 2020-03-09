@@ -15,104 +15,95 @@
 			 die('Query Failed'. mysqli_error($conn));
 		}
 
-		
-
-		while($row = mysqli_fetch_array($result)) {
-	        $json[] = array(
-	            'imagen' => $row['Imagen'],
-	          	'nombre' => $row['Nombre'],
-	          	'ubicacion' => $row['Ubicacion'],
-	          	'categoria' => $row['Categoria'],
-	          	'precio' => $row['Precio'],
-				'puntuacion' => $row['Puntuacion'],
-				'mapa' => $row['Mapa'],
-				'aforo' => $row['Aforo'],
-	        );
-	        $idRestaurant = $row['idRestaurante'];
-	    }
-        $jsonstring = json_encode($json);
-//  		echo $jsonstring;
-
-  		
-	    
-	    $query2 = "		SELECT opiniones.Titulo, opiniones.Descripcion, opiniones.Puntuacion, opinar.idUsuario, opinar.idImg, opinar.Fecha, opiniones.idOpinion, opinar.idRestaurante 
-						FROM opiniones, opinar
-						WHERE (1 = opinar.idRestaurante) AND (opinar.idOpinion = opiniones.idOpinion);";
-
-
-		$result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
-
-		if (!$result) {
-			 exit('Query Failed'. mysqli_error($conn));
-		}
-
-		$query_user = "SELECT idUsuario FROM usuarios WHERE (idUsuario = 1)";		
-		$username = mysqli_query($conn, $query_user) or die(mysqli_error($conn));
-		
-		$username = mysqli_fetch($username);
-
-		// Obtener todas las imagenes pertencientes a una opinion
-		$query_imgs = "	SELECT imgName FROM imagenes i, opinar o
-						WHERE o.idOpinion='$row['idOpinion']' AND (o.idImg = i.idImg); ";
-		$result = mysqli_query($conn, $query_imgs);
-
-		$arr_imgs = mysqli_fetch_array($result);
-
-		$matrix = array();
-
 		$row = mysqli_fetch_array($result);
-
-		$matrix[] = array(
-			'rating' => $rating,
-			'username' => $username,
-			'date' => $row['Fecha'],
-			'imgs' => $arr_img;
-		);
-
-
-		for ($i=1; $i < mysqli_num_rows($result); $i++) { 
+        $json[] = array(
+            'imagen' => $row['Imagen'],
+          	'nombre' => $row['Nombre'],
+          	'ubicacion' => $row['Ubicacion'],
+          	'categoria' => $row['Categoria'],
+          	'precio' => $row['Precio'],
+			'puntuacion' => $row['Puntuacion'],
+			'mapa' => $row['Mapa'],
+			'aforo' => $row['Aforo'],
+        );
+        
+        $idRestaurant = $row['idRestaurante'];
+	
+	
+		$matrix = array();
+		
+		$results = getRating($idRestaurant, $conn);
+		
+		while ($row = mysqli_fetch_assoc($results)) {
 			
-			$row = mysqli_fetch_array($result);	
+			$rating = array(
+		        'title' => $row['Titulo'],
+		      	'description' => $row['Descripcion'],
+		      	'punctuation' => $row['Puntuacion'],
+		    );
 
-			if ($row['idUsuario'] == matrix[i - 1]) {
-				# code...
-			} else {
-				# code...
-			}
-			
-
-
-			$query_user = "SELECT idUsuario FROM usuarios WHERE (idUsuario = 1)";		
-			//mysqli_query($conn);
-
-
-
+			$matrix[] = array(
+				'rating' => $rating,
+				'username' => getUsername($row['idUsuario'], $conn),
+				'date' => $row['Fecha'],
+				'imgs' => getImages($row['idOpinion'], $conn),
+			);
 		}
 
 
-		
-	    $rating[] = array(
-	        'title' => $row['Titulo'],
-	      	'description' => $row['Descripcion'],
-	      	'rating' => $row['Puntuacion'],
-	      	'date' => $row['Fecha'],
-	    	'idUser'=> $row['idUsuario'],
-	    );
-
-	    
-
-		$matrix[] = array(
-			'rating' => $rating,
-			'username' => $row['idUsuario'],
-			'date' => $row['Fecha']
-			//'imgs' => $arr_img;
-		);
-
-		//print_r($matrix);
-
-
-		$jsonstring2 = json_encode($matrix[]);
-		echo $jsonstring2;
+		$jsonstring = json_encode($matrix);
+		echo $jsonstring;
 
 
    }
+
+
+
+   /**
+    * @param  %isUser
+    * @return 
+    */
+    function getUsername(int $idUser, $conn) {
+   		$query = "SELECT Nombre FROM usuarios WHERE (idUsuario = $idUser)";		
+		$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+		
+		$username = mysqli_fetch_row($result)[0];
+
+		return $username;
+   	}
+
+
+
+   	/**
+   	 * @param  int $idOpinion Id de la opinion
+   	 * @return Array $arrImgs Array con los nombres de las imagenes de la opinion
+   	 */
+   	function getImages(int $idOpinion, $conn)
+   	{
+   	
+		// Obtener todas las imagenes pertencientes a una opinion
+		$query = "	SELECT imgName FROM imagenes
+						WHERE '$idOpinion'=idOpinion ";
+
+		$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+		$arrImgs = array();
+		while ($row = mysqli_fetch_assoc($result)){
+			$arrImgs[] = $row['imgName'];
+		}
+
+   		return $arrImgs;
+
+   	}
+
+   	function getRating($idRestaurant, $conn)
+   	{
+   			
+   		$query = "	SELECT o.Titulo, o.Descripcion, o.Puntuacion, op.idUsuario, op.idOpinion, op.Fecha
+					FROM opiniones o, opinar op
+					WHERE ('$idRestaurant' = op.idRestaurante) AND (op.idOpinion = o.idOpinion);";
+
+		$result = mysqli_query($conn, $query) or die('Query failed' . mysqli_error($conn));
+
+   		return $result;
+   	}
