@@ -39,7 +39,7 @@ INSERT INTO opinar(idUsuario, idRestaurante, idOpinion, idImg, Fecha) VALUES (1,
 
 
 /* OBTENER OPINIONES SOBRE UN RESTAURANTE */
-SELECT o.Titulo, o.Descripcion, o.Puntuacion, op.idUsuario, op.idImg, op.Fecha
+SELECT o.Titulo, o.Descripcion, o.Puntuacion, op.idUsuario, op.idImg, op.Fecha, o.idOpinion, op.idRestaurante
 FROM opiniones o, opinar op
 WHERE (1 = op.idRestaurante) AND (op.idOpinion = o.idOpinion)
 

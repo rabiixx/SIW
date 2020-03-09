@@ -103,7 +103,7 @@
 
     	var rest_name = trozo[trozo.length - 1];
 
-    	console.log("hola");
+    	console.log(rest_name);
 
       	$.ajax({
            	url: 'includes/load_restaurant.php',
@@ -114,7 +114,11 @@
 				buttonPressed: true
 			},
             success: function (response) {
+            	console.log("hola2");
             	console.log(response);
+            },
+            error: function (request, status, error) {
+            	console.log(request.responseText);
             }                                             
     	});
     }
