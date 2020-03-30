@@ -23,7 +23,7 @@
 	<div data-include="navbar"></div>
 
 
-	<div class="container d-flex justify-content-center border border-danger" style="margin-top: 100px;">
+<!-- 	<div class="container d-flex justify-content-center border border-danger" style="margin-top: 100px;">
 		<form action="includes/inicio.php" method="POST" class="form-row border border-info form">
 
 				<div class="col-3">
@@ -58,36 +58,33 @@
 				</div>
 			</div>	
 		</form>
-	</div>
+	</div> -->
 	
 
-	<form action="includes/inicio.php" method="POST" class="form-row border border-info form" style="margin: 100px 200px">
+	<form action="includes/inicio.php" method="POST" class="form-row border border-info form" id="searchRestaurantForm" style="margin: 100px 400px">
 
-		<div class="col-3 input-group">
+		<div class="col-2">
 
-			<div class="input-group mb-3">
+<!-- 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
    				<i class="far fa-calendar-alt "></i>	
-
 			  </div>
 			  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-			</div>
+			</div> -->
 			
 <!-- 			<div class="input-group-prepend">
 				<i class="far fa-calendar-alt"></i>	
-			</div>
+			</div> -->
 
-			<p><input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy"></p>
- -->
-			
-<!-- 			<div class="form-group">
+			<div class="form-group d-inline">
 			    <label for="exampleFormControlTextarea1"></label>
-			    <p><input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy"></p>
-			</div>	 -->
+			    <input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy">
+				<i class="far fa-calendar-alt"></i>	
+			</div>	
 			
 		</div>
 
-		<div class="col-3">
+		<div class="col-2">
 			<div class="form-group">
 			   	<label for="NumeroPersonas"></label>
 				<select id="cars" class="form-control" name="nPeople">
@@ -104,21 +101,23 @@
 			</div>					
 		</div>
 
-		<div class="col-3 has-warning">
+		<div class="col-2">
 			<label for="Hora"></label>
 			<select id="hour" class="form-control" name="hour"></select>	
 		</div>
 
-		 <div class="form-group has-error has-feedback">
-      <label for="inputError2">Input with error</label>
-      <input type="text" class="form-control" id="inputError2">
-      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-    </div>
+		<div class="col-4">
+			<label for="restaurant"></label>
+			<input type="text" name="restaurant" class="form-control" placeholder="Restaurante, Ubicacion">
+		</div>
+
+		<div class="col-2 my-auto">
+			<button class="btn btn-primary" id="searchRestaurant">Buscar</button>
+		</div>
+
 
 	</div>	
 </form>
-
-
 
 
 
