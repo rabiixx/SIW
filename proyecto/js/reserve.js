@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 	dinamicHourDropdown(true);
 
-	 $(function () {
+	$(function () {
 
 		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );	
 
@@ -90,12 +90,6 @@ $(document).ready(function() {
 	    $("#hour").html(template);
 	};
 
-
-
-
-
-
-		
 
  
 
