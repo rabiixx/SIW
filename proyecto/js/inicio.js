@@ -46,8 +46,6 @@ $(document).ready(function() {
 
 	/* Displays a reservation hour dropdown list with a 30min delay. */
 	function dinamicHourDropdown(today) {
-
-		console.log("Hola");
 		
 		if (today) {
 
@@ -91,6 +89,46 @@ $(document).ready(function() {
 
 	    $("#hour").html(template);
 	};
+
+
+    /** Muestra los restaurantes que comiencen por la 
+      * letra que el usuario introduzca por la barra de busqueda */ 
+    $('#search').keyup(function() {
+
+    	console.log("DENTRO");
+
+        if($('#search').val()) {
+            let search = $('#search').val();
+            $.ajax({
+                url: 'includes/inicio.php',
+                data: { "search": search , 
+            			"button-pressed": "true"},
+                method: 'POST',
+                dataType: "json",
+                success: function (response) {
+
+                	console.log(response);
+
+                    if(!response.error) {
+
+                    	$("#autocomplete_list").fadeIn();
+
+
+                        //let restaurants = JSON.parse(response['lista_restaurantes']);
+
+                        let template = '<div class="list-group">';
+                        response['lista_restaurantes'].forEach(restaurant => {
+                            template += `
+                                 <a href="#" class="list-group-item list-group-item-action">${restaurant.nombre}</a>`
+                        });
+                        template += '</div>';
+                        $('#autocomplete_list').html(template);     
+                    }
+                }    
+            })
+        }
+    });
+
 	
 
 	$(document).ready(function() {

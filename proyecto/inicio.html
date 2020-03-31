@@ -21,65 +21,14 @@
 
 
 	<div data-include="navbar"></div>
-
-
-<!-- 	<div class="container d-flex justify-content-center border border-danger" style="margin-top: 100px;">
-		<form action="includes/inicio.php" method="POST" class="form-row border border-info form">
-
-				<div class="col-3">
-					<div class="form-group">
-					    <label for="exampleFormControlTextarea1"></label>
-					    <p><input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy"></p>
-					</div>	
-				</div>
-
-				<div class="col-3">
-					<div class="form-group">
-					    <label for="exampleFormControlTextarea1"></label>
-					    <p><input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy"></p>
-					</div>	
-				</div>
-
-				<div class="col-6">
-					<div class="form-group">
-					   	<label for="NumeroPersonas"></label>
-						<select id="cars" class="form-control" name="nPeople">
-							<option>Num Personas</option>
-							<option value="1">1 Persona</option>
-							<option value="2">2 Personas</option>
-							<option value="3">3 Personas</option>
-							<option value="4">4 Personas</option>
-							<option value="5">5 Personas</option>
-							<option value="6">6 Personas</option>
-							<option value="7">7 Personas</option>
-							<option value="8">8 Personas</option>
-						</select>	
-					</div>					
-				</div>
-			</div>	
-		</form>
-	</div> -->
 	
 
 	<form action="includes/inicio.php" method="POST" class="form-row border border-info form" id="searchRestaurantForm" style="margin: 100px 400px">
 
 		<div class="col-2">
-
-<!-- 			<div class="input-group mb-3">
-			  <div class="input-group-prepend">
-   				<i class="far fa-calendar-alt "></i>	
-			  </div>
-			  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-			</div> -->
-			
-<!-- 			<div class="input-group-prepend">
-				<i class="far fa-calendar-alt"></i>	
-			</div> -->
-
 			<div class="form-group d-inline">
 			    <label for="exampleFormControlTextarea1"></label>
 			    <input type="text" id="datepicker" class="form-control" placeholder="dd/mm/yy">
-				<i class="far fa-calendar-alt"></i>	
 			</div>	
 			
 		</div>
@@ -108,7 +57,10 @@
 
 		<div class="col-4">
 			<label for="restaurant"></label>
-			<input type="text" name="restaurant" class="form-control" placeholder="Restaurante, Ubicacion">
+			<input type="text" style="border-radius: 10px" name="restaurant" class="form-control" id="search" placeholder="Restaurante, Ubicacion">
+		
+			<div id="autocomplete_list"></div>
+
 		</div>
 
 		<div class="col-2 my-auto">
