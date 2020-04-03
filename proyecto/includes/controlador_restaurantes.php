@@ -1,31 +1,90 @@
 <?php 
 
-
 	include 'database.php';
 
-	$code = $_POST['code'];
+	$accion = $_POST['accion'];
+	
 
-	switch ($code) {
-		case 1:
-			infScroll(1);
-			break;
-		case 2:
-			infScroll(2);
-			break;
-		case 3:
-			infScroll(3);
-			break;
-		case 4:
-			infScroll(4);
-			break;
+
+	if ($accion == 'filtro') {
+		
+		filtros($conn);
+
+	} else {
+		
+		$code = $_POST['code'];
+
+		switch ($code) {
+			case 1:
+				infScroll(1, $conn);
+				break;
+			case 2:
+				infScroll(2, $conn);
+				break;
+			case 3:
+				infScroll(3, $conn);
+				break;
+			case 4:
+				infScroll(4, $conn);
+				break;
+		}
+	}
+		
+
+	function filtros($conn) {
+
+		$query = "SELECT * FROM restaurantes WHERE Ubicacion != '' " ;
+
+		if (isset($_POST['ubicacion'])) {
+			$ubicaciones = implode("','", $_POST['ubicacion']);
+			$query .= "AND Ubicacion IN('" . $ubicaciones . "')";
+		}
+
+		if (isset($_POST['cocina'])) {
+			$cocinas = implode("','", $_POST['cocina']);
+			$query .= " AND Categoria IN('" . $cocinas . "')";
+		}
+
+		$query .= " LIMIT 6";
+
+		// echo $query;
+
+		$result = mysqli_query($conn, $query);
+		  
+		if(!$result) {
+			die('Query Failed'. mysqli_error($conn));
+		}
+
+		// echo mysqli_num_rows($result);
+
+		echo res2json($result);
+
+	}
+
+	function res2json($res){
+		
+		$json = array();
+
+		while($row = mysqli_fetch_array($res)) {
+		    $json[] = array(
+		        'imagen' => $row['Imagen'],
+		      	'nombre' => $row['Nombre'],
+		      	'ubicacion' => $row['Ubicacion'],
+		      	'categoria' => $row['Categoria'],
+		      	'precio' => $row['Precio']
+		    );
+		}
+
+		return json_encode($json);
 	}
 
 
 
-	function infScroll($code) {
+
+	function infScroll($code, $conn) {
 	
-		$start = $_POST["start"];
-		$limit = $_POST["limit"];
+		// $start = $_POST["start"];
+		// $limit = $_POST["limit"];
 
 		// Indice desde el cual se cargaran los restaurantes
 		$start = mysqli_real_escape_string($conn, $_POST['start']);
@@ -78,17 +137,7 @@
 		}
 		
 		if ( mysqli_num_rows($results) > 0 ) {
-			while($row = mysqli_fetch_array($results)) {
-				$json[] = array(
-					'imagen' => $row['Imagen'],
-					'nombre' => $row['Nombre'],
-					'ubicacion' => $row['Ubicacion'],
-					'cocina' => $row['Categoria'],
-					'precio' => $row['Precio']
-				);
-			}
-			$jsonstring = json_encode($json);
-			echo $jsonstring;
+			return res2json($result);
 		} else {
 			exit("reachedMax");
 		}

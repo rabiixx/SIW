@@ -171,7 +171,7 @@ $(document).ready(function() {
 					$("#datepicker").datepicker( "setDate", "getDate" );
 	    		},
 	    		error: function(data) {
-	    			console.log(data);	
+	    			console.log(data['responseText']);	
 	    		}
 			});
 		

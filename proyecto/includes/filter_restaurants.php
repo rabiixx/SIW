@@ -6,7 +6,7 @@
 	$filtro = $_POST['filtro'];
 	$opcion = $_POST["opcion"];
 
-	$query = "SELECT * FROM restaurantes WHERE $filtro='$opcion'";
+	$query = "SELECT * FROM restaurantes WHERE $filtro='$opcion' LIMIT 6";
 
 	// echo $query;
 
