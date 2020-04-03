@@ -1,12 +1,55 @@
+$(function(){
+	var includes = $('[data-include]');
+	jQuery.each(includes, function(){
+			var file = $(this).data('include') + '.html';
+			$(this).load(file);
+	});
+});
+
 $(document).ready(function() {
 
-	$(function(){
-		var includes = $('[data-include]');
-		jQuery.each(includes, function(){
-  			var file = $(this).data('include') + '.html';
-  			$(this).load(file);
+
+
+// 	$(document).on("click", "a", function (e) {
+//     	e.preventDefault();
+//     	console.log($(this).text());
+
+
+
+// 		var navHeight = $("#miniNav").height();
+
+//     	var listaOpiniones = document.getElementById("listaOpiniones");
+
+// 		console.log(navHeight);
+
+//     	listaOpiniones.scrollIntoView({ behavior: 'smooth'});
+// // 		var scrolledY = window.scrollY;
+
+// 		console.log(scrolledY);		
+
+// 		if(scrolledY){
+// 			window.scroll(0, scrolledY - navHeight);
+// 		}
+
+//     });
+
+
+	let mainNavLinks = document.querySelectorAll("div a");
+
+	mainNavLinks.forEach(link => {
+	  	
+	  	link.addEventListener("click", event => {
+		    event.preventDefault();
+		    
+		    let target = document.querySelector(event.target.hash);
+	    
+	    	target.scrollIntoView({
+	      		behavior: "smooth",
+	      		block: "start"
+	    	});
 		});
 	});
+
 
 
 	var date = new Date();

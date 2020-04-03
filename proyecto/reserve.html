@@ -7,6 +7,8 @@
 	<!-- BOOTSTRAP CDN -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 
+	<link rel="stylesheet" href="css/reserve.css">
+
 	<!-- Font Awesome Kit -->
 	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
 
@@ -15,6 +17,8 @@
 
 	<!-- JQUERY UI THEME -->
 	<link rel="stylesheet" href="css/jquery-ui.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
 	
 </head>
 <body>
@@ -22,15 +26,58 @@
 
 	<div data-include="navbar"></div>
 
-
 	<div class="container d-flex justify-content-center">
 		
-		<div class="row" style="margin-top: 100px">
+		<div class="row">
 			<div class="col-8">
-				<img src="img/res1.png" alt="">
+				<img src="##ImagenRestaurante##" alt="imagenRestaurante">
+				
+				<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mt-3" id="miniNav">
+				  	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				    	<div class="navbar-nav">
+				      		<a class="nav-item nav-link active" href="#navbar">Resumen</a>
+							<a class="nav-item nav-link" href="#menu">Menú</a>
+							<a class="nav-item nav-link" href="#ubicacion">Ubicacion</a>
+							<a class="nav-item nav-link" href="#listaOpiniones">Opiniones</a>
+						</div>
+					</div>
+				</nav>
+
+
+				<h1 style="font-family: 'Gotu', sans-serif; font-weight: bold; color:#2D333F; padding-top: 30px;" class="mt-3" id="resumen">##NombreRestaurante##</h1>
+				
+
+				
+
+				<hr width="99%" class="my-3">
+				<div class="d-inline mr-2"><i class="fas fa-money-bill mr-2 d-inline"></i><h5 class="d-inline">30 - 40$</h5></div>
+				<div class="d-inline mx-2"><i class="far fa-comments mr-2 d-inline"></i><h5 class="d-inline">180 reseñas</h5></span></div>
+				<div class="d-inline mx-2"><i class="fas fa-utensils mr-2 d-inline"></i><h5 class="d-inline">Tradicional</h5></div>
+				<p class="mt-4" style="font-family: 'Montserrat', sans-serif; color:#2D333F">Este sofisticado restaurante inspirado en los años 20, con cocina española actual, música en directo y coctelería excepcional, se ha convertido en uno de los más apetecidos de la capital (está siempre a reventar, por algo será…). Su carta pretende ser embajadora de la marca España por lo que no faltan platos como el jamón de bellota, las anchoas de Santoña, el salmorejo cordobés o el pulpo a la brasa. En los postres, un buen arroz con leche como se hace en Asturias o unas natillas con galleta son perfectos para terminar de llenar el estómago.</p>
+
+
+
+<!-- 				<div>##Ubicacion##</div>
+				<div>##Precio##</div>
+				<div>##Categoria##</div> -->
+
+
+				<h3 style="font-family: 'Gotu', sans-serif; font-weight: bold; color:#2D333F; padding-top: 70px;" class="mt-5" id="menu">Menú</h3>
+				<hr width="99%" class="my-3">
+
+
+
+
+				<h3 style="font-family: 'Gotu', sans-serif; font-weight: bold; color:#2D333F; padding-top: 70px;" class="mt-5 mb-3" id="ubicacion">Ubicacion</h3>		
+				<hr width="99%">		
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2927.0892723762554!2d-1.674988284180959!3d42.80759951471261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd50927932f78b69%3A0xb87b60d391285c40!2sCervecer%C3%ADa%20Aitzane!5e0!3m2!1ses!2ses!4v1585839776805!5m2!1ses!2ses" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+
+				<h3 id="listaOpiniones" style="font-family: 'Gotu', sans-serif; font-weight: bold; color:#2D333F; padding-top: 70px;">Opiniones</h3>
+				<hr width="99%" class="my-3">
+
 				
 				##MARCA##
-
 				<div class="card mt-3">
 					<div class="card-header">
 						<div class="d-flex justify-content-start mt-2">
@@ -46,6 +93,7 @@
 					        <i class="fa fa-star fa-1x" data-index="2"></i>
 					        <i class="fa fa-star fa-1x" data-index="3"></i>
 					        <i class="fa fa-star fa-1x" data-index="4"></i>
+
 			    		</div>
 			    		<h5 class="ml-auto">##Fecha##</h5>
 					</div>

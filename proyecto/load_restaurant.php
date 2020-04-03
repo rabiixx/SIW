@@ -1,11 +1,11 @@
 <?php 
 	
-	require 'database.php';
+	require 'includes/database.php';
 
 
-	if ($_POST["buttonPressed"]) {
+	// if ($_POST["buttonPressed"]) {
 
-		$restauratName = $_POST["restName"];
+		$restaurant = $_GET["restaurant"];
 
 		$query = "SELECT * FROM restaurantes WHERE Nombre='Aintzane'; ";
 
@@ -26,9 +26,8 @@
 			'mapa' => $row['Mapa'],
 			'aforo' => $row['Aforo'],
         );
-        
+
         $idRestaurant = $row['idRestaurante'];
-	
 	
 		$matrix = array();
 		
@@ -52,9 +51,13 @@
 
 
 		$jsonstring = json_encode($matrix);
-	
 
-		$src_template = explode("##MARCA##", file_get_contents("../reserve.html"));
+		$src_template = explode("##MARCA##", file_get_contents("reserve.html"));
+		$src_template[0] = str_replace("##ImagenRestaurante##", "img/" . $json[0]['imagen'], $src_template[0]);
+		$src_template[0] = str_replace("##NombreRestaurante##", $json[0]['nombre'], $src_template[0]);
+		$src_template[0] = str_replace("##Ubicacion##", $json[0]['ubicacion'], $src_template[0]);
+		$src_template[0] = str_replace("##Precio##", $json[0]['precio'], $src_template[0]);
+		$src_template[0] = str_replace("##Categoria##", $json[0]['categoria'], $src_template[0]);
 
 	   	$auxTemplate = '';
 
@@ -75,7 +78,7 @@
 
 		echo $src_template[0] . $dest_template . $src_template[2];
 
-	}
+	//}
 
 
 
@@ -132,5 +135,54 @@
 
 
 
+?>
 
-   	
+ <!-- <?php  
+
+	// $cadena = file_get_contents("reserve.html");
+
+	// $trozos = explode("##MARCA##", $cadena);
+
+	// $aux = "";
+	// $cuerpo = "";
+	// $cuerpo = $str_replace("##NombreRestaurante##", )
+
+
+
+	// for ($i = 0; $i < $numero; $i++) {
+	// 	if ($i % 2) {
+	// 		$aux = $trozos[1];
+	// 		$aux = str_replace("##nomp1##", $nomp1, $aux);
+	// 		$aux = str_replace("##ape1p1##", $ape1p1, $aux);
+	// 		$aux = str_replace("##ape2p1##", $ape2p1, $aux);
+	// 		$aux = str_replace("##color1##", $color1, $aux);
+			
+	// 		$cuerpo .= $aux;
+	// 	} else {
+	// 		$aux = $trozos[2];
+	// 		$aux = str_replace("##nomp2##", $nomp2, $aux);
+	// 		$aux = str_replace("##ape1p2##", $ape1p2, $aux);
+	// 		$aux = str_replace("##ape2p2##", $ape2p2, $aux);
+			
+	// 		$aux = str_replace("##color2##", $color2, $aux);
+
+	// 		$cuerpo .= $aux;
+	// 	}
+	// }
+
+	// echo $trozos[0] . $cuerpo . $trozos[3];
+
+?>  -->
+
+<!--  	<div>##NombreRestaurante##</div>
+	<div>##Ubicacion##</div>
+	<div>##Precio##</div>
+	<div>##Categoria##</div>
+								<h5 class="text-center ml-3">##Username##</h5>
+
+						<h5 class="mr-3">##Titulo##</h5>
+
+			    		<h5 class="ml-auto">##Fecha##</h5>
+
+						<div class="card-text font-weight-light font-italic">##Descripcion##</div> 
+ -->

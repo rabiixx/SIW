@@ -119,15 +119,28 @@ $(document).ready(function() {
                         let template = '<div class="list-group">';
                         response['lista_restaurantes'].forEach(restaurant => {
                             template += `
-                                 <a href="#" class="list-group-item list-group-item-action">${restaurant.nombre}</a>`
+                                 <a href="load_restaurant.php?restaurant=${restaurant.nombre}" class="list-group-item list-group-item-action">${restaurant.nombre}</a>`
                         });
                         template += '</div>';
                         $('#autocomplete_list').html(template);     
                     }
                 }    
             })
+        } else {
+        	$("#autocomplete_list").fadeOut();
+        	$("#autocomplete_list").html("");	
+
         }
     });
+
+
+  //   $(document).on("click", "a", function (e) {
+  //   	// e.preventDefault();
+  //   	// console.log($(this).text());
+
+		// $.redirect('includes/load_restaurant.php', {'restaurant': $(this).text()});
+
+  //   });
 
 	
 

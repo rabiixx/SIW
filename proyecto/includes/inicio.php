@@ -24,7 +24,7 @@
 	    }
 
 
-  		$query = "SELECT Ubicacion FROM restaurantes WHERE Ubicacion LIKE '%$search%'";
+  		$query = "SELECT DISTINCT Ubicacion FROM restaurantes WHERE Ubicacion LIKE '%$search%'";
 	  	$result = mysqli_query($conn, $query);
   
 		if(!$result) {
