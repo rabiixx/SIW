@@ -5,6 +5,8 @@ VALUES ('Ruben', 'Cherif', 'rabiixx', 'rabiixx@gmail.com', 'Rabiixx12');
 INSERT INTO `restaurantes` 
 (`nombre`, `ubicacion`, `Categoria`, `precio`, `puntuacion`, `imagen`, `idUsuario`) VALUES
 
+('Doner Kebab', 'Barañain', 'Kebab', 5, 5, 'res29.jpg', 1);
+
 ('Aintzane', 'Pamplona - Mendebaldea', 'Hambirguesas, Bocatas', 10, 4, 'res1.png', 1),
 ('Common Good', 'Baranain', 'De todo ', 7, 4, 'res2.jpg', 1),
 ('Burguer King', 'Pamplona', 'Hamburgueseria', 5, 3, 'res3.jpg', 1),

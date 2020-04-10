@@ -1,6 +1,8 @@
+var start = 6;              /* Indice inicial de carga del scroll */
+var limit = 3;              /* Indice final de carga del scroll */
+var reachedMax = false;     /* FLAG: se ha alcanzado el numero maximo de elementos */
 
-
-// Import html header and footer
+/*  Import html header and footer */
 $(function(){
     var includes = $('[data-include]');
     jQuery.each(includes, function(){
@@ -9,83 +11,10 @@ $(function(){
     });
 });
 
-
-
-function loadRestaurant(x) {
- 
-    var trozo = x.split("-");
-
-    var rest_name = trozo[trozo.length - 1];
-
-    $.ajax({
-        url: 'includes/load_restaurant.php',
-        type: 'POST',
-        //dataType: 'json',
-        dataType: 'text',
-        data: {
-            restName: rest_name,
-            buttonPressed: true
-        },
-        success: function (completeHtmlPage) {
-            console.log(completeHtmlPage);
-            $("html").html(completeHtmlPage);
-        },
-        error: function (request, status, error) {
-            console.log(request.responseText);
-            //console.log('Error hackeado');
-        }                                             
-    });
-}
-
-
+setupRestaurantes();
+setupFiltros();  
 
 $(document).ready(function() {
-
-    var start = 6;              /* Indice inicial de carga del scroll */
-    var limit = 3;              /* Indice final de carga del scroll */
-    var reachedMax = false;     /* FLAG: se ha alcanzado el numero maximo de elementos */
-
-    fetchRestaurants();
-
-  	/** Consulta a la base de datos los restaurantes y muestra 
-      * los 10 primeros */
-  	function fetchRestaurants() {
-
-        $.ajax( {
-  			url: 'includes/restaurant_list.php',
-  			method: 'POST',
-  			dataType: 'json',
-  			success: function (response) {
-  				//const restaurants = JSON.parse(response);
-
-                let template = '';
-                response.forEach(restaurant => {
-                    template += `
-                            <div class="col-4 mb-3">
-                                <div class="card h-100" href="reserve.html">
-                                    <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
-                                    <div class="d-flex card-body flex-column">
-                                        <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                                        <p class="card-text">${restaurant.ubicacion}</p>
-                                        <p class="card-text">${restaurant.cocina}</p>
-                                        <h1 class="card-text">${restaurant.precio} €</h1>
-                                        <button id="btn-${restaurant.nombre}" onclick="loadRestaurant(this.id)"  class="btn btn-primary btn-block mt-auto">Reservar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                          `
-                });
-            $('#restaurant_list').html(template);		
-  		    },
-            error: function (data) {
-                //console.log(data['responseText']);
-
-                //console.log("adios");
-            }
-        });
-    }
-
 
     /** Muestra los restaurantes que comiencen por la 
       * letra que el usuario introduzca por la barra de busqueda */ 
@@ -129,266 +58,67 @@ $(document).ready(function() {
     });
 
 
+
     // Infinite Scroll
+    // $(window).scroll(function(e) {
 
-
-    /*$(window).data('ajaxready', true).scroll(function(e) {
-        
-        if ($(window).data('ajaxready') == false) return;*/
-
-    $(window).scroll(function(e) {
-
-        console.log("debug1");
+    $(window).on('scroll', function(e) {
 
         var win_scroll_top = Math.round($(window).scrollTop());
         var doc_height = Math.round($(document).height());
         var win_height = Math.round($(window).height());
 
         if (win_scroll_top >= doc_height - win_height) {
-            
-            // var h = $('input[name=checkbox]:not(:checked)');
 
-            if ( $('input[name=checkboxUbicacion]').is(':checked') && $('input[name=checkboxCocina]').is(':checked') ) {   
-                
-                var opcionUbicacion = $('input[name=checkboxUbicacion]:checked');
-                var opcionCocina =  $('input[name=checkboxCocina]:checked');
-                console.log(opcionUbicacion.attr("value"));
-                console.log(opcionCocina.attr("value"));
-                $.ajax({
-                    url: 'includes/controlador_restaurantes.php',
-                    method: 'POST',
-                    data: {
-                        "code": 1,
-                        "filtroUbicacion": "Ubicacion",
-                        "opcionUbicacion": opcionUbicacion,
-                        "filtroCocina": "Categoria",
-                        "opcionCocina": opcionCocina,
-                        "start": start, 
-                        "limit": limit
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == 'reachedMax') {
-                            reachedMax = true;
-                        } else {
-                            fetchRestaurantes(response, 'append');
-                        }
-                    },
-                    error: function(responseText, textStatus, errorThrown) {
-                        console.log(responseText['responseText']);  
-                    }
-                }); 
-            } else if ( $('input[name=checkboxUbicacion]').is(':checked') ) {
-                
-                var opcionUbicacion = $('input[name=checkboxUbicacion]:checked');
-                console.log(opcionUbicacion.attr("value"));
-                
-                $.ajax({
-                    url: 'includes/controlador_restaurantes.php',
-                    method: 'POST',
-                    data: {
-                        code: 2,
-                        filtroUbicacion: "Ubicacion",
-                        opcionUbicacion: opcionUbicacion.attr('value'),
-                        start: start, 
-                        limit: limit
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        console.log("HIOL");
-                        if (response == 'reachedMax') {
-                            reachedMax = true;
-                        } else {
-                            fetchRestaurantes(response, 'append');
-                        }
-                    },
-                    error: function(responseText, textStatus, errorThrown) {
-                        console.log(responseText['responseText']);  
-                    }
-                });
+            // $('#filtros').children().each(function() {
+            //     var temp = $(this).attr('id').split('filtro');
+            //     filtros.push(temp[temp.length - 1]);
+            // });
 
-            } else if ( $('input[name=checkboxCocina]').is(':checked') ) {
-                var opcionCocina = $('input[name=checkboxCocina]:checked');
-                console.log(opcionCocina.attr("value"));
+            var Ubicaciones = [];
 
-                $.ajax({
-                    url: 'includes/controlador_restaurantes.php',
-                    method: 'POST',
-                    data: {
-                        "code": 3, 
-                        "filtroCocina": "Categoria",
-                        "opcionCocina": opcionCocina.attr('value'),
-                        "start": start, 
-                        "limit": limit
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == 'reachedMax') {
-                            reachedMax = true;
-                        } else {
-                            fetchRestaurantes(response, 'append');
-                        }
-                    },
-                    error: function(responseText, textStatus, errorThrown) {
-                        console.log(responseText['responseText']);  
-                    }
-                });
+            $('input[name=checkboxUbicacion]:checked').each(function() {
+                Ubicaciones.push($(this).val());
+            });
 
-            } else {
-                console.log("Nada seleccionado");
+            var Cocinas = [];
 
-                $.ajax({
-                    url: 'includes/controlador_restaurantes.php',
-                    method: 'POST',
-                    data: {
-                        "code": 4,
-                        "start": start, 
-                        "limit": limit
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == 'reachedMax') {
-                            reachedMax = true;
-                        } else {
-                            fetchRestaurants(response, 'append');
-                        }
-                    },
-                    error: function(responseText, textStatus, errorThrown) {
-                        console.log(responseText['responseText']);  
-                    }
-                });
-            }
+            $('input[name=checkboxCocina]:checked').each(function() {
+                Cocinas.push($(this).val());
+            });
+
+            $.ajax({
+                url: 'includes/controlador_restaurantes.php',
+                method: 'POST',
+                data: {
+                    accion: 'filtrar',
+                    code: 2,
+                    ubicacion: Ubicaciones,
+                    cocina: Cocinas,
+                    start: start,
+                    limit: limit
+                },
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    fetchRestaurantes(response, 'append');
+                },
+                error: function(responseText, textStatus, errorThrown) {
+                    console.log(responseText['responseText']);  
+                }
+            });
         }
     });
+
     
 
-    function fetchRestaurantes(response, flag) {
+    /** 
+      * Detecta si algun filtro ha sido seleccionado,
+      * lo aplica y devuelve los resultados de haberlo aplicado 
+      */
+    $('#filtros').on('change', 'input[type=checkbox]', function() {
 
-        start += limit;
-                        
-        let template = '';
-        response.forEach(restaurant => {
-            template += `
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
-                        <div class="d-flex card-body flex-column">
-                            <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                            <p class="card-text">${restaurant.ubicacion}</p>
-                            <p class="card-text">${restaurant.cocina}</p>
-                            <h1 class="card-text">${restaurant.precio} €</h1>
-                            <button id="btn-${restaurant.nombre}" href="reserve.html" onclick="loadRestaurant(this.id)" class="btn btn-primary btn-block mt-auto">Reservar</button>
-                        </div>
-                    </div>
-                </div>`
-        });
-
-        (flag == "append") ? $('#restaurant_list').append(template) : $('#restaurant_list').html(template);
-    }
-
-
-
-
-
-/*    $('input[name=checkboxUbicacion]').change(function(){
-        if( $(this).is(':checked') ) {
-
-            // Desabilitamos tomas las opciones de la categoria que no sean la seleccionada
-            $('input[name=checkboxUbicacion]').not($(this)).attr("disabled", "true");
-
-            // Obtenemos la opcion seleccionada
-            var opcion = $(this).next().text();
-            // console.log($(this).next().text());
-            
-            // Obtenemos el nombre del filtro
-            var filtro = $(this).parents(".list-group-flush").prev().text();
-            // console.log(filtro);
-
-        } else {
-
-            // Si el usuario deselcciona la opcion elegida, habilitamos todas las opciones de nuevo
-            $('input[name=checkboxUbicacion]').not($(this)).removeAttr('disabled');
-
-        }
-    });
-
-
-
-
-    $('input[name=checkboxCocina]').change(function(){
-        if( $(this).is(':checked') ) {
-
-            // Desabilitamos tomas las opciones de la categoria que no sean la seleccionada
-            $('input[name=checkboxCocina]').not($(this)).attr("disabled", "true");
-
-            // Obtenemos la opcion seleccionada
-            var opcion = $(this).next().text();
-            // console.log($(this).next().text());
-            
-            // Obtenemos el nombre del filtro
-            var filtro = $(this).parents(".list-group-flush").prev().text();
-            // console.log(filtro);
-
-        } else {
-
-            // Si el usuario deselcciona la opcion elegida, habilitamos todas las opciones de nuevo
-            $('input[name=checkboxCocina]').not($(this)).removeAttr('disabled');
-
-        }
-    });*/
-
-
-
-/*    $('input[type=checkbox]').change(function(){
-
-        var filterName = $(this).attr('name');
-
-        if ($(this).is(':checked')) {
-            $('input[name=' + filterName + ']').not($(this)).attr("disabled", "true");
-
-
-            $('input[name=checkboxUbicacion]').is(':checked')
-
-                var opcionUbicacion = $('input[name=checkboxUbicacion]:checked');
-                var opcionCocina =  $('input[name=checkboxCocina]:checked');
-                console.log(opcionUbicacion.attr("value"));
-                console.log(opcionCocina.attr("value"));
-                $.ajax({
-                    url: 'includes/controlador_restaurantes.php',
-                    method: 'POST',
-                    data: {
-                        "code": 1,
-                        "filtroUbicacion": "Ubicacion",
-                        "opcionUbicacion": opcionUbicacion,
-                        "filtroCocina": "Categoria",
-                        "opcionCocina": opcionCocina,
-                        "start": start, 
-                        "limit": limit
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response == 'reachedMax') {
-                            reachedMax = true;
-                        } else {
-                            fetchRestaurantes(response, 'append');
-                        }
-                    },
-                    error: function(responseText, textStatus, errorThrown) {
-                        console.log(responseText['responseText']);  
-                    }
-                }); 
-
-
-
-
-        } else {
-            $('input[name=' + filterName + ']').not($(this)).removeAttr('disabled');
-        }
-
-    });*/
-
-
-    $('input[type=checkbox]').change(function(){
+        start = 6;
 
         var Ubicaciones = [];
 
@@ -402,11 +132,14 @@ $(document).ready(function() {
             Cocinas.push($(this).val());
         });
 
+        console.log(Ubicaciones);
+
         $.ajax({
             url: 'includes/controlador_restaurantes.php',
             method: 'POST',
             data: {
-                accion: 'filtro',
+                accion: 'filtrar',
+                code: 1,
                 ubicacion: Ubicaciones,
                 cocina: Cocinas
             },
@@ -419,11 +152,111 @@ $(document).ready(function() {
                 console.log(responseText['responseText']);  
             }
         }); 
-
-
-
     });
 
-
-
 });
+
+
+
+
+
+/** Consulta a la base de datos los restaurantes y muestra 
+  * los 10 primeros */
+function setupRestaurantes() {
+
+    $.ajax( {
+        url: 'includes/controlador_restaurantes.php',
+        method: 'POST',
+        data: {
+            accion: 'setupRestaurantes'
+        },
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            fetchRestaurantes(response, 'html'); 
+        },
+        error: function (data) {
+            console.log(data['responseText']);
+        }
+    });
+}
+
+
+
+function setupFiltros() {
+
+    var filtros = []; 
+
+    $('#filtros').children().each(function() {
+        var temp = $(this).attr('id').split('filtro');
+        filtros.push(temp[temp.length - 1]);
+    });
+
+    $.ajax({
+        url: 'includes/controlador_restaurantes.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            accion: 'setupFiltros',
+            filtros: filtros
+        },
+        success: function (response) {
+
+            for (var key in response) {
+                let template = '';    
+                response[key].forEach(function(elem, i) {
+                    template += `
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                             <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="check${key}${i}" name="checkbox${key}" value="${elem.value}">
+                                <label class="custom-control-label" for="check${key}${i}">${elem.value}</label>
+                            </div>
+                            <span class="badge badge-primary badge-pill">${elem.cantidad}</span>
+                        </li> `;
+
+                    $('#filtro' + key + ' div ul').html(template);
+                    // $("#listaUbicaciones").html(template);
+                });
+            }
+
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }    
+    });
+};
+
+function hack() {
+    console.log("aslkdnnas");
+}
+
+
+function fetchRestaurantes(response, flag) {
+
+    if (flag == 'append') 
+        start += limit;
+
+                    
+    let template = '';
+    response.forEach(restaurant => {
+        template += `
+            <div class="col-4 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
+                    <div class="d-flex card-body flex-column">
+                        <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
+                        <p class="card-text">${restaurant.ubicacion}</p>
+                        <p class="card-text">${restaurant.cocina}</p>
+                        <h1 class="card-text">${restaurant.precio} €</h1>
+                         <a href="load_restaurant.php?restaurant=${restaurant.nombre}" class="btn btn-primary stretched-link mt-auto">Reservar</a>
+                        
+                    </div>
+                </div>
+            </div>`
+    });
+
+    (flag == "append") ? $('#restaurant_list').append(template) : $('#restaurant_list').html(template);
+}
+
+
+// <button id="btn-${restaurant.nombre}" href="reserve.html" class="btn btn-primary btn-block mt-auto">Reservar</button>

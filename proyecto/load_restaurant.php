@@ -7,7 +7,7 @@
 
 		$restaurant = $_GET["restaurant"];
 
-		$query = "SELECT * FROM restaurantes WHERE Nombre='Aintzane'; ";
+		$query = "SELECT * FROM restaurantes WHERE Nombre='$restaurant'; ";
 
 		$result = mysqli_query($conn, $query);
 
@@ -20,7 +20,7 @@
             'imagen' => $row['Imagen'],
           	'nombre' => $row['Nombre'],
           	'ubicacion' => $row['Ubicacion'],
-          	'categoria' => $row['Categoria'],
+          	'categoria' => $row['Cocina'],
           	'precio' => $row['Precio'],
 			'puntuacion' => $row['Puntuacion'],
 			'mapa' => $row['Mapa'],

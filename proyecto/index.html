@@ -6,134 +6,175 @@
 	<title>Restaurantes</title>
 
 	<!-- BOOTSTRAP CDN -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
 
 	<!-- Font Awesome Kit -->
 	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
 
 	<!-- <link rel="stylesheet" href="css/styles.css"> -->
+		<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
 
-		<!-- JQUERY -->
+	<!-- JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	
-	<!-- CUSTOM JS -->
-    <script src="js/restaurant_list.js"></script>
+
 
 
 </head>
 <body>
 
+	<style>
+		
+		body {
+			font-family: 'Montserrat', sans-serif;	
+			background-color: #f7f7f7;
+		}
+
+		.page-header {
+			width: 65%;
+			height: 100%;
+			text-align: center;
+			margin: 0px auto;			
+		}
+
+		.page-header .header-image {
+			position: relative;
+			width: 100%;
+			height: 250px;
+			background: url(../img2/canal-beside-houses-2901209_2.jpg) no-repeat center center ;
+		    display: table;
+		    background-size: cover;
+		    border-radius: 5px;
+		}
+
+		.header-title {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			font-family: 'Gotu', sans-serif;
+			color: white;
+			top: 30%;	
+		}
+
+
+		.header-image .search-box {
+			position: absolute;
+			/*width: 40%;*/
+			height: 45px;
+			transform: translate(-50%, -50%);
+			top: 60%;
+			left: 50%;
+			/*margin: 0px auto;*/
+			/*margin-top: 20px;*/
+			background: #dfe4ea;
+			border-radius: 30px;
+			padding: 10px;
+		}
+
+		.search-btn {
+			color: #ff7f50;
+			float: right;
+			width: 45px;
+			border-radius: 30px;
+			background: none;
+			display: flex;
+			justify-content: center;
+			/*align-items: center;*/
+			margin-top: 5px;
+			cursor: pointer;
+		}
+
+		.search-txt {
+			border: none;
+			background: none;
+			outline: none;
+			float: left;
+			padding: 0px;
+			color: white;
+			font-size: 16px;
+			transition: 0.4s;
+			line-height: 25px;
+			width: 240px;
+
+		}
+
+/*		.search-bar {
+			border-radius: 30px;
+			width: 40%;
+			height: 45px;
+			margin: 0px auto;
+			margin-top: 20px;
+			border: 1px solid white;
+		}
+*/
+
+	</style>
+
 	<header data-include="navbar"></header>
 
-	<div class="container ">
-
-	<div class="jumbotron text-center mt-1">
-        <h1>Reserva de Restaurantes</h1>
-        <h3>Haz tu reserva YA!</h3>
-    </div>
-
-    <div class="container mb-3 border border-dark">
-    	<div class="d-flex row justify-content-center w-100 border border-danger">
-    		<form class="form-inline">
-    			<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            	<button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-    		</form>	
-    	</div>
-    </div>  
-
-	<div class="container">
-<!--     <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
-                </ol>
-            </nav>
-        </div>
-    </div> -->
-
-	<div class="row">
-		<div class="col-3" style="width: 18rem;">
-  			
-  			<div class="card-header">Ubicacion</div>
-	  		<ul class="list-group list-group-flush">
-				
-				<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkUbicacion1" name="checkboxUbicacion" value="Pamplona">
-    					<label class="custom-control-label" for="checkUbicacion1">Pamplona</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">14</span>
-  				</li>		
-	  			
-	  			<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkUbicacion2" name="checkboxUbicacion" value="Barañain">
-    					<label class="custom-control-label" for="checkUbicacion2">Barañain</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">4</span>
-  				</li>
-  				
-  				<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkUbicacion3"  name="checkboxUbicacion" value="Villava">
-    					<label class="custom-control-label" for="checkUbicacion3">Villava</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">2</span>
-  				</li>
-	  			
-			</ul>
-
-
-			<div class="card-header mt-5">Cocina</div>
-	  		<ul class="list-group list-group-flush">
-				
-				<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkCocina1" name="checkboxCocina" value="Kebab">
-    					<label class="custom-control-label" for="checkCocina1">Kebab</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">14</span>
-  				</li>		
-	  			
-	  			<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkCocina2" name="checkboxCocina" value="Española">
-    					<label class="custom-control-label" for="checkCocina2">Tradicional</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">4</span>
-  				</li>
-  				
-  				<li class="list-group-item d-flex justify-content-between align-items-center">
-					 <div class="custom-control custom-checkbox">
-    					<input type="checkbox" class="custom-control-input" id="checkCocina3" name="checkboxCocina" value="Bocatas">
-    					<label class="custom-control-label" for="checkCocina3">Bocatas</label>
-  					</div>
-					<span class="badge badge-primary badge-pill">2</span>
-  				</li>
-	  			
-			</ul>
-		</div>	
-
-
-		<div class="col-9">
-			<div class="row" id="restaurant_list"></div>		
+	<div class="page-header">
+		<div class="header-image">
+			<h1 class="header-title">Reserva para cualquier ocasion</h1>
+			<div class="search-box">
+				<input type="text" class="search-txt" placeholder="Search">	
+				<i class="fa fa-search search-btn"></i>
+			</div>
 		</div>
+
+
+
+		<div class="container-fluid mt-5">
+			<div class="row">
+				<div class="col-3" style="width: 18rem;" id="filtros">
+					##MARCA##
+					<div class="card border-primary mb-3" style="max-width: 18rem;" id="##CARDID##">
+					  	<div class="card-header bg-primary" style="color: white; font-size: 16px;">##HEADERTEXT##</div>
+					  	<div class="card-body">
+					   	  	<ul class="list-group list-group-flush" id="##ULID##">
+					   	  		##MARCA##
+					   	  		<li class="list-group-item d-flex justify-content-between align-items-center">
+                             		<div class="custom-control custom-checkbox">
+                                		<input type="checkbox" class="custom-control-input" id="##INPUTID##" name="##INPUTNAME##" value="##INPUTVALUE##">
+                                		<label class="custom-control-label" for="##LABELFOR##">##LABELVALUE##</label>
+                            		</div>
+                            		<span class="badge badge-primary badge-pill">##CANTIDAD##</span>
+                        		</li>
+                        		##MARCA##
+					   	  	</ul>
+					  	</div>
+					</div>
+					##MARCA##
+				</div>
+
+				<div class="col-9">
+					<div class="row" id="restaurant_list">
+						##MARCA##
+						<div class="col-4 mb-3">
+		                	<div class="card h-100">
+		                    	<img class="card-img-top" src="##IMAGEN##" alt="Card image cap">
+		                    	<div class="d-flex card-body flex-column">
+		                        	<h5 class="card-title text-center">##NOMBRE##</h5>
+		                        	<p class="card-text">##UBICACION##</p>
+		                        	<p class="card-text">##COCINA##</p>
+		                        	<h1 class="card-text">##PRECIO##</h1>
+		                         	<a href="load_restaurant.php?restaurant=##LINK##" class="btn btn-primary stretched-link mt-auto">Reservar</a>
+		                    	</div>
+		                	</div>
+						</div>
+						##MARCA##
+					</div>		
+				</div>
+			
+			</div>
+		</div>
+
 	</div>
 
 
-
-
-	</div>
-
-		<!-- CUSTOM JS -->
-    <!-- <script src="js/restaurant_list.js"></script> -->
-    
-</div>
+	
+	<!-- CUSTOM JS -->
+    <script src="js/restaurant_list.js"></script>
 
 </body>
 </html>

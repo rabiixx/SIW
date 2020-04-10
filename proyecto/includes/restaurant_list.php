@@ -16,7 +16,7 @@
             'imagen' => $row['Imagen'],
           	'nombre' => $row['Nombre'],
           	'ubicacion' => $row['Ubicacion'],
-          	'categoria' => $row['Categoria'],
+          	'cocina' => $row['Cocina'],
           	'precio' => $row['Precio']
         );
     }

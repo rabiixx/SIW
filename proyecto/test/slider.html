@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Slider</title>
+
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+
+	<style>
+
+		.post-slider {
+			position: relative;
+			height: 100%;
+			width: 100%;
+		}
+
+		.post-slider .post-wrapper {
+			width: 1060px;
+			height: 250px;
+			margin: 0px auto;
+			/*overflow: hidden;*/
+		}
+
+		.post-slider .post-wrapper .post {
+			height: 250px;
+			width: 250px;
+			background: blue;
+			display: inline-block;
+			margin: 0px 10px;
+			border-radius: 15px;
+			cursor: pointer;
+			box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
+
+		}
+
+		.post-slider .next {
+			position: absolute;
+			top: 55%;
+			font-size: 2em;
+			right: 19%;
+			cursor: pointer;
+			color: #ffa812;
+		}
+
+		.post-slider .prev {
+			position: absolute;
+			top: 55%;
+			font-size: 2em;
+			left: 19%;
+			cursor: pointer;
+			color: #ffa812;
+		}
+
+		.slick-dots li.slick-active button::before {
+    		color: #ff7e00;
+    		opacity: 0.8;
+  		}
+
+ 		.slick-dots li button:before {
+	        font-size: 15px;
+	        line-height: 15px;
+	        top: 30px;
+	        color: #ff7e00;
+	        opacity: 0.5;
+    	}
+
+	</style>
+
+<!-- 
+	<h1 style="border: 1px solid blue; display: table;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit ratione eum beatae veniam ullam debitis dignissimos iure recusandae labore, assumenda!</h1> -->
+
+	<div class="page-wrapper" style="/*border: 1px solid green;*/">
+		<div class="post-slider">
+			
+			<h1 class="slider-title">Trending Posts</h1>
+			<i class="fas fa-chevron-right next"></i>
+			<i class="fas fa-chevron-left prev"></i>
+
+			<div class="post-wrapper">
+
+				<img src="../img2/2882855_7.jpg" class="post">
+
+				<img src="../img2//2882855_7.jpg" class="post">
+
+				<img src="../img2//2882855_7.jpg" class="post">
+
+				<img src="../img2//2882855_7.jpg" class="post">
+
+				<img src="../img2//2882855_7.jpg" class="post">
+
+				<img src="../img2//2882855_7.jpg" class="post">
+			</div>
+		</div>		
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+  	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  	<script>
+
+  		$('.post-wrapper').slick({
+  			lazyLoad: 'ondemand',
+  			slidesToShow: 4,
+  			sliderToScroll: 1,
+  			infinite: true,
+			variableWidth: true,
+			dots: true,
+			nextArrow: $('.next'),
+			prevArrow: $('.prev'),
+			
+			// centerMode: true
+  		});
+
+  	</script>
+	
+</body>
+</html>
