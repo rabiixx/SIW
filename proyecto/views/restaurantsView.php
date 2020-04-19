@@ -72,3 +72,26 @@
 
 		return $restaurantListHtml;
 	}
+
+
+	function data2json($res) {
+
+		if ( !$res || (mysqli_num_rows($res) == 0) ) {
+			return "reachedMax";
+		} else {
+
+			$json = array();
+
+			while($row = mysqli_fetch_array($res)) {
+			    $json[] = array(
+			        'imagen' => $row['Imagen'],
+			      	'nombre' => $row['Nombre'],
+			      	'ubicacion' => $row['Ubicacion'],
+			      	'cocina' => $row['Cocina'],
+			      	'precio' => $row['Precio']
+			    );
+			}
+
+			return json_encode($json);
+		}		
+	}

@@ -6,17 +6,27 @@
 
 		$query = "SELECT * FROM restaurantes WHERE Ubicacion != '' " ;
 
-		if (isset($_POST['ubicacion'])) {
-			$ubicaciones = implode("','", $_POST['ubicacion']);
+		if ( isset($_POST['ubicacion']) ) {
+			if ($code == 1) {
+				$ubicaciones = $_POST['ubicacion'];
+			} else {
+				$ubicaciones = implode("','", $_POST['ubicacion']);
+			}	
+			
 			$query .= "AND Ubicacion IN('" . $ubicaciones . "')";
 		}
 
-		if (isset($_POST['cocina'])) {
-			$cocinas = implode("','", $_POST['cocina']);
+		if ( isset($_POST['cocina']) ) {
+			if ($code == 1) {
+				$cocinas = $_POST['cocina'];
+			} else {
+				$cocinas = implode("','", $_POST['cocina']);	
+			}
+			
 			$query .= " AND Cocina IN('" . $cocinas . "')";
 		}
 
-		if ($code == 2) {
+		if ($code == 3) {
 			$start = $_POST['start'];
 			$limit = $_POST['limit'];
 			$query .= " LIMIT " . $start . ", " . $limit;
@@ -28,27 +38,7 @@
 
 		$result = mysqli_query($conn, $query);
 
-		if (!$result) {
-			exit("reachedMax");
-		}
-		  
-		if ($code == 1) {
-			// return "hola";
-			return $result;
-			// return $result;
-			
-		} else {
-			
-			if (!$result) {
-				exit("reachedMax");
-			}
-			
-			if ( mysqli_num_rows($result) > 0 ) {
-				echo res2json($result);
-			} else {
-				exit("reachedMax");
-			}
-		}
+		return $result;
 	}
 
 
@@ -66,12 +56,12 @@
 		// }
 
 		$query1 = "	SELECT DISTINCT Ubicacion, COUNT(Ubicacion) AS Cantidad
-						FROM restaurantes GROUP BY Ubicacion";
+						FROM restaurantes GROUP BY Ubicacion ORDER BY Cantidad DESC";
 		
 		$result1 = mysqli_query($conn, $query1);
 
 		$query2 = "	SELECT DISTINCT Cocina, COUNT(Cocina) AS Cantidad
-						FROM restaurantes GROUP BY Cocina";
+						FROM restaurantes GROUP BY Cocina ORDER BY Cantidad DESC";
 		
 		$result2 = mysqli_query($conn, $query2);
 
@@ -83,3 +73,6 @@
 
 
 	}
+
+
+

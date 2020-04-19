@@ -9,10 +9,7 @@ $(function(){
         var file = $(this).data('include') + '.html';
         $(this).load(file);
     });
-});
-
-setupRestaurantes();
-setupFiltros();  
+}); 
 
 $(document).ready(function() {
 
@@ -59,9 +56,7 @@ $(document).ready(function() {
 
 
 
-    // Infinite Scroll
-    // $(window).scroll(function(e) {
-
+    /* Infinite Scroll */
     $(window).on('scroll', function(e) {
 
         var win_scroll_top = Math.round($(window).scrollTop());
@@ -88,17 +83,17 @@ $(document).ready(function() {
             });
 
             $.ajax({
-                url: 'includes/controlador_restaurantes.php',
+                url: 'controlador_restaurantes.php',
                 method: 'POST',
                 data: {
-                    accion: 'filtrar',
+                    accion: 'scroll',
                     code: 2,
                     ubicacion: Ubicaciones,
                     cocina: Cocinas,
                     start: start,
                     limit: limit
                 },
-                dataType: "json",
+                dataType: 'json',
                 success: function (response) {
                     console.log(response);
                     fetchRestaurantes(response, 'append');
@@ -118,6 +113,8 @@ $(document).ready(function() {
       */
     $('#filtros').on('change', 'input[type=checkbox]', function() {
 
+        console.log('hola');
+
         start = 6;
 
         var Ubicaciones = [];
@@ -135,7 +132,7 @@ $(document).ready(function() {
         console.log(Ubicaciones);
 
         $.ajax({
-            url: 'includes/controlador_restaurantes.php',
+            url: 'controlador_restaurantes.php',
             method: 'POST',
             data: {
                 accion: 'filtrar',
@@ -143,7 +140,7 @@ $(document).ready(function() {
                 ubicacion: Ubicaciones,
                 cocina: Cocinas
             },
-            dataType: "json",
+            dataType: 'json',
             success: function (response) {
                 console.log(response);
                 fetchRestaurantes(response, 'html');
@@ -158,105 +155,32 @@ $(document).ready(function() {
 
 
 
+    function fetchRestaurantes(response, flag) {
 
+        if (flag == 'append') 
+            start += limit;
 
-/** Consulta a la base de datos los restaurantes y muestra 
-  * los 10 primeros */
-function setupRestaurantes() {
-
-    $.ajax( {
-        url: 'includes/controlador_restaurantes.php',
-        method: 'POST',
-        data: {
-            accion: 'setupRestaurantes'
-        },
-        dataType: 'json',
-        success: function (response) {
-            console.log(response);
-            fetchRestaurantes(response, 'html'); 
-        },
-        error: function (data) {
-            console.log(data['responseText']);
-        }
-    });
-}
-
-
-
-function setupFiltros() {
-
-    var filtros = []; 
-
-    $('#filtros').children().each(function() {
-        var temp = $(this).attr('id').split('filtro');
-        filtros.push(temp[temp.length - 1]);
-    });
-
-    $.ajax({
-        url: 'includes/controlador_restaurantes.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            accion: 'setupFiltros',
-            filtros: filtros
-        },
-        success: function (response) {
-
-            for (var key in response) {
-                let template = '';    
-                response[key].forEach(function(elem, i) {
-                    template += `
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="check${key}${i}" name="checkbox${key}" value="${elem.value}">
-                                <label class="custom-control-label" for="check${key}${i}">${elem.value}</label>
-                            </div>
-                            <span class="badge badge-primary badge-pill">${elem.cantidad}</span>
-                        </li> `;
-
-                    $('#filtro' + key + ' div ul').html(template);
-                    // $("#listaUbicaciones").html(template);
-                });
-            }
-
-        },
-        error: function (request, status, error) {
-            console.log(request.responseText);
-        }    
-    });
-};
-
-function hack() {
-    console.log("aslkdnnas");
-}
-
-
-function fetchRestaurantes(response, flag) {
-
-    if (flag == 'append') 
-        start += limit;
-
-                    
-    let template = '';
-    response.forEach(restaurant => {
-        template += `
-            <div class="col-4 mb-3">
-                <div class="card h-100">
-                    <img class="card-img-top" src="img/${restaurant.imagen}" alt="Card image cap">
-                    <div class="d-flex card-body flex-column">
-                        <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                        <p class="card-text">${restaurant.ubicacion}</p>
-                        <p class="card-text">${restaurant.cocina}</p>
-                        <h1 class="card-text">${restaurant.precio} €</h1>
-                         <a href="load_restaurant.php?restaurant=${restaurant.nombre}" class="btn btn-primary stretched-link mt-auto">Reservar</a>
                         
+        let template = '';
+        response.forEach(restaurant => {
+            template += `
+                <div class="col-4 mb-3">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="../img/${restaurant.imagen}" alt="Card image cap">
+                        <div class="d-flex card-body flex-column">
+                            <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
+                            <p class="card-text">${restaurant.ubicacion}</p>
+                            <p class="card-text">${restaurant.cocina}</p>
+                            <h1 class="card-text">${restaurant.precio} €</h1>
+                             <a href="../load_restaurant.php?restaurant=${restaurant.nombre}" class="btn btn-primary stretched-link mt-auto">Reservar</a>
+                            
+                        </div>
                     </div>
-                </div>
-            </div>`
-    });
+                </div>`
+        });
 
-    (flag == "append") ? $('#restaurant_list').append(template) : $('#restaurant_list').html(template);
-}
+        (flag == "append") ? $('#restaurant_list').append(template) : $('#restaurant_list').html(template);
+    }
 
 
 // <button id="btn-${restaurant.nombre}" href="reserve.html" class="btn btn-primary btn-block mt-auto">Reservar</button>

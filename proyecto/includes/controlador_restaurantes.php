@@ -9,8 +9,8 @@
 	if ($accion == 'setup') {
 		showRestaurantsPage(setupFilters($conn), loadRestaurants($conn, 1));
 	} else if ($accion == 'filtrar') {
-		return loadRestaurants($conn, 2);
+		echo data2json(loadRestaurants($conn, 2));
 	} else if ($accion == 'scroll') {
-		return loadRestaurantes($coon, 3);	
+		echo data2json(loadRestaurants($conn, 3));	
 	}
 

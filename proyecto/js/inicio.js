@@ -101,8 +101,8 @@ $(document).ready(function() {
             let search = $('#search').val();
             $.ajax({
                 url: 'includes/inicio.php',
-                data: { "search": search , 
-            			"button-pressed": "true"},
+                data: { search: search , 
+            			button-pressed: true},
                 method: 'POST',
                 dataType: "json",
                 success: function (response) {

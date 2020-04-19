@@ -23,62 +23,136 @@
 	<!-- DROPZONE JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.js"></script>	
 
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
 
+	<!-- Google Fonts: Montserrat  -->
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 </head>
 <body>
 
+	<style>
+		html, body {
+		    height: 100%;
+    		width: 100%;
+		}
+
+
+		.bg-img {
+		    background: url(img2/table-centerpiece-2140980.jpg) no-repeat center center fixed;
+		    display: table;
+		    height: 100%;
+		    position: relative;
+		    width: 100%;
+    		background-size: cover;
+		}
+		
+		.input-wrapper {
+			margin-left: 50px;
+			margin-right: 50px;
+			margin-bottom: 15px;
+			margin-top: 25px;
+		}
+
+		.error {
+			opacity: 0.7;
+ 	 		border-color: #ff6b81;
+  			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0px 0px 10px rgba(255, 71, 87, 0.6);
+		}
+
+		.success {
+			opacity: 0.7;
+ 	 		border-color: #2ed573;
+  			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(46, 213, 115, 0.6);
+		}
+
+/*		input[type='text']:focus {
+			color: orange;
+			border: 1px solid red;
+    		color: orange;
+		}*/
+
+		.bg-img .card {
+			position: absolute;
+			width: 570px;
+			/*height: 100%;*/
+			top: 10%;
+			right: 10%;
+			border-radius: 10px;
+		}
+
+		label, button {
+			font-family: 'Montserrat', sans-serif;
+			font-family: 'Baloo Tamma 2', cursive;
+			color: #57606f;
+			font-size: 16px;
+		}
+		
+		.dropzone {
+			padding: 15px 10px;
+			margin: 0px 30px;
+			margin-bottom: 30px;
+			border-radius: 10px; 
+			border: 1px dashed grey;
+		}
+
+		.dropzone .dz-preview {
+			margin: 10px;
+		}
+
+		.dropzone .dz-preview .dz-image {
+  			width: 100px;
+ 		 	height: 100px;
+		}
+
+		.dropzone .dz-preview .dz-details {
+			width: 100px;
+ 		 	height: 100px;
+		}
+
+	</style>
+
+
+
 	<header data-include="navbar"></header>
 
-	<div class="container">
+	<div class="bg-img">
+		<div class="card">
+			<div class="input-wrapper">
 
-
-		<h1 class="text-center text-warning" style="padding-top: 75px">Añade tu propio restaurante</h1>
-
-		<form action="add_restaurant.php" enctype="multipart/form-data" method="POST" id="restaurant-form">
-			<div class="form-group">
-				<label for="name">Nombre del Restaurante</label>
-				<input type="text" class="form-control" placeholder="Nombre Restaurante" id="name" name="name">
-			</div>
-			<div class="form-group">
-				<label for="location">Ubicacion</label>
-				<input type="text" class="form-control" placeholder="Ubicacion" id="location" name="location">
-			</div>
-			<div class="form-group">
-				<label for="food-type">Tipo de Comida</label>
-				<input type="text" class="form-control" placeholder="Comida" id="food-type" name="food-type">
-			</div>
-			<div class="form-group input-group">
-				<label for="price">Precio</label>
-				<input type="number" class="form-control" placeholder="Precio" id="price" name="price">
-				
-				<div class="input-group-append">
-					<select class="custom-select">
-						<option value="1" selected>€</option>
-						<option value="2">$</option>
-					</select>
-				</div>
+				<h2 style="font-family: 'Montserrat', sans-serif; color: #2f3542;">Añade tu propio Restaurante</h2>
+				<form action="add_restaurant.php" enctype="multipart/form-data" method="POST" id="restaurant-form">
+					<div class="form-group">
+						<label for="name">Nombre del Restaurante</label>
+						<input type="text" class="form-control" placeholder="Nombre Restaurante" id="name" name="name" data-toggle="tooltip">
+					</div>
+					<div class="form-group">
+						<label for="location">Ubicacion</label>
+						<input type="text" class="form-control" placeholder="Ubicacion" id="location" name="location" data-toggle="tooltip">
+					</div>
+					<div class="form-group">
+						<label for="food-type">Tipo de Comida</label>
+						<input type="text" class="form-control" placeholder="Comida" id="food-type" name="food-type" data-toggle="tooltip">
+					</div>
+					<div class="form-group">
+						<label for="price">Precio</label>
+						<input type="number" class="form-control" placeholder="Precio" id="price" name="price" data-toggle="tooltip">
+					</div>
+				</form>
   			</div>
-
-  			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<select class="custom-select">
-						<option value="1" selected>€</option>
-						<option value="2">$</option>
-					</select>
-				</div>
-				<input type="text" class="form-control" placeholder="Some text">
-			</div>
-			
+  		
 			<div class="dropzone" id="dropzoneForm"></div>
-			
-			<div class="d-flex justify-content-center mb-2" id="btn-add-restaurant">
-				<button type="submit" id="submit-all" class="btn btn-success mt-3">Añadir Restaurante</button>	
+
+			<div class="d-flex justify-content-center" id="btn-add-restaurant">
+				<button id="submit-all" class="btn" style="background: #fc5c65; color: white; height: 40px; width: 90%; margin-bottom: 20px">Añadir Restaurante</button>	
 			</div>
 
-		</form>
-
-		<!-- Modal -->
+  		</div>
+	</div>	
+		
+	<!-- Modal -->
 		<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
@@ -98,25 +172,98 @@
 		</div>
 
 
-</div>	
+<style>
+	
+	.custom-tooltip {
+		border: 1px solid blue;
+		border-radius: 10px;
+		background: white;
+	}
+
+	.tooltip-arrow{
+		position: absolute;
+    	width: 0;
+    	height: 0;
+	    top: 50%;
+	    left: -2px;
+	    margin-top: -10px;
+	    border-top: 10px solid transparent;
+	    border-bottom: 10px solid transparent;
+	    border-right: 10px solid #fc5c65;
+	}
+
+	.tooltip-inner {
+		background: white;
+		box-shadow: 0px 0px 8px #778ca3; 
+		text-align: center;
+		border: 2px solid #fc5c65;
+		vertical-align: middle;
+	}
+
+	.tooltip-title {
+		color: black;
+		font-size: 16px;
+		font-family: 'Montserrat', sans-serif;
+		font-family: 'Baloo Tamma 2', cursive;
+	}
+
+</style>
 
 
 
-		
+
+		<!-- '<div class="tooltip" role="tooltip"><div class="tooltip-arrow" style="color: blue;"></div><div class="tooltip-inner"></div></div>' -->
 	<script>
 
 
 
-	// Import html header and footer
-  	$(function(){
-    	var includes = $('[data-include]');
-    	jQuery.each(includes, function(){
-    		var file = $(this).data('include') + '.html';
-    		$(this).load(file);
-    	});
-  	});
+		// Import html header and footer
+	  	$(function(){
+	    	var includes = $('[data-include]');
+	    	jQuery.each(includes, function(){
+	    		var file = $(this).data('include') + '.html';
+	    		$(this).load(file);
+	    	});
+	  	});
 
-	/*$(document).ready(function(){*/
+		$('[data-toggle="tooltip"]').tooltip({
+  			html: true,
+  			template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="color: blue;"></div></div>',
+  			placement: 'right',
+  			title: '<div class="tooltip-title"><i class="fas fa-exclamation-circle mr-2"></i>Rellene todos los campos</div>',
+  		});   	
+
+	  	$('input').focusout(function() {
+
+			if ($(this).val() === '') {
+				
+				if ($(this).hasClass('success')) 
+					$(this).removeClass('success').addClass('error');
+				else if (!$(this).hasClass('error')) 
+					$(this).addClass('error');
+			
+			} else {
+				if ($(this).hasClass('error')) 
+					$(this).removeClass('error').addClass('success');
+				else if (!$(this).hasClass('success')) 
+					$(this).addClass('success');
+			
+			}
+	  	});
+
+
+
+	  	/** 						AVISO 
+	  	  * El tamaño por defecto de una peticion POST es de 8MB.
+	  	  * Este valor puede ser extendido modificando el fichero 'php.ini'.
+	  	  * Como este fichero es parte del servidor supongo que la 
+	  	  * configuracion sel servidor que se nos proporciona sera 
+	  	  * la que viene por defecto y por tanto el tamaño maximo sera de 8MB.
+		  * Por tanto, no añade imagenes de tamaño superior, puesto que
+		  * retornara un error 
+		  */
+
+		/*$(document).ready(function(){*/
 
 		// Do this outside of jQuery
 		Dropzone.autoDiscover = false;
@@ -124,18 +271,25 @@
 		// Start jQuery stuff
 		$(function() {
 
+			var x = 
 		    // Call Dropzone manually
 		    $("#dropzoneForm").dropzone({
 		    	url: 'includes/add_restaurant.php',						
 		        paramName: "images",	
 		        uploadMultiple: true,
-		        parallelUploads: 3,
-		        maxFiles: 5,						
+		        parallelUploads: 4,
+		        maxFiles: 4,						
 		        maxFilesize: 8, // MB 								// Tamaño maximo por imagen
 		        dictDefaultMessage: 'Arrastre las imagenes aqui',	// Mensaje
 		        autoProcessQueue: false,							// Para que no se suban automaticamente
 		        addRemoveLinks: true,								// Link para eliminarlas los archivos antes de subit
 		  		acceptedFiles:".png,.jpg,.gif,.jpeg",				// Tipos de archivos permitidos
+		        thumbnailWidth: 100,
+		        thumbnailHeight: 100,
+		        // createImageThumbnails: false,
+
+		        // previewTemplate: $('#template-preview'),
+
 		        /*addedfile: function (file) {
 		        	console.log(file.name);
 		        },*/
@@ -157,34 +311,44 @@
 
 			           //	confirm("Esta seguro ?");
 
-						$('#confirmModal').modal('toggle');
+						// $('#confirmModal').modal('toggle');
 
-						$('#btnContinue').click(function() {
-							dropzoneForm.processQueue();
-							$('#confirmModal').modal('hide');		
+						// $('#btnContinue').click(function() {
+
+							var SUCCESS_FLAG = true;
+							$('form input').each( function(){
+								if (!$(this).hasClass('success')) {
+									SUCCESS_FLAG = false;
+									return false;
+								}
+							});
+
+							if (SUCCESS_FLAG == true) {
+								console.log('success');
+							}
+
+							// dropzoneForm.processQueue();
+							// $('#confirmModal').modal('hide');		
+						// });
 						});
 		        	
-		        	});
+		        	
 
-
-			        //send all the form data along with the files:
 			        this.on("sendingmultiple", function(data, xhr, formData) {
-			            
+
 			            formData.append("name", jQuery("#name").val());
 			            formData.append("location", jQuery("#location").val());
 			            formData.append("food-type", jQuery("#food-type").val());
 			            formData.append("price", jQuery("#price").val());
 			            
-			            /*for (var value of formData.values()) {
-							console.log(value); 
-						}*/
 			        });
 		        },
-		        /*complete: function (response, data, file) {
-		        	dropzoneForm.removeFile(file);
-		        	console.log(file);
-		        	console.log(data);
-		        }*/
+		        maxfilesreached: function() {
+		        	alert("espabila");
+		        },
+		        uploadprogress: function(x, progress) {
+		        	console.log(progress);
+		        },
 		        complete: function (file, data) {
 		        	
 		        	console.log(file);
@@ -203,6 +367,8 @@
 		    });
 
 		});
+
+
 
 
 	</script>		

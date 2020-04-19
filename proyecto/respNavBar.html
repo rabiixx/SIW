@@ -1,0 +1,142 @@
+<style>
+
+	.navbar {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
+
+	.navbar-light {
+		background-color: #0a3d62;
+		color: transparent;
+		box-shadow: 0px 0px 10px grey;
+	}
+
+	.navbar .navbar-brand h1 {
+		font-family: 'Poppins', sans-serif;
+		letter-spacing: 4px;
+		color: white;
+		font-size: 20px;
+		transition: transform 0.5s;
+		cursor: pointer;
+	}
+
+	.navbar .navbar-brand h1:hover {
+		text-shadow: 1px 1px 8px black;
+		transform: scale(1.1);
+	}
+
+	.horizontal-divider {
+		height: 40px;
+		width: 3px;
+		background-color: white;
+		border-radius: 10px;
+	}
+
+	.custom-nav-links {
+		display: flex;
+		justify-content: space-around;
+		width: 30%;
+		align-items: center;
+		margin-bottom: 0px;
+	}
+
+	.custom-nav-links li {
+		list-style: none;
+		transition: transform 0.5s;
+	}
+
+
+	.custom-nav-links li:hover {
+		transform: scale(1.05);
+	}
+
+	.custom-nav-links a {
+		font-family: 'Poppins', sans-serif;
+		letter-spacing: 3px;
+		color: #95afc0;
+		font-size: 16px;
+		font-weight: 600;
+		text-decoration: none;
+		transition: color 0.5s, text-shadow 0.5s;
+	}
+
+	.custom-nav-links a:hover {
+		color: white;
+		text-shadow: 2px 2px black;
+	}
+
+	.custom-btn, .custom:focus {
+		padding-left: 10px;
+		padding-right: 10px;
+		height: 40px;
+		font-family: 'Baloo Paaji 2', cursive;
+		letter-spacing: 1px;
+		font-size: 14px;
+		font-style: bold;
+		outline: none;
+		border-radius: 8px;
+		transition: transform 0.4s, box-shadow 0.5s;
+	}
+
+	.custom-btn:hover {
+		transform: translate(2px, 2px);
+		outline: none;
+	}
+
+	.btn-login {
+		background-color: #273c75; 
+		color: white;
+		box-shadow: 5px 5px #192a56;
+		border: 1.5px solid white;
+	}
+
+	.btn-login:hover {
+		box-shadow: 3px 3px #192a56;
+	}
+
+	.btn-register {
+		background-color: #16a085; 
+		color: white;
+		box-shadow: 5px 5px #006266;
+		border: 1.5px solid white;
+	}
+
+	.btn-register:hover {
+		box-shadow: 3px 3px #006266;
+	}
+
+
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+		<a class="navbar-brand d-inline-block" href="#">
+		<img src="svg/chilli.svg" width="30" height="27" class="border-danger" alt="logo">
+			<div class="horizontal-divider d-inline-block align-middle mx-2"></div>
+		<h1 class="d-inline my-auto">rabiixx</h1>
+		</a>
+		
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>	
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	
+		<ul class="custom-nav-links navbar-nav">
+  			<li>
+    			<a href="#">Home</a>
+  			</li>
+  			<li>
+    			<a href="#">Restaurantes</a>
+  			</li>
+  			<li>
+    			<a href="#">About</a>
+  			</li>
+		</ul>
+
+		<div class="ml-auto">
+			<button class="custom-btn btn-login">Iniciar Sesion</button>
+    		<button class="custom-btn btn-register ml-3">Registrarse</button>
+		</div>
+  	</div>
+</nav>
