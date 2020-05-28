@@ -13,9 +13,6 @@
 	<!-- Custom CSS Styles -->
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
-	
-
-
 
 </head>
 <body>
@@ -51,7 +48,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<button id="show_hide_pass" class="input-group-text"><i id="pass_icon" class="fas fa-eye"></i></button>
+									<button tabindex="-1" id="show_hide_pass" class="input-group-text"><i id="pass_icon" class="fas fa-eye"></i></button>
 								</div>
 
 								<input type="password" id="pass" name="password" class="form-control" data-toogle="password" placeholder="Password" onfocusout="validatePassword()">
@@ -101,46 +98,40 @@
 	<!-- BOOTSTRAP 4 JS -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+	<script src="js/loginValidation.js"></script>
 
+	<script>
 
+		// Import html header and footer
+	  	$(function(){
+	    	var includes = $('[data-include]');
+	    	jQuery.each(includes, function(){
+	    		var file = $(this).data('include') + '.html';
+	    		$(this).load(file);
+	    	});
+	  	});
 
-<script src="js/loginValidation.js"></script>
+		$(document).ready(function() {
+			
+			/* Show hide password function */
+			$("#show_hide_pass").click(function(e) {
 
-<script>
+				e.preventDefault();
+		       	e.stopPropagation();
 
-	// Import html header and footer
-  	$(function(){
-    	var includes = $('[data-include]');
-    	jQuery.each(includes, function(){
-    		var file = $(this).data('include') + '.html';
-    		$(this).load(file);
-    	});
-  	});
+				var type = $("#pass").attr('type');
 
-	$(document).ready(function() {
-		
+				$("#pass_icon").toggleClass('fa-eye fa-eye-slash');
 
-		/* Show hide password function */
-		$("#show_hide_pass").click(function(e) {
+				if (type === "password") {
+					$("#pass").attr('type', 'text');
+				} else {
+					$("#pass").attr('type', 'password');
+				}
 
-			e.preventDefault();
-	       	e.stopPropagation();
-
-			var type = $("#pass").attr('type');
-
-			$("#pass_icon").toggleClass('fa-eye fa-eye-slash');
-
-			if (type === "password") {
-				$("#pass").attr('type', 'text');
-			} else {
-				$("#pass").attr('type', 'password');
-			}
-
+			});
 		});
-	});
-</script>
-
-
+	</script>
 
 
 </body>

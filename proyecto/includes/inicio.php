@@ -7,7 +7,7 @@
 		
 		$search = $_POST['search'];
 
-  		$query = "SELECT Nombre, Ubicacion FROM restaurantes WHERE Nombre LIKE '%$search%'";
+  		$query = "SELECT Nombre, Ubicacion FROM restaurantes WHERE Nombre LIKE '$search%' LIMIT 4";
 	  	$result = mysqli_query($conn, $query);
   
 		if(!$result) {
@@ -24,7 +24,7 @@
 	    }
 
 
-  		$query = "SELECT DISTINCT Ubicacion FROM restaurantes WHERE Ubicacion LIKE '%$search%'";
+  		$query = "SELECT DISTINCT Ubicacion FROM restaurantes WHERE Ubicacion LIKE '$search%' LIMIT 4";
 	  	$result = mysqli_query($conn, $query);
   
 		if(!$result) {
@@ -39,8 +39,26 @@
 	        );
 	    }
 
+  		$query = "SELECT DISTINCT Cocina FROM restaurantes WHERE Cocina LIKE '$search%' LIMIT 4";
+	  	$result = mysqli_query($conn, $query);
+  
+		if(!$result) {
+	    	die('Query Failed'. mysqli_error($conn));
+	  	}
+
+	  	$cocina_json = array();
+
+	    while($row = mysqli_fetch_array($result)) {
+	        $cocina_json[] = array(
+	          	'cocina' => $row['Cocina'],
+	        );
+	    }
+
+
+
 	    $result_json = array(	'lista_restaurantes' => $restaurantes_json,
-	    						'lista_ubicaciones' => $ubicaciones_json);
+	    						'lista_ubicaciones' => $ubicaciones_json,
+	    						'lista_cocinas' => $cocina_json);
 
 	    $json = json_encode($result_json);
 

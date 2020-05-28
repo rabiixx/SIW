@@ -84,7 +84,7 @@
 			position: absolute;
 			top: 40%;
 			font-size: 2em;
-			right: 10px;
+			right: -10px;
 			cursor: pointer;
 			color: #ffa812;
 		}
@@ -94,7 +94,7 @@
 			position: absolute;
 			top: 40%;
 			font-size: 2em;
-			left: 10px;
+			left: 0px;
 			cursor: pointer;
 			color: #ffa812;
 		}
@@ -185,7 +185,7 @@
 		
 		<div class="row">
 			<div class="col-8">
-				<img src="##ImagenRestaurante##" alt="imagenRestaurante">
+				<img src="##ImagenRestaurante##" alt="imagenRestaurante" style="height: 500px; width: 800px;">
 				
 				<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mt-3" id="miniNav">
 				  	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -205,9 +205,10 @@
 				
 
 				<hr width="99%" class="my-3">
-				<div class="d-inline mr-2"><i class="fas fa-money-bill mr-2 d-inline"></i><h5 class="d-inline">30 - 40$</h5></div>
+				<div class="d-inline mr-2"><i class="fas fa-money-bill mr-2 d-inline"></i><h5 class="d-inline">##PRECIO##$</h5></div>
 				<div class="d-inline mx-2"><i class="far fa-comments mr-2 d-inline"></i><h5 class="d-inline">180 reseñas</h5></span></div>
-				<div class="d-inline mx-2"><i class="fas fa-utensils mr-2 d-inline"></i><h5 class="d-inline">Tradicional</h5></div>
+				<div class="d-inline mx-2"><i class="fas fa-utensils mr-2 d-inline"></i><h5 class="d-inline">##COCINA##</h5></div>
+				<div class="d-inline mx-2"><i class="fas fa-map-marker-alt mr-2"></i></i><h5 class="d-inline">##UBICACION##</h5></div>
 				<p class="mt-4" style="font-family: 'Montserrat', sans-serif; color:#2D333F">Este sofisticado restaurante inspirado en los años 20, con cocina española actual, música en directo y coctelería excepcional, se ha convertido en uno de los más apetecidos de la capital (está siempre a reventar, por algo será…). Su carta pretende ser embajadora de la marca España por lo que no faltan platos como el jamón de bellota, las anchoas de Santoña, el salmorejo cordobés o el pulpo a la brasa. En los postres, un buen arroz con leche como se hace en Asturias o unas natillas con galleta son perfectos para terminar de llenar el estómago.</p>
 
 				<h3 style="font-family: 'Gotu', sans-serif; font-weight: bold; color:#2D333F; padding-top: 70px;" class="mt-5" id="menu">Imagenes</h3>
@@ -221,28 +222,12 @@
 						    <li data-target="#carouselExampleInterval" data-slide-to="2"></li>
 						 </ol> -->
 				  		<div class="carousel-inner custom-events">
-				    		<a href="img/res1.png" class="carousel-item active"> 			
-						    	<img src="img/res1.png"/>
-							</a>
-							<a href="img/res2.jpg" class="carousel-item"> 			
-						    	<img src="img/res2.jpg"/>
-							</a>	
-							<a href="img/res3.jpg" class="carousel-item"> 			
-						    	<img src="img/res3.jpg"/>
-							</a>
-							<a href="img/res4.jpg" class="carousel-item"> 			
-						    	<img src="img/res4.jpg"/>
-							</a>	
-							<a href="img/res5.jpg" class="carousel-item"> 			
-						    	<img src="img/res5.jpg"/>
-							</a>	
-							<a href="img/res6.jpg" class="carousel-item"> 			
-						    	<img src="img/res6.jpg"/>
-							</a>			    		
+				    		##MARCA##<a href="img/##IMGLG##" class="carousel-item ##ACTIVE##"> 			
+						    	<img src="img/##IMGMD##"/>
+							</a>##MARCA##			    		
 				  		</div>
 				  		<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
 				  			<i class="fas fa-chevron-left prev"></i>
-				    		
 				  		</a>
 				  		<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
 				    		<i class="fas fa-chevron-right next"></i>
@@ -252,15 +237,10 @@
 					
 					<div class="thumbnail-slider">
 						<i class="fas fa-chevron-right next"></i>
-						<i class="fas fa-chevron-left prev disabled-arrow"></i>
+						<i class="fas fa-chevron-left prev"></i>
 
 						<div class="thumbnail-wrapper" id="thumbnail-album">
-							<img src="img/res1.png" name="Bocatas">
-							<img src="img/res2.jpg" name="Cafe">
-							<img src="img/res3.jpg" name="Española">
-							<img src="img/res4.jpg" name="Hamburguesas">
-							<img src="img/res5.jpg" name="Sidreria">
-							<img src="img/res6.jpg" name="Mexicana">
+							##MARCA##<img src="img/##IMGSM##" name="Bocatas">##MARCA##
 						</div>
 					</div>	
 
@@ -423,18 +403,18 @@
   			var slidesToShow = $('.thumbnail-wrapper').get(0).slick.options.slidesToShow;
   			var currentSlide = currentSlide['currentSlide'];
 
-  			if ( sliderCount - slidesToShow == currentSlide ) {
-  				console.log('asd');
-  				$('.thumbnail-slider .next').addClass('disabled-arrow');
-  			} else {
-  				$('.thumbnail-slider .next').removeClass('disabled-arrow');
-  			}
+  			// if ( sliderCount - slidesToShow == currentSlide ) {
+  			// 	console.log('asd');
+  			// 	$('.thumbnail-slider .next').addClass('disabled-arrow');
+  			// } else {
+  			// 	$('.thumbnail-slider .next').removeClass('disabled-arrow');
+  			// }
 
-  			if (currentSlide == 0) {
-  				$('.thumbnail-slider .prev').addClass('disabled-arrow');	
-  			} else {
-  				$('.thumbnail-slider .prev').removeClass('disabled-arrow');	
-  			}
+  			// if (currentSlide == 0) {
+  			// 	$('.thumbnail-slider .prev').addClass('disabled-arrow');	
+  			// } else {
+  			// 	$('.thumbnail-slider .prev').removeClass('disabled-arrow');	
+  			// }
 
 		});
   		
@@ -447,32 +427,32 @@
 		$customEvents.lightGallery();	
 
 
-		$('#jsPDF').on('click', function(e) {
-			e.preventDefault();
+		// $('#jsPDF').on('click', function(e) {
+		// 	e.preventDefault();
 						
-			var content = $('.container-fluid').outerHTML;
-			console.log(content);
+		// 	var content = $('.container-fluid').outerHTML;
+		// 	console.log("jsPDF");
 
-			$.ajax({
-				url: 'includes/html2pdf.php',
-				method: 'POST',
-				data: {data: content},
-				success: function(response) {
-					console.log(response);
-				}
-			});
+		// 	$.ajax({
+		// 		url: 'includes/html2pdf.php',
+		// 		method: 'POST',
+		// 		data: {data: content},
+		// 		success: function(response) {
+		// 			console.log(response);
+		// 		}
+		// 	});
 
-		});
+		// });
 
 
-/*		$('#jsPDF').on('click', function(){
+		$('#jsPDF').on('click', function(){
 
 			html2canvas(document.querySelector('.container-fluid')).then(canvas => {
 				
 				var bodyHeightMm = Math.floor($('.container-fluid').height()/($('#my_mm').height()/100));
 				var bodyWidthMm = Math.floor($('.container-fluid').width()/($('#my_mm').height()/100));
 
-				let pdf = new jsPDF('p', 'mm', [$('.container-fluid').width(), $('.container-fluid').height()]);*/
+				let pdf = new jsPDF('p', 'mm', [$('.container-fluid').width(), $('.container-fluid').height()]);
 				
 				// var pdfPageHeight= pdf.internal.pageSize.height;
 				// console.log(pdf.internal.pageSize.height);
@@ -490,20 +470,20 @@
 
 
 				// Before adding new content
-/*				y = 500 // Height position of new content
-				if (y >= pageHeight)
-				{
-				  doc.addPage();
-				  y = 0 // Restart height position
-				}
-*/
+				// y = 500 // Height position of new content
+				// if (y >= pageHeight)
+				// {
+				//   doc.addPage();
+				//   y = 0 // Restart height position
+				// }
 
-/*				pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, bodyWidthMm, bodyHeightMm);	
+
+				pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, bodyWidthMm, bodyHeightMm);	
 				
 				pdf.save('test.pdf');
 			});
 		});
-*/
+
 		
 
 

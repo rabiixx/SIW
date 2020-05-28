@@ -116,7 +116,8 @@
 
 
 
-	<header data-include="navbar"></header>
+	
+	<div data-include="respNavBar"></div>
 
 	<div class="bg-img">
 		<div class="card">
@@ -209,13 +210,7 @@
 
 </style>
 
-
-
-
-		<!-- '<div class="tooltip" role="tooltip"><div class="tooltip-arrow" style="color: blue;"></div><div class="tooltip-inner"></div></div>' -->
 	<script>
-
-
 
 		// Import html header and footer
 	  	$(function(){
@@ -324,16 +319,13 @@
 							});
 
 							if (SUCCESS_FLAG == true) {
-								console.log('success');
+								dropzoneForm.processQueue();
+								$('#confirmModal').modal('hide');
 							}
-
-							// dropzoneForm.processQueue();
-							// $('#confirmModal').modal('hide');		
+		
 						// });
-						});
+					});
 		        	
-		        	
-
 			        this.on("sendingmultiple", function(data, xhr, formData) {
 
 			            formData.append("name", jQuery("#name").val());
@@ -344,7 +336,7 @@
 			        });
 		        },
 		        maxfilesreached: function() {
-		        	alert("espabila");
+		        	alert("Numero maximo de imagenes alcanzado");
 		        },
 		        uploadprogress: function(x, progress) {
 		        	console.log(progress);
@@ -352,6 +344,7 @@
 		        complete: function (file, data) {
 		        	
 		        	console.log(file);
+		        	console.log(data);
 
 		        	// Reset form input fields
 		        	$('#restaurant-form').trigger("reset");
@@ -360,6 +353,7 @@
 		        	dropzoneForm.removeAllFiles();
 		        }, 
 		        success: function (response, data) {
+		        	console.log(response);
 		        	console.log(data);
 		        }
 

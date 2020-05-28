@@ -28,20 +28,27 @@ form.addEventListener('submit', function(e) {
 			contentType: false,
     		processData: false,
     		success: function (response) {
-    			console.log(response);
+    			createCookie("user", username.value, 3);
+    			$(location).attr('href', 'espabila.html');
     		},
     		error: function(data) {
-    			console.log(data);	
+    			console.log(data);
     		}
 		});
 
 	}
 });
 
-
-
-
-
+function createCookie(name, value, days) {
+	if (days) {	
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		var expires = "; expires=" + date.toUTCString();
+	} else {
+		var expires = "";
+	}
+	document.cookie = name + "=" + value + expires + "; path=/";
+}
 
 
 /* Valida si un usuario es correcto */

@@ -7,6 +7,10 @@
 
 		$restaurant = $_GET["restaurant"];
 
+
+		$src_template = explode("##MARCA##", file_get_contents("reserve.html"));		
+
+
 		$query = "SELECT * FROM restaurantes WHERE Nombre='$restaurant'; ";
 
 		$result = mysqli_query($conn, $query);
@@ -52,12 +56,12 @@
 
 		$jsonstring = json_encode($matrix);
 
-		$src_template = explode("##MARCA##", file_get_contents("reserve.html"));
+
 		$src_template[0] = str_replace("##ImagenRestaurante##", "img/" . $json[0]['imagen'], $src_template[0]);
 		$src_template[0] = str_replace("##NombreRestaurante##", $json[0]['nombre'], $src_template[0]);
-		$src_template[0] = str_replace("##Ubicacion##", $json[0]['ubicacion'], $src_template[0]);
-		$src_template[0] = str_replace("##Precio##", $json[0]['precio'], $src_template[0]);
-		$src_template[0] = str_replace("##Categoria##", $json[0]['categoria'], $src_template[0]);
+		$src_template[0] = str_replace("##UBICACION##", $json[0]['ubicacion'], $src_template[0]);
+		$src_template[0] = str_replace("##PRECIO##", $json[0]['precio'], $src_template[0]);
+		$src_template[0] = str_replace("##COCINA##", $json[0]['categoria'], $src_template[0]);
 
 	   	$auxTemplate = '';
 
@@ -65,7 +69,7 @@
 
 		for ($i = 0; $i < sizeof($matrix); $i++) { 
 
-			$auxTemplate = $src_template[1];
+			$auxTemplate = $src_template[5];
 
 			$auxTemplate = str_replace("##Username##", $matrix[$i]['username'], $auxTemplate);
 		   	$auxTemplate = str_replace("##Titulo##", $matrix[$i]['rating']['title'], $auxTemplate);
@@ -76,12 +80,73 @@
 		   	$dest_template .= $auxTemplate;
 		}
 
-		echo $src_template[0] . $dest_template . $src_template[2];
+
+		$query = "SELECT idRestaurante FROM restaurantes WHERE Nombre = '$restaurant'";
+		$res = mysqli_query($conn, $query);
+		$row = mysqli_fetch_row($res);
+		$id = $row[0];
+
+		$query = "SELECT * FROM imgrestaurante WHERE idRestaurante = '$id' ";
+		//echo $query;
+		$res = mysqli_query($conn, $query);
+		
+
+		$imgHtml1 = '';
+		$imgHtml2 = '';
+
+		$trozos = explode(".", $json[0]['imagen']);
+		// $imagen_md = $trozos[0] . '_md.' . $trozos[1]; 		
+		// $imagen_sm = $trozos[0] . '_sm.' . $trozos[1];
+		// $imagen_lg = $trozos[0] . '_lg.' . $trozos[1];
+		
+		// $imgHtml1 .= str_replace("##IMGMD##", $imagen_md, $src_template[1]);
+		// $imgHtml1 .= str_replace("##IMGLG##", $imagen_lg, $imgHtml1);
+		// $imgHtml1 .= str_replace("##ACTIVE##", "active", $imgHtml1);
+
+		// $imgHtml2 .= str_replace("##IMGSM##", $imagen_sm, $src_template[3]);
+
+		
+		if ($res) {
+			
+			$i = 0;
+			while ($row = mysqli_fetch_assoc($res)) {
+				
+				$img1Template = $src_template[1];
+				$img2Template = $src_template[3];
+
+				//echo $row['imgName'];
+
+				$trozos = explode(".", $row['imgName']);
+				$imagen_md = $trozos[0] . '_md.' . $trozos[1]; 		
+				$imagen_sm = $trozos[0] . '_sm.' . $trozos[1];
+				$imagen_lg = $trozos[0] . '_lg.' . $trozos[1];
+
+				$img1Template = str_replace("##IMGMD##", $imagen_md, $img1Template);
+				$img1Template = str_replace("##IMGLG##", $imagen_lg, $img1Template);
+				
+				if ($i == 0) {
+					$img1Template = str_replace("##ACTIVE##", "active", $img1Template);	
+				} else {
+					$img1Template = str_replace("##ACTIVE##", "", $img1Template);		
+				}
+
+				$img2Template = str_replace("##IMGSM##", $imagen_sm, $img2Template);
+
+				$imgHtml1 .= $img1Template;
+				$imgHtml2 .= $img2Template;
+			
+				$i++;
+			}
+
+			$imgHtml = $imgHtml1 . $src_template[2] . $imgHtml2 . $src_template[4]; 
+		} else {
+			$imgHtml = $imgHtml1 . $src_template[2] . $imgHtml2 . $src_template[4]; 
+		}
+
+
+		echo $src_template[0] . $imgHtml . $dest_template . $src_template[6];
 
 	//}
-
-
-
 
 
    /**

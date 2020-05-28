@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Restaurantes</title>
+
+	<!-- BOOTSTRAP CDN -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Font Awesome Kit -->
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+
+	<!-- <link rel="stylesheet" href="css/styles.css"> -->
+		<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
+
+	<!-- JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+</head>
+<body>
+
+	<style>
+		
+		body {
+			font-family: 'Montserrat', sans-serif;	
+			background-color: #f7f7f7;
+		}
+
+		.page-header {
+			width: 75%;
+			height: 100%;
+			text-align: center;
+			margin: 100px auto;			
+		}
+
+		.page-header .header-image {
+			position: relative;
+			width: 100%;
+			height: 250px;
+			background: url(img2/canal-beside-houses-2901209_2.jpg) no-repeat center center ;
+		    display: table;
+		    background-size: cover;
+		    border-radius: 5px;
+		}
+
+		.header-title {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			font-family: 'Gotu', sans-serif;
+			color: white;
+			top: 30%;	
+		}
+
+
+		.search-box {
+			position: absolute;
+			height: 50px;
+			width: 450px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: white;
+			border: 2px solid #0a3d62;
+			border-radius: 30px;
+			box-shadow: 2px 2px 8px #0a3d62;
+			padding: 15px;
+			display: flex;
+			align-items: center;
+		}
+
+		.search-txt {
+			border: none;
+			background: none;
+			margin-left: 10px;
+			outline: none;
+			color: black;
+			font-family: 'Gotu', sans-serif;
+			font-size: 16px;
+			transition: 0.4s;
+			line-height: 25px;
+			width: 90%;
+		}
+
+		.search-box i {
+			float: right;
+			font-size: 25px;
+		}
+
+		.search-box button {
+			background-color: none;
+			background: none;
+			outline: none;
+			border: none;
+			float: right;
+			display: flex;
+			color: #0a3d62;
+		}
+
+		.custom-card {
+			width: 275px;
+			height: 310px;
+			display: inline-block;
+			border-radius: 10px;
+			box-shadow: 6px 6px 6px #778ca3; 
+			cursor: pointer;
+			transition: transform 0.5s;
+		}
+		.custom-card:hover {
+			-webkit-transform: scale(1.05);
+        	-ms-transform: scale(1.05);
+        	transform: scale(1.05);
+		}
+
+		.custom-card .card-text-wrapper {
+			margin: 10px;
+			text-align: left;
+		}
+
+		.card-text-wrapper .restaurant-name {
+			color: #2d333f;
+			font-size: 22px;
+			font-family: 'Baloo Paaji 2', cursive;
+		}
+
+		.custom-card .slider-img {
+			width: 275px;	/* With 100% did not fit parent full width */ 
+			height: 50%;
+			border-top-right-radius: 10px;
+			border-top-left-radius: 10px;
+			/*border: 1px solid blue;*/
+		}
+
+		h1 {
+    		font-family: 'Gotu', sans-serif;
+			margin-bottom: 10px;
+			font-weight: bold;
+    	}
+
+		.euro-enabled {
+
+		}
+
+		.euro-disabled {
+			color: #a4b0be;
+		}
+
+		.fa-star {
+			font-size: 14px;
+			color: #ffa502;
+		}
+	</style>
+
+
+	<div data-include="respNavBar"></div>
+
+
+	<div class="page-header">
+		<div class="header-image">
+			<div class="search-box">
+				<input type="text" class="search-txt" placeholder="Search">	
+				<button><i class="fa fa-search search-btn align-items-center"></i></button>
+			</div>
+		</div>
+
+		<div class="container-fluid mt-5">
+			<div class="row">
+				<div class="col-3" style="width: 18rem;" id="filtros">
+					##MARCA##
+					<div class="card border-primary mb-3" style="max-width: 18rem;" id="##CARDID##">
+					  	<div class="card-header bg-primary" style="color: white; font-size: 16px;">##HEADERTEXT##</div>
+					  	<div class="card-body">
+					   	  	<ul class="list-group list-group-flush" id="##ULID##">
+					   	  		##MARCA##
+					   	  		<li class="list-group-item d-flex justify-content-between align-items-center">
+                             		<div class="custom-control custom-checkbox">
+                                		<input type="checkbox" class="custom-control-input" id="##INPUTID##" name="##INPUTNAME##" value="##INPUTVALUE##" ##CHECKED##>
+                                		<label class="custom-control-label" for="##LABELFOR##">##LABELVALUE##</label>
+                            		</div>
+                            		<span class="badge badge-primary badge-pill">##CANTIDAD##</span>
+                        		</li>
+                        		##MARCA##
+					   	  	</ul>
+					  	</div>
+					</div>
+					##MARCA##
+				</div>
+
+				<div class="col-9">
+					<div class="row" id="restaurant_list">
+						##MARCA##
+						<div class="col-4 mb-3">
+		                	<div class="custom-card my-4">
+								<img src="##IMAGEN##" class="slider-img" name="Italiana">
+								
+								<div class="card-text-wrapper">
+									<div class="restaurant-name">##NOMBRE##</div>
+									<div>
+										<div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>##UBICACION##</div>
+										<div style="font-size: 18px; display: inline; ">-</div>
+										<div style="display: inline;"><i class="fas fa-utensils mr-2"></i>##COCINA##</div>	
+									</div>
+									<div class="stars" style="margin: 5px;">
+								        <i class="fa fa-star"></i>
+								        <i class="fa fa-star"></i>
+								        <i class="fa fa-star"></i>
+								        <i class="fa fa-star"></i>
+								        <i class="fa fa-star"></i>
+										<i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+			    					</div>
+									<div style="margin: 5px;">
+										##PRECIO##
+										<!-- <i class="fas fa-euro-sign mx-1"></i>
+										<i class="fas fa-euro-sign mx-1"></i>
+										<i class="fas fa-euro-sign mx-1 euro-disabled"></i>	 -->
+									</div>
+									<a href="load_restaurant.php?restaurant=##LINK##" class="stretched-link"></a>						
+								</div>
+							</div>
+						</div>
+						##MARCA##
+					</div>		
+				</div>
+			
+			</div>
+		</div>
+
+	</div>
+	
+	<script type="text/javascript">
+		$(function(){
+			var includes = $('[data-include]');
+			jQuery.each(includes, function(){
+			var file = $(this).data('include') + '.html';
+				$(this).load(file);
+			});
+		});
+	</script>
+
+	<!-- CUSTOM JS -->
+    <script src="js/restaurant_list.js"></script>
+
+</body>
+</html>

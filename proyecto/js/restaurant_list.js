@@ -1,4 +1,4 @@
-var start = 6;              /* Indice inicial de carga del scroll */
+var start = 12;              /* Indice inicial de carga del scroll */
 var limit = 3;              /* Indice final de carga del scroll */
 var reachedMax = false;     /* FLAG: se ha alcanzado el numero maximo de elementos */
 
@@ -115,7 +115,7 @@ $(document).ready(function() {
 
         console.log('hola');
 
-        start = 6;
+        start = 12;
 
         var Ubicaciones = [];
 
@@ -160,27 +160,39 @@ $(document).ready(function() {
         if (flag == 'append') 
             start += limit;
 
-                        
         let template = '';
         response.forEach(restaurant => {
             template += `
-                <div class="col-4 mb-3">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="../img/${restaurant.imagen}" alt="Card image cap">
-                        <div class="d-flex card-body flex-column">
-                            <h5 class="card-title text-primary text-center">${restaurant.nombre}</h5>
-                            <p class="card-text">${restaurant.ubicacion}</p>
-                            <p class="card-text">${restaurant.cocina}</p>
-                            <h1 class="card-text">${restaurant.precio} €</h1>
-                             <a href="../load_restaurant.php?restaurant=${restaurant.nombre}" class="btn btn-primary stretched-link mt-auto">Reservar</a>
-                            
+            <div class="col-4 mb-3">
+                <div class="custom-card my-4">
+                    <img src="img/${restaurant.imagen}" class="slider-img" name="Italiana">
+                    
+                    <div class="card-text-wrapper">
+                        <div class="restaurant-name">${restaurant.nombre}</div>
+                        <div>
+                            <div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>${restaurant.ubicacion}</div>
+                            <div style="font-size: 18px; display: inline; ">-</div>
+                            <div style="display: inline;"><i class="fas fa-utensils mr-2"></i>${restaurant.cocina}</div>  
                         </div>
+                        <div class="stars" style="margin: 5px;">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+                        </div>
+                        <div style="margin: 5px;">
+                            ${restaurant.precio}
+                            <!-- <i class="fas fa-euro-sign mx-1"></i>
+                            <i class="fas fa-euro-sign mx-1"></i>
+                            <i class="fas fa-euro-sign mx-1 euro-disabled"></i>  -->
+                        </div>
+                        <a href="load_restaurant.php?restaurant=${restaurant.nombre}" class="stretched-link"></a>                       
                     </div>
-                </div>`
+                </div>
+            </div>`
         });
 
         (flag == "append") ? $('#restaurant_list').append(template) : $('#restaurant_list').html(template);
     }
-
-
-// <button id="btn-${restaurant.nombre}" href="reserve.html" class="btn btn-primary btn-block mt-auto">Reservar</button>

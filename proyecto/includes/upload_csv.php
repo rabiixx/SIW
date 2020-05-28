@@ -2,32 +2,32 @@
 
 	include 'database.php';
 
-	if(!empty($_FILES["csv_file"]["name"])) {
-
-		$file_data = fopen($_FILES["csv_file"]["tmp_name"], 'r');  
+	if(!empty($_FILES["file"]["name"])) {
 		
-		fgetcsv($file_data);	// Leemos la primera linea del csv (cabecera)
+		$table = $_POST['table'];
+		
+		$file_data = fopen($_FILES["file"]["tmp_name"], 'r');  
+		
+		//fgetcsv($file_data);	// Leemos la primera linea del csv (cabecera)
 
-		//print_r($file_data);
 
-		while ($row = fgetcsv($file_data, 100, ";")) {
+		$str = '';
+		while ($row = fgetcsv($file_data, 100, ",")) {
 			
-			$name = mysqli_real_escape_string($conn, $row[0]);
 
-			$location = mysqli_real_escape_string($conn, $row[1]);
+			for ($i=0; $i < sizeof($row); $i++) { 
 
-			$food_type = mysqli_real_escape_string($conn, $row[2]);
+				$str .= "'" . mysqli_real_escape_string($conn, $row[$i]) . "'";
 
-			$price = mysqli_real_escape_string($conn, $row[3]);
+				if ($i != sizeof($row) - 1) {
+					$str .= ', ';
+				}
+			}
 
-			$puntuation = mysqli_real_escape_string($conn, $row[4]);
+			$query = "INSERT INTO $table VALUES (" . $str . ")";
+			echo $query;
 
-			$img = mysqli_real_escape_string($conn, $row[5]);
-
-			$query = "INSERT INTO restaurantes (nombre, ubicacion, cocina, precio, puntuacion, imagen)
-					  VALUES ('$name', '$location', '$food_type', '$price', '$puntuation', '$img')";
-		
-			mysqli_query($conn, $query);
+			echo mysqli_query($conn, $query) or die(mysqli_error($conn));
 	
 		}
 

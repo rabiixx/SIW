@@ -7,7 +7,7 @@ CREATE TABLE Usuarios (
     idUsuario int AUTO_INCREMENT NOT NULL,
     Nombre varchar(255) NOT NULL,
     Apellido varchar(255) NOT NULL,
-    Username varchar(255) NOT NULL,
+    Username varchar(255) NOT NULL UNIQUE,
     Email varchar(255) NOT NULL,
     Password varchar(255) NOT NULL,
     PRIMARY KEY (idUsuario)
@@ -84,5 +84,14 @@ CREATE TABLE Reserva (
 	PRIMARY KEY (idReserva, idUsuario, idRestaurante),
 	CHECK (Turno IN ('Comida', 'Cena')),
 	FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (idRestaurante) REFERENCES Restaurantes(idRestaurante) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE imgRestaurante (
+	idImgRestaurante int AUTO_INCREMENT,
+	imgName varchar(255) NOT NULL,
+	idRestaurante int NOT NULL,
+	PRIMARY KEY (idImgRestaurante),
 	FOREIGN KEY (idRestaurante) REFERENCES Restaurantes(idRestaurante) ON DELETE CASCADE ON UPDATE CASCADE
 );

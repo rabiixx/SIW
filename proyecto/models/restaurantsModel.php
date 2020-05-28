@@ -1,7 +1,5 @@
 <?php 
 
-	include '../includes/database.php';
-
 	function loadRestaurants($conn, $code) {
 
 		$query = "SELECT * FROM restaurantes WHERE Ubicacion != '' " ;
@@ -31,7 +29,7 @@
 			$limit = $_POST['limit'];
 			$query .= " LIMIT " . $start . ", " . $limit;
 		} else {
-			$query .= " LIMIT 6";
+			$query .= " LIMIT 12";
 		}
 
 		// echo $query;

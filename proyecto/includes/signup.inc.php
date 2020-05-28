@@ -8,7 +8,7 @@
       */
 	if (isset($_POST['button-pressed'])) {
   		
-        include '..\database.php';
+        include 'database.php';
 
         $firstName = $_POST['first-name'];
         $lastName = $_POST['last-name']; 
@@ -61,7 +61,11 @@
 
                     mysqli_stmt_bind_param($stmt, "sssss", $firstName , $lastName, $username, $email, $hashedPwd);
                     mysqli_stmt_execute($stmt);
-                    //header("Location: ../signup.php?signup=success");
+    
+                    session_start();
+                    $_SESSION['username'] = $username;
+
+                    header("Location: ../signup.php?signup=success");
 
                 }
             }

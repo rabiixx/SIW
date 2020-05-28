@@ -2,7 +2,7 @@
 
 if (isset($_POST['button-pressed'])) {
 
-	include '..\database.php';
+	include 'database.php';
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -26,16 +26,11 @@ if (isset($_POST['button-pressed'])) {
 		  * Devulve un array asociativo */
 		if ( $row = mysqli_fetch_assoc($result) ) {
 				
-			$pwdCheck = password_verify($password, $row['password']);
-			
-			/*if ($password == $row['password']) {
-				$pwdCheck = true;
-			} else {
-				$pwdCheck = false;
-			}*/
+			$pwdCheck = password_verify($password, $row['Password']);
 
 			if ($pwdCheck == false) {
-				header("Location: ../signup.php?error=wrongpwd");
+				//header("Location: ../login.html?error=wrongpwd");
+				echo $row['Password'];
 				exit();
 				
 			/** Por si ocurriera un fallo y el resultado 
@@ -47,18 +42,17 @@ if (isset($_POST['button-pressed'])) {
 				  * Se crea una varianle global ($_SESSION) que contiene
 				  * informacion sobre el usuario */
 				session_start();
+				$_SESSION['username'] = $row['Username'];
 
-				$_SESSION['username'] = $row['username'];
-
-				header("Location: ../signup.php?login=success");
-					exit();
+				header("Location: ../login.html?login=success");
+				exit();
 
 			} else {
-				header("Location: ../signup.php?error=wrongpwd");
+				header("Location: ../login.html?error=wrongpwd");
 				exit();
 			}
 		} else {
-			header("Location: ../signup.php?error=nouser");
+			header("Location: ../login.html?error=nouser");
 			exit();
 		}
 
