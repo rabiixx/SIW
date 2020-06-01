@@ -1,0 +1,267 @@
+<style>
+
+	.navbar {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
+
+	.navbar-light {
+		background-color: #0a3d62;
+		color: transparent;
+		box-shadow: 0px 0px 10px grey;
+	}
+
+	.navbar .navbar-brand h1 {
+		font-family: 'Poppins', sans-serif;
+		letter-spacing: 4px;
+		color: white;
+		font-size: 20px;
+		transition: transform 0.5s;
+		cursor: pointer;
+	}
+
+	.navbar .navbar-brand h1:hover {
+		text-shadow: 1px 1px 8px black;
+		transform: scale(1.1);
+	}
+
+	.user-profile {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
+
+	.user-profile .profile-image {
+		height: 50px;
+		width: 50px;
+		margin-right: 12px;
+	}
+
+	#nav-username {
+		font-family: 'Poppins', sans-serif;
+		letter-spacing: 4px;
+		color: white;
+		font-size: 18px;
+		transition: transform 0.5s;
+		cursor: pointer;
+		margin-top: 6px;
+	}
+
+	.horizontal-divider {
+		height: 40px;
+		width: 3px;
+		background-color: white;
+		border-radius: 10px;
+	}
+
+	.custom-nav-links {
+		display: flex;
+		justify-content: space-around;
+		width: 30%;
+		align-items: center;
+		margin-bottom: 0px;
+	}
+
+	.custom-nav-links li {
+		list-style: none;
+		transition: transform 0.5s;
+	}
+
+
+	.custom-nav-links li:hover {
+		transform: scale(1.05);
+	}
+
+	.custom-nav-links a {
+		font-family: 'Poppins', sans-serif;
+		letter-spacing: 3px;
+		color: #95afc0;
+		font-size: 16px;
+		font-weight: 600;
+		text-decoration: none;
+		transition: color 0.5s, text-shadow 0.5s;
+	}
+
+	.custom-nav-links a:hover {
+		color: white;
+		text-shadow: 2px 2px black;
+	}
+
+	.custom-btn, .custom:focus {
+		padding-left: 10px;
+		padding-right: 10px;
+		height: 40px;
+		font-family: 'Baloo Paaji 2', cursive;
+		letter-spacing: 1px;
+		font-size: 14px;
+		font-style: bold;
+		outline: none;
+		border-radius: 8px;
+		transition: transform 0.4s, box-shadow 0.5s;
+	}
+
+	.custom-btn:hover {
+		transform: translate(2px, 2px);
+		outline: none;
+	}
+
+	.btn-logout {
+		background-color: #EA2027; 
+		color: white;
+		box-shadow: 3px 3px #c23616;
+		border: 1.5px solid white;
+		outline: none;
+		margin-left: 20px;
+	}
+
+	.btn-login {
+		background-color: #273c75; 
+		color: white;
+		box-shadow: 5px 5px #192a56;
+		border: 1.5px solid white;
+		outline: none;
+	}
+
+	.btn-login:hover {
+		box-shadow: 3px 3px #192a56;
+	}
+
+	.btn-register {
+		background-color: #16a085; 
+		color: white;
+		box-shadow: 5px 5px #006266;
+		border: 1.5px solid white;
+		outline: none;
+	}
+
+	.btn-register:hover {
+		box-shadow: 3px 3px #006266;
+	}
+
+
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+		<a class="navbar-brand d-inline-block" href="#">
+		<img src="svg/chilli.svg" width="30" height="27" class="border-danger" alt="logo">
+			<div class="horizontal-divider d-inline-block align-middle mx-2"></div>
+		<h1 class="d-inline my-auto">rabiixx</h1>
+		</a>
+		
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>	
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	
+		<ul class="custom-nav-links navbar-nav">
+  			<li>
+    			<a href="index.html">Home</a>
+  			</li>
+  			<li>
+    			<a id="rest-list" href="#">Restaurantes</a>
+  			</li>
+  			<li>
+    			<a href="#">About</a>
+  			</li>
+		</ul>
+
+		<div class="ml-auto">
+			<a href="login.html"><button class="custom-btn btn-login">Iniciar Sesion</button></a>
+    		<a href="register.html"><button class="custom-btn btn-register ml-3">Registrarse</button></a>
+    		<div class="user-profile">
+    			<img src="logos/profile.png" class="profile-image">
+    			<div class="dropdown show">
+  				<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="nav-username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #0a3d62; outline: none; border: none; border-color: none; "></a>
+
+  				<div class="dropdown-menu justify-content-center" aria-labelledby="dropdownMenuLink" style="width: 150px; height: ">
+    				<a class="dropdown-item text-center" href="#" style="height: 30px; margin: 5px 0px; font-size: 14px; font-weight: bold;">Mi Perfil</a>
+    				<a class="dropdown-item text-center" href="misRestaurantes.php" style="height: 30px; margin: 5px 0px; font-size: 14px; font-weight: bold;">Mis Restaurante</a>
+    				<a class="dropdown-item text-center" href="add_restaurant.html" style="height: 30px; margin: 5px 0px; font-size: 14px; font-weight: bold;">Añadir Restaurante</a>
+    				<a class="dropdown-item text-center" id="logoutBtn" style="width: 96%; height: 38px; margin: 0px auto; background-color: #ff3f34; border-radius: 6px; border: 4px solid #e84118; color: white; font-size: 14px; font-weight: bold;" href="#">Cerrar Sesion</a>
+  </div>
+</div>
+    		</div>
+		</div>
+  	</div>
+</nav>
+
+<!-- <button class="custom-btn btn-logout" style="outline: none;">Cerrar Sesion</button> -->
+
+
+<script type="text/javascript">
+		
+	
+	if ( (username = readCookie("user")) != null) {
+		$('.custom-btn.btn-login').css('display', 'none');
+		$('.custom-btn.btn-register').css('display', 'none');
+	
+		$('#nav-username').text(username);
+	} else {
+		$('.user-profile').css('display', 'none');
+	}
+
+	$('#rest-list').click(function(event) {
+		$.redirect("controlador_restaurantes.php", {accion: 'setup'}, "POST"); 
+	});
+
+
+	$('#logoutBtn').click(function(e) {
+
+		eraseCookie("user");
+
+		$.ajax({
+    		url: 'includes/logout.php',
+    		method: 'POST',
+    		success: function(e) {
+    			if ( (username = readCookie("user")) != null) {
+					$('.custom-btn.btn-login').css('display', 'none');
+					$('.custom-btn.btn-register').css('display', 'none');
+				
+					$('.user-profile h1').text(username);
+				} else {
+					$('.user-profile').css('display', 'none');
+					$('.custom-btn.btn-login').css('display', 'inline');
+					$('.custom-btn.btn-register').css('display', 'inline');
+				}
+    		},
+    		failure: function(e) {
+    			console.log("Logged Out FAILURE");		
+    		}
+    	});
+	});
+
+
+	function createCookie(name, value, days) {
+		if (days) {	
+			var date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			var expires = "; expires=" + date.toUTCString();
+		} else {
+			var expires = "";
+		}
+		document.cookie = name + "=" + value + expires + "; path=/";
+	}
+
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(";");
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1, c.length);
+			}
+
+			if (c.indexOf(nameEQ) == 0)
+				return c.substring(nameEQ.length, c.length);
+		}
+		return null;
+	}
+
+	function eraseCookie(name) {
+    	createCookie(name,"",-1);
+	}
+
+</script>

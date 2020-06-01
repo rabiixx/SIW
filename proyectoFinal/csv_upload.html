@@ -1,0 +1,113 @@
+
+	<style type="text/css">
+		
+		form {
+			width: 1000px;
+			height: 750px;
+			border: 3px dashed green;
+			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+		}
+
+		button {
+			width: 400px;
+			height: 45px;
+		}
+
+		.row1 {
+			display: inline-flex;
+
+		}
+	
+
+	</style>
+
+
+	<form id="upload-csv-form">
+	
+		<div class="row1" style="width: 450px; display: flex; align-items: center;">
+			<div class="custom-file" style="width: 100%; margin: 20px;">
+		 		<input type="file" class="custom-file-input" id="file" name="file" required>
+				<label class="custom-file-label" for="file">Elige un archivo</label>
+			</div>		
+			<i class="fas fa-file-csv" style="font-size: 40px; color: green; display: flex;"></i>			
+		</div>
+		<div style="width: 400px">
+			<h2 style="font-size: 26px; color: black; font-family: 'Gotu', sans-serif; font-weight: bold;">Tablas</h2>
+			<div class="list-group" id="list-tab" role="tablist">
+						##MARCA##<a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">##TABLE##</a>##MARCA##
+			</div>		
+		</div>
+		<button class="btn btn-success text-center" type="submit" id="importar">Importar</button>	 	
+		
+	 </form>
+	 
+		
+	<script>
+
+		$(document).ready(function() {
+
+			var file;
+
+			$('input[type="file"]').change(function(e){
+		        file = e.target.files[0].name;
+		        $('.custom-file-label').html(file);
+		    });
+
+
+			
+			$("#upload-csv-form").submit(function(e) {
+
+				e.preventDefault();			// Evitamos que se recarge la pagina
+			
+				// Comprobamos que el usuario ha escogido algun fichero
+				if (file != "") {
+
+					file = file.toLowerCase();
+					
+					file = file.split('.');
+
+					var form = $('form')[0];
+					console.log(form);
+					data = new FormData(this);
+					console.log(data);
+
+		            data.append("table", $(".active").text());
+
+
+					if (file[file.length - 1] == "csv") {
+						$.ajax({
+							url: 'includes/upload_csv.php',
+							method: 'POST',
+							data: data,
+							contentType: false,
+							cache: false,
+							processData: false,
+							success: function (data) {
+
+								console.log(data);
+
+								if (data == 'error1') {
+									alert("El delimitador debe ser una ','");
+								} else if (data == 'error2') {
+									alert("El delimitador debe ser una ','");
+								} else {
+									alert("Dato Introducidos Corrctamente");
+									$('#upload-csv-form').trigger('reset');	
+									$('.custom-file-label').html("Elige un archivo")
+								}		
+							}
+						})
+					}
+				}
+			});
+
+
+
+		});
+
+
+	</script>

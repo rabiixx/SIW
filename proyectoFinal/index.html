@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sdfsdf</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+	<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@500&display=swap" rel="stylesheet">
+
+	<!-- Google Font - Poppins -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@700&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+	<div data-include="respNavBar"></div>
+
+	<style>
+
+		html, body {
+		    height: 100%;
+    		width: 100%;
+		}
+
+		#home {
+		    background: url(img/home_bg.jpg) no-repeat center center fixed;
+		    height: 100%;
+		    position: relative;
+		    width: 100%;
+    		background-size: cover;
+		}
+
+		.search-wrapper {
+			position: absolute;
+			top: 30%;
+			width: 100%;
+			height: 50%;
+			margin-top: 50px;
+			display: flex;
+			align-content: flex-start;
+			align-items: center;
+			flex-direction:column;
+			flex-wrap: nowrap;
+		}
+
+
+		.search-box {
+			height: 55px;
+			width: 500px;
+			flex-direction: row;
+			align-items: center;
+			display: flex;
+			background: white;
+			border: 2px solid #0a3d62;
+			border-radius: 30px;
+			box-shadow: 2px 2px 8px #0a3d62;
+			padding: 15px;
+		}
+
+		.search-txt {
+			border: none;
+			background: none;
+			margin-left: 10px;
+			outline: none;
+			color: black;
+			font-family: 'Gotu', sans-serif;
+			font-size: 16px;
+			transition: 0.4s;
+			line-height: 25px;
+			width: 90%;
+		}
+
+		.search-box i {
+			float: right;
+			font-size: 25px;
+		}
+
+		.search-box button {
+			background-color: none;
+			background: none;
+			outline: none;
+			border: none;
+			float: right;
+			display: flex;
+			justify-content: flex-end;
+			color: #0a3d62;
+		}
+
+		.autocomplete-list {
+			width: 400px;
+		}
+
+		.autocomplete-list a {
+			font-family: 'Gotu', sans-serif;
+			font-size: 19px;
+			font-weight: 600;
+		}
+
+
+	</style>
+
+
+	<div id="home" >
+		<div class="search-wrapper">
+			<div class="search-box">
+				<input type="text" class="search-txt" placeholder="Search">	
+				<button><i class="fa fa-search search-btn align-items-center"></i></button>
+			</div>
+			<div class="autocomplete-list">
+				<div class="list-group"></div>
+			</div>	
+		</div>
+	</div>
+
+	<style>
+
+
+
+		.bg-light {
+			background-color: transparent !important;
+		}
+
+		.gastronomy-slider {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			margin-top: 50px;
+			text-align: center;
+			/*border: 1px solid green;*/
+		}
+
+		.slider-title {
+    		font-family: 'Gotu', sans-serif;
+			margin-bottom: 10px;
+    	}
+
+		.gastronomy-slider .gastronomy-wrapper {
+			width: 1120px;
+			height: 280px;
+			margin: 0px auto;
+			/*border: 1px solid brown;*/
+		}
+
+		.gastronomy-slider .gastronomy-wrapper .gastronomy {
+			height: 250px;
+			width: 250px;
+			display: inline-block;
+			border-radius: 15px;
+			cursor: pointer;
+			box-shadow: 6px 6px 8px #778ca3; 
+			margin-top: 15px;
+			margin-bottom: 15px;
+			outline: none;
+			transition: transform 0.5s;
+		}
+
+		.gastronomy-slider .gastronomy-wrapper .gastronomy:hover {
+			-webkit-transform: scale(1.05);
+        	-ms-transform: scale(1.05);
+        	transform: scale(1.05);
+		}
+
+		.gastronomy-slider .gastronomy-wrapper .gastronomy:active {
+			outline: none;
+		}
+
+		/* Next Slide Arrow */
+		.gastronomy-slider .next {
+			position: absolute;
+			top: 50%;
+			font-size: 2em;
+			right: 270px;
+			cursor: pointer;
+			color: #ffa812;
+		}
+		
+		/* Previous Slide Arrow */
+		.gastronomy-slider .prev {
+			position: absolute;
+			top: 50%;
+			font-size: 2em;
+			left: 270px;
+			cursor: pointer;
+			color: #ffa812;
+		}
+		
+		/* Custom Slider Bottom Buttons */
+		.gastronomy-wrapper .slick-dots li.slick-active button::before {
+    		color: #ff7e00;
+    		opacity: 0.8;
+  		}
+
+ 		.gastronomy-wrapper .slick-dots li button:before {
+	        font-size: 15px;		
+	        line-height: 15px;
+	        top: 15px;
+	        color: #ff7e00;
+	        opacity: 0.5;
+    	}
+
+    	.slick-slide {
+    		margin: 0px 15px;
+    	}
+    	
+    	.gastronomy-wrapper .slick-list {
+   	 		padding: 10px 15px;
+  		}
+
+	</style>
+
+	<div class="page-wrapper">
+		<div class="gastronomy-slider">
+		
+			<h1 class="slider-title mr-4">La Mejor Gastronomia</h1>	
+			<hr style="width: 75%; height: 0.5px; background: #ecf0f1;">
+			
+			<i class="fas fa-chevron-right next"></i>
+			<i class="fas fa-chevron-left prev"></i>
+
+			<div class="gastronomy-wrapper" id="slider-cocina">
+				<img src="img2/bocatas.jpg" class="gastronomy" name="Bocatas">
+				<img src="img2/cafe2.jpg" class="gastronomy" name="Cafe">
+				<img src="img2/española.jpg" class="gastronomy" name="Española">
+				<img src="img2/hamburguesas.jpg" class="gastronomy" name="Hamburguesas">
+				<img src="img2/steaks.jpg" class="gastronomy" name="Sidreria">
+				<img src="img2/mexicana4.jpg" class="gastronomy" name="Mexicana">
+				<img src="img2/sushi.jpg" class="gastronomy" name="China">
+				<img src="img2/italiana2.jpg" class="gastronomy" name="Italiana">
+				<img src="img2/hotdog.jpg" class="gastronomy" name="HotDog">
+			</div>
+		</div>		
+	</div>
+
+	<style>
+
+		.popular-restaurants-slider {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			margin-top: 80px;
+			text-align: center;
+			/*border: 1px solid grey;*/
+		}
+
+		.popular-restaurants-wrapper {
+			width: 1220px;
+			height: 340px;
+			margin: 0px auto;
+			/*border: 1px dashed black;*/
+		}
+
+		.popular-restaurants-wrapper .card {
+			width: 275px;
+			height: 310px;
+			display: inline-block;
+			/*border: 1px solid red;*/
+			border-radius: 10px;
+			box-shadow: 6px 6px 6px #778ca3; 
+			/*margin-top: 15px;*/
+			/*margin-bottom: 15px;*/
+			cursor: pointer;
+			transition: transform 0.5s;
+		}
+
+		.popular-restaurants-wrapper .card:hover {
+			-webkit-transform: scale(1.05);
+        	-ms-transform: scale(1.05);
+        	transform: scale(1.05);
+		}
+
+		.card .slider-img {
+			width: 275px;	/* With 100% did not fit parent full width */ 
+			height: 170px;
+			border-top-right-radius: 10px;
+			border-top-left-radius: 10px;
+			/*border: 1px solid blue;*/
+		}
+
+		.card .card-text-wrapper {
+			margin: 10px;
+			text-align: left;
+		}
+
+		.card-text-wrapper .restaurant-name {
+			color: #2d333f;
+			font-size: 22px;
+			font-family: 'Baloo Paaji 2', cursive;
+		}
+
+    	.popular-restaurants-wrapper .slick-slide {
+    		margin: 15px 15px;
+    	}
+    	
+    	.popular-restaurants-wrapper .slick-list {
+   	 		padding: 15px 15px;
+   	 		/*border: 1px solid black;*/
+  		}
+		
+		/* Next Slide Arrow */
+		.popular-restaurants-slider .next {
+			position: absolute;
+			top: 55%;
+			font-size: 2em;
+			right: 200px;
+			cursor: pointer;
+			color: #1e90ff;
+			opacity: 0.8;
+		}
+		
+		/* Previous Slide Arrow */
+		.popular-restaurants-slider .prev {
+			position: absolute;
+			top: 55%;
+			font-size: 2em;
+			left: 200px;
+			cursor: pointer;
+			color: #1e90ff;
+			opacity: 0.8;
+		}
+
+				/* Custom Slider Bottom Buttons */
+		.popular-restaurants-wrapper .slick-dots li.slick-active button::before {
+    		color: #1e90ff;
+    		opacity: 0.9;
+  		}
+
+ 		.popular-restaurants-wrapper .slick-dots li button:before {
+	        font-size: 15px;
+	        line-height: 15px;
+	        top: 15px;
+	        color: #1e90ff;
+	        opacity: 0.5;
+    	}
+
+		.euro-enabled {
+
+		}
+
+		.euro-disabled {
+			color: #a4b0be;
+		}
+
+		.fa-star {
+			font-size: 14px;
+			color: #ffa502;
+		}
+
+		.custom-btn {
+			padding-left: 10px;
+			padding-right: 10px;
+			height: 40px;
+			font-family: 'Baloo Paaji 2', cursive;
+			letter-spacing: 1px;
+			font-size: 14px;
+			font-style: bold;
+			outline: none;
+			border-radius: 8px;
+			transition: transform 0.4s, box-shadow 0.5s;
+
+			background-color: #273c75; 
+			color: white;
+			box-shadow: 5px 5px #192a56;
+			border: 1.5px solid white;
+		}
+
+	</style>
+
+	<div class="page-wrapper">
+		<div class="popular-restaurants-slider">
+
+			<div style="display: flex; justify-content: center; align-items: flex-start;">
+				<h1 class="slider-title mr-4">Restaurantes Populares</h1>	
+				<button  class="custom-btn"><i class="fas fa-utensils mr-2"></i>Ver Todos</button>
+			</div>
+			<hr style="width: 75%; height: 0.5px; background: #ecf0f1;">
+
+			<i class="fas fa-chevron-right next"></i>
+			<i class="fas fa-chevron-left prev"></i>
+
+			<div class="popular-restaurants-wrapper" id="slider-restaurants">
+				<div class="card" style="outline: none;">
+					<img src="img/res5.jpg" class="slider-img" name="Italiana">
+					
+					<div class="card-text-wrapper">
+						<div class="restaurant-name">Aintzane</div>
+						<div>
+							<div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>Pamplona</div>
+							<div style="font-size: 18px; display: inline; ">-</div>
+							<div style="display: inline;"><i class="fas fa-utensils mr-2"></i>Tradicional</div>	
+						</div>
+						<div class="stars" style="margin: 5px;">
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+							<i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+    					</div>
+						<div style="margin: 5px;">
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1 euro-disabled"></i>	
+						</div>
+						<a href="load_restaurant.php?restaurant=k12" class="stretched-link"></a>						
+						
+					</div>
+				</div>
+								<div class="card" style="outline: none;">
+					<img src="img/res1.png" class="slider-img" name="Italiana">
+					
+					<div class="card-text-wrapper">
+						<div class="restaurant-name">Aintzane</div>
+						<div>
+							<div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>Pamplona</div>
+							<div style="font-size: 18px; display: inline; ">-</div>
+							<div style="display: inline;"><i class="fas fa-utensils mr-2"></i>Tradicional</div>	
+						</div>
+						<div class="stars" style="margin: 5px;">
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+							<i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+    					</div>
+						<div style="margin: 5px;">
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1 euro-disabled"></i>	
+						</div>						
+					</div>
+														<a href="load_restaurant.php?restaurant=Aintzane" class="stretched-link"></a>						
+
+				</div>
+								<div class="card" style="outline: none;">
+					<img src="img/res2.jpg" class="slider-img" name="Italiana">
+					
+					<div class="card-text-wrapper">
+						<div class="restaurant-name">Aintzane</div>
+						<div>
+							<div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>Pamplona</div>
+							<div style="font-size: 18px; display: inline; ">-</div>
+							<div style="display: inline;"><i class="fas fa-utensils mr-2"></i>Tradicional</div>	
+						</div>
+						<div class="stars" style="margin: 5px;">
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+							<i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+    					</div>
+						<div style="margin: 5px;">
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1 euro-disabled"></i>	
+						</div>
+															<a href="load_restaurant.php?restaurant=Common Good" class="stretched-link"></a>						
+						
+					</div>
+				</div>
+								<div class="card" style="outline: none;">
+					<img src="img/res3.jpg" class="slider-img" name="Italiana">
+					
+					<div class="card-text-wrapper">
+						<div class="restaurant-name">Aintzane</div>
+						<div>
+							<div style="display: inline;"><i class="fas fa-map-pin mr-2"></i>Pamplona</div>
+							<div style="font-size: 18px; display: inline; ">-</div>
+							<div style="display: inline;"><i class="fas fa-utensils mr-2"></i>Tradicional</div>	
+						</div>
+						<div class="stars" style="margin: 5px;">
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+					        <i class="fa fa-star"></i>
+							<i class="far fa-comments mr-2 d-inline"></i>180 reseñas
+    					</div>
+						<div style="margin: 5px;">
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1"></i>
+							<i class="fas fa-euro-sign mx-1 euro-disabled"></i>	
+						</div>	
+															<a href="load_restaurant.php?restaurant=Burguer King" class="stretched-link"></a>						
+					
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div style="height: 100%"></div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  	<script type="text/javascript" src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js"></script>
+
+   	<script>
+
+   		$(function(){
+			var includes = $('[data-include]');
+			jQuery.each(includes, function(){
+			var file = $(this).data('include') + '.html';
+				$(this).load(file);
+			});
+		});
+
+    	$('.gastronomy-wrapper').slick({
+  			slidesToShow: 4,
+  			sliderToScroll: 1,
+  			infinite: true,
+			variableWidth: true,
+			dots: true,
+			nextArrow: $('.gastronomy-slider .next'),
+			prevArrow: $('.gastronomy-slider .prev'),
+  		});
+
+  		$('.popular-restaurants-wrapper').slick({
+  			slidesToShow: 4,
+  			sliderToScroll: 1,
+  			infinite: true,
+			variableWidth: true,
+			dots: true,
+			nextArrow: $('.popular-restaurants-slider .next'),
+			prevArrow: $('.popular-restaurants-slider .prev'),
+  		});
+
+
+
+  		$(document).ready(function($) {
+
+  			$('#slider-cocina img').click(function(){
+	  			var x = $(this).attr('name');
+				$.redirect("controlador_restaurantes.php", {accion: 'setup', cocina: x}, "POST"); 
+	  		})
+
+	  		$('#slider-restaurants .card').click(function(){
+	  			//console.log($(this).attr("name"));
+	  			$.redirect("controlador_restaurantes.php", {accion: 'setup'}, "POST"); 
+	  		});
+
+  			$('.popular-restaurants-slider button').on('click', function(event) {
+  				$.redirect("controlador_restaurantes.php", {accion: 'setup'}, "POST");
+  			});
+  		});
+
+  		$('.search-txt').keyup(function(){
+
+  			if( $(this).val() ) {
+
+            	let search = $(this).val();
+
+  				$.ajax({
+  					url: 'includes/inicio.php',
+  					type: 'POST',
+  					dataType: 'json',
+  					data: { 'button-pressed': true,
+  						search: search},
+  					success: function(data) {
+
+  						console.log(data);
+
+  						if (data['lista_restaurantes'].length != 0) {
+
+  							let template = '';
+    	                    
+    	                    data['lista_restaurantes'].forEach(restaurant => {
+		                        template += `<a href="load_restaurant.php?restaurant=${restaurant.nombre}" class="list-group-item list-group-item-action"><i class="fas fa-utensils mr-4"></i>${restaurant.nombre}</a>`
+                        	});
+	
+                        	$('.autocomplete-list .list-group').html(template);     
+  						}
+
+
+						if (data['lista_ubicaciones'].length != 0) {
+  	
+  							let template = '';
+    	                    
+    	                    data['lista_ubicaciones'].forEach(ubicacion => {
+		                        template += `<a href="#" class="list-group-item list-group-item-action" name="ubicacion"><i class="fas fa-map-marker-alt mr-4"></i>${ubicacion.ubicacion}</a>`
+                        	});
+	
+                    		$('.autocomplete-list .list-group').append(template);     
+  						}
+
+						if (data['lista_cocinas'].length != 0) {
+  	
+  							let template = '';
+    	                    
+    	                    data['lista_cocinas'].forEach(cocina => {
+		                        template += `<a href="#" class="list-group-item list-group-item-action" name="cocina"><i class="fas fa-hamburger mr-4"></i>${cocina.cocina}</a>`
+                        	});
+	
+                    		$('.autocomplete-list .list-group').append(template);     
+  						}
+					}
+  				});
+  			} else {
+				$('.autocomplete-list .list-group').html("");
+  			}
+  		});
+
+  		$(document).on( 'click', ('a[name=ubicacion]'), function(){
+  			$.redirect("controlador_restaurantes.php", {accion: 'setup', ubicacion: $(this).text()}, "POST"); 	
+  		});
+
+  		$(document).on( 'click', ('a[name=cocina]'), function(){
+  			$.redirect("controlador_restaurantes.php", {accion: 'setup', cocina: $(this).text()}, "POST"); 	
+  		});
+
+
+  		
+
+
+  	</script>
+	
+</body>
+</html>

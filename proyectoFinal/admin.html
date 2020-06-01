@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tablas DB</title>
+	
+		<!-- BOOTSTRAP CDN -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Font Awesome Kit -->
+	<script src="https://kit.fontawesome.com/a41a314d19.js" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@500&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
+
+
+
+</head>
+<body>
+
+	<style type="text/css">
+		
+		.wrapper {
+			height: 100%;
+			width: 100%;
+			margin: 100px auto;
+		}	
+
+		.wrapper2 {
+			position: absolute;
+			display: flex;
+   	 		width: 100%;
+   	 		height: 100%;
+    		align-items: stretch;
+		}
+
+		.nav {
+			width: 15%;
+			height: 100%;
+			background-color: #0a3d62;
+		}
+
+		.nav .list-group-item {
+			background-color: transparent;
+			border: none;
+		}
+
+		li[name="plist"]  {
+			font-size: 19px;
+			font-weight: bold;
+			color: white;
+			opacity: 60%;
+    		font-family: 'Gotu', sans-serif;
+		}
+		
+		li:hover {
+			opacity: 100%;
+			color: white;
+		}
+
+		.list-group-item a {
+			text-decoration: none !important;
+			color: white;
+		}
+	 
+		#lista-tablas li {
+			font-size: 15px;
+			font-weight: bold;
+			color: white;
+			opacity: 60%;
+			font-family: 'Gotu', sans-serif;
+			margin-left: 20px;	
+		}
+
+		#lista-tablas li:hover {
+			opacity: 100%;
+			color: white;	
+		}
+
+
+	</style>
+
+	<!-- <div data-include="respNavBar"></div> -->
+	<div class="wrapper2">
+		<nav class="nav flex-column">
+			<ul class="list-group list">
+				<li class="list-group-item" name="plist">
+					<div>
+						<i class="fas fa-table mr-2" style="margin-left: 15px; margin-top: 10px;"></i>
+						<a data-toggle="collapse" href="#collapseExample">Tablas</a>
+					</div>
+					<ul class="list-group collapse" id="collapseExample">
+						<!-- <li class="list-group-item"><a href="##TABLELINK##">##TABLE##</a></li> -->
+						<div id="lista-tablas"></div>
+					</ul>
+				</li>
+				<li class="list-group-item" name="plist">	
+					<i class="fas fa-file-csv mr-2" style="margin-left: 15px; margin-top: 10px;"></i>
+					<a href="#">CSV</a>
+				</li>
+				<li class="list-group-item"  name="plist">
+					<i class="fas fa-file-code mr-2" style="margin-left: 15px; margin-top: 10px;"></i>
+					<a href="#">JSON</a>
+				</li>
+			</ul>
+		</nav>
+
+		<section id="tables" style="width: 100%; display: flex; align-items: center; justify-content: center; border: 1px solid black"></section>	
+	
+		<nav id="pag" style="position: absolute; top: 90%; left: 50%; display: none;">
+  	<ul class="pagination">
+	    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item"><a class="page-link" href="#">2</a></li>
+	    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    </ul>
+</nav>	
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  	<script type="text/javascript">
+
+		checkAdmin();
+
+  		$(function(){
+			var includes = $('[data-include]');
+			jQuery.each(includes, function(){
+			var file = $(this).data('include') + '.html';
+				$(this).load(file);
+			});
+		});
+
+		loadSidebar();
+
+		function checkAdmin() {
+			$.ajax({
+  				url: 'includes/admin_controler.php',
+  				type: 'POST',
+  				data: {code: 'admin'},
+  				success: function(data) {
+  					console.log(data);
+  					if (data != 'success') {
+  						window.location.replace("login.html");
+  					}
+  				}
+  			});
+		}
+
+
+  		function loadSidebar() {
+
+  			$.ajax({
+  				url: 'includes/admin_controler.php',
+  				type: 'POST',
+  				dataType: 'json',
+  				data: {code: 'sidebar'},
+  				success: function(data) {
+
+  					console.log(data);
+
+  					let template = '';
+
+    	            data.forEach(tabla => {
+		                template += `<li class="list-group-item"><a href="##TABLELINK##">${tabla}</a></li>`
+                    });
+
+    	            $('#lista-tablas').html(template);
+  				}
+  			});
+ 
+  		}
+
+  		var limit = 10;
+  		var start = 0;
+
+
+  		function loadTables(table, start, limit) {
+  			  		
+			console.log(start);
+			console.log(limit);
+  			$.ajax({
+  				url: 'includes/admin_controler.php',
+  				type: 'POST',
+  				data: {code: 'tables',
+  				start: start,
+  				limit: limit,
+  				table: table},
+  				success: function(data) {
+  					$('#tables').html(data);
+  					
+  				}
+  			});
+  		}
+
+
+  		$(document).on('click', ('ul #lista-tablas li'), function() {
+  			var data = loadTables( $(this).text(), 0, 10);
+  			$('#pag').fadeIn();
+  		});
+
+  		$(document).on('click', ('.pagination .page-item'), function(){
+
+			var table = $('table').attr('name');
+			var start = ( parseInt( $(this).text()) * 10 ) - 10;	
+			var number = parseInt( $(this).text());
+
+			loadTables(table, start, limit);
+
+
+			$('.page-item').each(function(i){
+
+				if ( parseInt($(this).text()) != number) {
+					$(this).removeClass('active');
+				} else {
+					console.log("hola");
+					$(this).addClass('active');
+				}
+
+			});
+
+		});
+
+		$(document).on('click', ('[name=plist] a'), function(){
+
+			console.log($(this).text().toLowerCase());
+
+			$('#pag').fadeOut();
+
+			$.ajax({
+				url: 'includes/admin_controler.php',
+				type: 'POST',
+				data: {code: $(this).text().toLowerCase()},
+				success: function(data) {
+					//console.log(data);
+					$('#tables').html(data);
+				}
+			});
+		});
+
+		/* Insert new Row */
+
+		$(document).on('click', ('.btn-success'), function (e) {
+		
+			e.preventDefault();
+
+			var table = $('table').attr('name');
+
+			var fields = [];
+
+			var trs = $(this).parent().parent().find('input');
+
+			trs.each(function() {
+				fields.push($(this).val());
+			});
+
+			$.ajax({
+				url: 'includes/controlador_tablas.php',
+				type: 'POST',
+				data: {code: 'insert',
+						table: table,
+						fields: fields},
+				success: function(data) {
+					console.log(data);
+					trs.each(function() {
+						$(this).val(" ");
+					});
+					$.ajax({
+		  				url: 'includes/admin_controler.php',
+		  				type: 'POST',
+		  				data: {code: 'tables',
+		  				table: table},
+		  				success: function(data) {
+		  					$('#tables').html(data);
+	  					}
+  					});
+				}
+			});
+		});
+
+		/* Update Single Row */
+	
+			// $('.btn-warning').not('[name=expand]')
+		$(document).on('click', ('.btn-warning:not([name=expand])'), function (e) {
+			
+			e.preventDefault();
+
+			var table = $('table').attr('name');
+
+			var inputFields = [];
+
+			var input = $(this).parent().parent().find('input');
+
+			input.each(function() {
+				inputFields.push($(this).val());
+			});
+
+			rowFields = $(this).parent().parent().prev().children('[name=field]');
+			colsFields = $('th').next();
+
+			var colsValue = []; 
+			var fieldsValue = [];
+
+			colsFields.each(function(index, el) {
+				colsValue.push($(this).text());
+			});
+
+			colsValue = colsValue.filter(function(el) {
+				return el != "";
+			});
+
+			rowFields.each(function(index, el) {
+				fieldsValue.push($(this).text());
+			});
+
+			var fields = new Object();
+			for (var i = 0; i < colsValue.length; i++) {
+				fields[colsValue[i]] = fieldsValue[i];
+			}
+
+			var updatedFields = new Object();
+
+			nUpdated = 0;
+			for (var i = 0; i < inputFields.length; i++) {
+				if (inputFields[i].localeCompare(fields[colsValue[i]]) != 0) {
+					updatedFields[colsValue[i]] = inputFields[i];
+					nUpdated++;
+				}				
+			}
+
+			if (nUpdated == 0) {
+
+				$('.alert').text("Los campos no han sido modoficados");				
+
+				$('.alert').fadeIn('slow');
+
+				setTimeout(function(){
+					$('.alert').fadeOut('slow');
+				}, 5000);
+			}
+
+			var data = new Object();
+			data['table'] = table;
+			data['fields'] = fields;
+			data['updatedFields'] = updatedFields;
+
+			var json = JSON.stringify( data );
+
+			$.ajax({
+				url: 'includes/controlador_tablas.php',
+				type: 'POST',
+				data: {
+					code: 'update',
+					json : json},
+				success: function(data) {
+					console.log(data);
+					$.ajax({
+		  				url: 'includes/admin_controler.php',
+		  				type: 'POST',
+		  				data: {code: 'tables',
+		  				table: table},
+		  				success: function(data) {
+		  					$('#tables').html(data);
+	  					}
+  					});
+				}
+			});
+
+		});
+
+
+		/* Delete Single Row */
+
+		$(document).on('click', ('button[name=rowBtn]'), function(e){
+
+			rowFields = $(this).parent().parent().children('[name=field]');
+			colsFields = $('th').next();
+
+			var cols = []; 
+			var fields = [];
+
+			colsFields.each(function(index, el) {
+				cols.push($(this).text());
+			});
+
+			rowFields.each(function(index, el) {
+				fields.push($(this).text());
+			});
+
+			var data = new Object();
+			var table = $('table').attr('name');
+			data['table'] = $('table').attr('name');
+			
+			var row = new Object();
+			for (var i = 0; i < cols.length; i++) {
+				row[cols[i]] = fields[i];
+			}
+
+			data['fields'] = row;
+
+			var json = JSON.stringify( data );
+
+			$.ajax({
+				url: 'includes/controlador_tablas.php',
+				type: 'POST',
+				data: {code: 'deleteSingle', 
+						json},
+				success: function(data) {
+					console.log(data);
+					$.ajax({
+		  				url: 'includes/admin_controler.php',
+		  				type: 'POST',
+		  				data: {code: 'tables',
+		  				table: table},
+		  				success: function(data) {
+		  					$('#tables').html(data);
+	  					}
+  					});
+				}
+			});
+		});
+
+		/* Delete Selected Rows */
+		$(document).on('click', ('#delAllBtn'), function(e) {
+			
+			console.log($(this));
+
+			e.preventDefault();
+
+			var data = new Object();
+			var tabla = $('table').attr('name')
+			data['table'] = $('table').attr('name');
+
+			var colsValue = []; 
+			$('th').next().each(function(el) {
+				colsValue.push($(this).text());
+			});
+
+			colsValue = colsValue.filter(function(el) {
+				return el != "";
+			});
+
+			selectedRows = new Object();
+
+			var index = 0;
+			$('input:checked').each(function() {
+
+				var row = new Object();
+				for (var i = 0; i < colsValue.length; i++) {
+					row[colsValue[i]] = $(this).parents('td').nextAll('[name=field]').eq(i).text();
+				}
+				selectedRows[index] = row;
+				index++;
+			});
+
+			data['selectedRows'] = selectedRows;
+
+			var json = JSON.stringify( data );
+			console.log(data);
+
+			$.ajax({
+				url: 'includes/controlador_tablas.php',
+				type: 'POST',
+				data: {code: 'deleteSelected', 
+						json: json},
+				success: function(data) {
+					console.log(data);
+					$.ajax({
+		  				url: 'includes/admin_controler.php',
+		  				type: 'POST',
+		  				data: {code: 'tables',
+		  				table: tabla},
+		  				success: function(data) {
+		  					$('#tables').html(data);
+	  					}
+  				});
+				}
+			});
+		});	
+
+
+
+		/* Expand Update Row */
+		$(document).on('click', ('.btn-warning[name=expand]'), function() {
+			$(this).parent().parent().next().slideToggle("fast");
+		});
+
+	
+  	</script>
+</body>
+</html>
